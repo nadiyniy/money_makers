@@ -18,7 +18,7 @@ const Test = () => {
     const data = {
       name: 'Bob Petro',
       email: 'petro@pet.com',
-      password: 'qwer1234',
+      password: 'qwer12',
     };
     dispatch(registerThunk(data));
   };
