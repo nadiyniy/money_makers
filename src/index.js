@@ -5,11 +5,16 @@ import { BrowserRouter } from 'react-router-dom';
 import { App } from 'components/App';
 import './variables.css';
 import './index.css';
+import { ToastContainer } from 'react-toastify';
+import { Provider } from 'react-redux';
+import { store } from 'redux/store';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter basename="/money_makers">
-    <React.StrictMode>
+    <Provider store={store}>
       <App />
-    </React.StrictMode>
+    </Provider>
+
+    <ToastContainer />
   </BrowserRouter>
 );
