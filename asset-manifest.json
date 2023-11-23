@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/money_makers/static/css/main.7acaea2f.css",
-    "main.js": "/money_makers/static/js/main.07d3183d.js",
+    "main.js": "/money_makers/static/js/main.7f4dc89a.js",
     "index.html": "/money_makers/index.html",
     "main.7acaea2f.css.map": "/money_makers/static/css/main.7acaea2f.css.map",
-    "main.07d3183d.js.map": "/money_makers/static/js/main.07d3183d.js.map"
+    "main.7f4dc89a.js.map": "/money_makers/static/js/main.7f4dc89a.js.map"
   },
   "entrypoints": [
     "static/css/main.7acaea2f.css",
-    "static/js/main.07d3183d.js"
+    "static/js/main.7f4dc89a.js"
   ]
 }
