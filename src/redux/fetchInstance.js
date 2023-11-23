@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const instance = axios.create({
-  baseURL: 'https://connections-api.herokuapp.com/',
+  baseURL: 'https://expense-tracker.b.goit.study/api/',
 });
 
 export const setToken = token => {
