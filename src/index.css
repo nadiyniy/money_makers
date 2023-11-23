@@ -1,14 +1,19 @@
 @import-normalize; /* bring in normalize.css styles */
 @font-face {
   font-family: 'SuisseIntl'; /*Can be any text*/
-  src: local('SuisseIntlRegular'),
-    url('/public/fonts/suisse-regular.ttf') format('truetype');
+  src: local('SuisseIntlRegular'), url('/public/fonts/suisse-regular.ttf') format('truetype');
 }
 @font-face {
   font-family: 'SuisseIntl';
-  src: local('SuisseIntlBold'),
-    url('/public/fonts/suisse-bold.ttf') format('truetype');
+  src: local('SuisseIntlBold'), url('/public/fonts/suisse-bold.ttf') format('truetype');
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
 body {
   margin: 0;
   font-family: Suisse Intl, sans-serif;
@@ -17,6 +22,5 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
