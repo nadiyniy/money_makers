@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, Navigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { registerThunk } from 'redux/auth/operations';
 import styled from 'styled-components';
 
