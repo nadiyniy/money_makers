@@ -1,10 +1,17 @@
 @import-normalize; /* bring in normalize.css styles */
-
+@font-face {
+  font-family: 'SuisseIntl'; /*Can be any text*/
+  src: local('SuisseIntlRegular'),
+    url('/public/fonts/suisse-regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'SuisseIntl';
+  src: local('SuisseIntlBold'),
+    url('/public/fonts/suisse-bold.ttf') format('truetype');
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: Suisse Intl, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
