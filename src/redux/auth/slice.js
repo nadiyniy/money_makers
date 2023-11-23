@@ -6,10 +6,13 @@ const initialState = {
     name: '',
     email: '',
   },
+  accessToken: '',
+  refreshToken: '',
+  sid: '',
   error: null,
-  token: '',
   isLoggedIn: false,
   isRefreshing: false,
+  isLoading: false,
 };
 
 const slice = createSlice({
@@ -19,10 +22,11 @@ const slice = createSlice({
     builder.addCase(registerThunk.fulfilled, (state, { payload }) => {
       state.user.name = payload.user.name;
       state.user.email = payload.user.email;
-      state.token = payload.token;
+      state.accessToken = payload.accessToken;
       state.isLoggedIn = true;
       state.error = '';
     });
+    // .addCase();
   },
 });
 
