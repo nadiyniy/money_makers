@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Route, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 // import Header from './header';
 // import BgImageWrapper from './BgImageWrapper';
@@ -15,40 +15,14 @@ import { Route, Outlet } from 'react-router-dom';
 // import TransactionsHistoryPage from './TransactionsHistoryPage';
 // import Loader from './Loader';
 
-const SharedLayout = () => {
+const Layout = () => {
   return (
     <div>
-      {/* <Header /> */}
-      <Route
-        exact
-        path="/"
-        render={() => (
-          <div>
-            {/* <BgImageWrapper /> */}
-            {/* <Route path="/welcome" element={<WellcomePage />} /> */}
-            {/* <Route path="/register" element={<RegisterPage />} /> */}
-            {/* <Route path="/login" element={<LoginPage />} /> */}
-            {/* <Route path="/transactions" element={<MainTransactionsPage />} /> */}
-            {/* <Route path="/transactions/history" element={<TransactionsHistoryPage />} /> */}
-            {/* <Route path="/loader" element={<Loader />} /> */}
-               <Suspense>
- <Outlet />
-                     </Suspense>
-
-
-          </div>
-        )}
-      />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };
 
-const Layout = () => {
-  return (
-    <Suspense>
-      <SharedLayout />
-    </Suspense>
-  );
-};
-
-export { SharedLayout, Layout };
+export { Layout };
