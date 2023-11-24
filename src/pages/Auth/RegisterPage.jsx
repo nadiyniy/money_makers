@@ -1,3 +1,5 @@
+import { useDispatch } from 'react-redux';
+import { registerThunk } from 'redux/auth/operations';
 import AuthForm from 'shared/AuthForm/AuthForm';
 import { validationSchema } from 'shared/validationSchema/validationSchema';
 
@@ -13,20 +15,24 @@ const navigationData = {
 };
 
 const RegisterPage = () => {
-  const onSubmit = data => {
+  const dispatch = useDispatch();
+
+  const submit = data => {
     console.log(data);
+    dispatch(registerThunk(data));
   };
+
   return (
     <div>
       RegisterPage
       <AuthForm
+        onSubmit={submit}
         fieldsData={fieldsData}
         submitButtonText="Sign Up"
         initialState={{ email: '', password: '', name: '' }}
         validationSchema={validationSchema}
-        onSubmit={onSubmit}
         navigationData={navigationData}
-        isRegistrationForm={true}
+        authType="register"
       />
     </div>
   );
