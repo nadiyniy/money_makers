@@ -48,10 +48,5 @@ const StyledBurgerMenu = styled.div`
   height: 100%;
   background-color: var(--primary-color);
 `;
-const StyledBurgerUserBarBtn = styled(UserBarBtn)`
-  @media (max-width: 768px) {
-    display: flex;
-  }
-`;
 
 export default BurgerMenu;
