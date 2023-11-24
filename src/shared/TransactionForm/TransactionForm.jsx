@@ -22,6 +22,7 @@ const TransactionForm = ({ transactionsType }) => {
   return (
     <div>
       <form onSubmit={handleSubmit(submit)}>
+        <button type="button">close</button>
         <div>
           <label>
             Expense
@@ -60,10 +61,9 @@ const TransactionForm = ({ transactionsType }) => {
           </label>
         </div>
         <div>
-          <label>
-            Sum:
-            <input type="number" {...register('sum')} placeholder="Enter the sum" />
-          </label>
+          <label htmlFor="amountInput">Sum:</label>
+          <input type="text" id="amountInput" {...register('sum')} placeholder="Enter the sum" />
+          <span>{'грн'}</span>
         </div>
         <div>
           <label>
