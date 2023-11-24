@@ -1,5 +1,25 @@
 import React, { Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Route, Outlet } from 'react-router-dom';
+// import Header from './header';
+import BgImageWrapper from './BgImageWrapper';
+
+const SharedLayout = ({ children }) => {
+  return (
+    <div>
+      {/* <Header /> */}
+      <Route
+        exact
+        path="/"
+        render={() => (
+          <div>
+            <BgImageWrapper />
+            {children}
+          </div>
+        )}
+      />
+    </div>
+  );
+};
 
 const Layout = () => {
   return (
@@ -9,4 +29,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export { SharedLayout, Layout };
