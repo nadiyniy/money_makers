@@ -3,16 +3,20 @@ import { Link } from 'react-router-dom';
 import Modal from 'shared/Modal/Modal';
 import { useModal } from 'shared/hooks/useModal';
 import UserSetsModal from '../userSetsModal/UserSetsModal';
+import { useDispatch } from 'react-redux';
+import { logoutThunk } from 'redux/auth/operations';
 
 const UserPanel = () => {
   const { isOpen, openModal, closeModal } = useModal();
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logoutThunk());
+  };
   return (
     <>
       <div>
-        <Link onClick={() => openModal()} to="#">
-          Profile settings
-        </Link>
-        <Link to="#">Log out</Link>
+        <button onClick={() => openModal()}>Profile settings</button>
+        <button onClick={handleLogout}>Log out</button>
       </div>
       {isOpen ? (
         <Modal closeModal={closeModal}>
