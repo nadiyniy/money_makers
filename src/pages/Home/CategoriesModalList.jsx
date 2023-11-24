@@ -23,7 +23,7 @@ const CategoriesModalList = ({ closeModal, categories, setchooseCategory, setTak
   return (
     <div>
       <button onClick={closeModal}>Close</button>
-      <h2>{categories.type}</h2>
+      <h2>{categories[0].type[0].toUpperCase() + categories[0].type.slice(1)}</h2>
       <ul>
         {categories?.map(category => (
           <li key={category.id}>
