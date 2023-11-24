@@ -14,7 +14,6 @@ import { selectIsRefreshing } from 'redux/auth/selectors';
 export const App = () => {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
-  console.log(isRefreshing);
 
   useEffect(() => {
     dispatch(refreshThunk());

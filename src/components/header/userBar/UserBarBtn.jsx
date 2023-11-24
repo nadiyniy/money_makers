@@ -1,20 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import avatar from '../../../images/404-page.png';
 
-const UserBarBtn = () => {
+const UserBarBtn = ({ toggleUserPanel }) => {
   return (
-    <StyledUserBtn>
+    <StyledUserBtn onClick={toggleUserPanel}>
       <img src={avatar} alt="User icon" />
       <p>Alex Rybachok</p>
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path
-          d="M5 7.5L10 12.5L15 7.5"
-          stroke="#0EF387"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
+        <path d="M5 7.5L10 12.5L15 7.5" stroke="#0EF387" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     </StyledUserBtn>
   );

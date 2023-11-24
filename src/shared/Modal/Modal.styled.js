@@ -13,8 +13,8 @@ export const ModalBackdrop = styled.div`
 `;
 
 export const ModalContent = styled.div`
-  background-color: white;
+  /* background-color: white;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); */
 `;
