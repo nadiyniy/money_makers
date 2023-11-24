@@ -5,7 +5,6 @@ export const registerThunk = createAsyncThunk('register', async (user, thunkApi)
   try {
     const { data } = await instance.post('auth/register', user);
     setToken(data.accessToken);
-    console.log(data);
     return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
@@ -33,8 +32,6 @@ export const logoutThunk = createAsyncThunk('logout', async (_, thunkApi) => {
     await instance.get('/auth/logout');
     clearToken();
   } catch (error) {
-    console.log({ error });
-
     return thunkApi.rejectWithValue(error.message);
   }
 });

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchUser, updateUser, deleteUser } from './userThunkActions';
+import { fetchThunk, updateThunk, deleteThunk } from './operations.js';
 
 const initialState = {
   data: null,
@@ -12,21 +12,21 @@ const userSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-      .addCase(fetchUser.pending, state => {
+      .addCase(fetchThunk.pending, state => {
         state.isLoading = true;
       })
-      .addCase(fetchUser.fulfilled, (state, action) => {
+      .addCase(fetchThunk.fulfilled, (state, action) => {
         state.data = action.payload;
         state.isLoading = false;
       })
-      .addCase(fetchUser.rejected, (state, action) => {
+      .addCase(fetchThunk.rejected, (state, action) => {
         state.error = action.payload;
         state.isLoading = false;
       })
-      .addCase(updateUser.fulfilled, (state, action) => {
+      .addCase(updateThunk.fulfilled, (state, action) => {
         state.data = { ...state.data, ...action.payload };
       })
-      .addCase(deleteUser.fulfilled, state => {
+      .addCase(deleteThunk.fulfilled, state => {
         state.data = null;
       });
   },

@@ -4,6 +4,8 @@ import TransactionsHistoryNav from './navBar/TransactionsHistoryNav';
 import UserBarBtn from './userBar/UserBarBtn';
 import BurgerMenuBtn from './burgerMenuBtn/BurgerMenuBtn';
 import UserPanel from './userPanel/UserPanel';
+import styled from 'styled-components';
+import { StyledCommonWrapper } from 'styles/Common.styled';
 
 const Header = () => {
   const [isUserPanelOpen, setIsUserPanelOpen] = useState(false);
@@ -18,16 +20,22 @@ const Header = () => {
   };
 
   return (
-    <div>
-      <header>
+    <StyledHeader>
+      <StyledCommonWrapper>
         <Logo />
         <TransactionsHistoryNav />
         <UserBarBtn toggleUserPanel={toggleUserPanel} />
         {isUserPanelOpen && <UserPanel onClick={handleModalClose} />}
         <BurgerMenuBtn />
-      </header>
-    </div>
+      </StyledCommonWrapper>
+    </StyledHeader>
   );
 };
+const StyledHeader = styled.header`
+  border-bottom: 1px solid var(--gray-text-10);
+  /* display: flex;
+  align-items: center;
+  padding: 18px; */
+`;
 
 export default Header;

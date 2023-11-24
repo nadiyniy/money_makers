@@ -1,3 +1,6 @@
+import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { loginThunk } from 'redux/auth/operations';
 import AuthForm from 'shared/AuthForm/AuthForm';
 import { validationSchema } from 'shared/validationSchema/validationSchema';
 
@@ -7,8 +10,13 @@ const fieldsData = [
 ];
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
+  const { reset } = useForm();
+
   const onSubmit = data => {
     console.log(data);
+    dispatch(loginThunk(data));
+    reset();
   };
 
   const navigationData = {
@@ -26,7 +34,7 @@ const LoginPage = () => {
         validationSchema={validationSchema}
         onSubmit={onSubmit}
         navigationData={navigationData}
-        isRegistrationForm={false}
+        authType="login"
       />
     </div>
   );

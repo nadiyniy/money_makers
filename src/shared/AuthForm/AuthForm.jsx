@@ -1,5 +1,5 @@
-import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 const AuthForm = ({
   fieldsData,
@@ -8,13 +8,13 @@ const AuthForm = ({
   validationSchema,
   onSubmit,
   navigationData,
-  isRegistrationForm,
+  authType,
 }) => {
   const { handleSubmit, register, formState } = useForm({
     defaultValues: initialState,
   });
 
-  const linkTo = isRegistrationForm ? '/login' : '/register';
+  const linkTo = authType === 'register' ? '/login' : '/register';
 
   const { isDirty } = formState;
 
