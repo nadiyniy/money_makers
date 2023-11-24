@@ -7,15 +7,15 @@ export const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route
-          index
-          element={
-            <div>
-              <Header />
-            </div>
-          }
-        />
+        <Route index element={<Header />} />
         <Route path="transactions/:transactionsType" element={<MainTransactionsPage />} />
+        {/* <BgImageWrapper />
+        <Route path="/welcome" element={<WellcomePage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/transactions" element={<MainTransactionsPage />} />
+        <Route path="/transactions/history" element={<TransactionsHistoryPage />} />
+        <Route path="/loader" element={<Loader />} /> */}
       </Route>
     </Routes>
   );
