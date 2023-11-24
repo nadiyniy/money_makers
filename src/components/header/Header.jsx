@@ -13,29 +13,35 @@ const Header = () => {
   const toggleUserPanel = () => {
     setIsUserPanelOpen(!isUserPanelOpen);
   };
-  const handleModalClose = e => {
-    if (e.currentTarget === e.target) {
-      setIsUserPanelOpen(false);
-    }
-  };
 
   return (
     <StyledHeader>
       <StyledCommonWrapper>
-        <Logo />
-        <TransactionsHistoryNav />
-        <UserBarBtn toggleUserPanel={toggleUserPanel} />
-        {isUserPanelOpen && <UserPanel onClick={handleModalClose} />}
-        <BurgerMenuBtn />
+        <StyledContainer>
+          <Logo />
+          <TransactionsHistoryNav />
+          <StyledContainerUserBtn>
+            <UserBarBtn toggleUserPanel={toggleUserPanel} />
+            {isUserPanelOpen && <UserPanel />}
+          </StyledContainerUserBtn>
+          <BurgerMenuBtn />
+        </StyledContainer>
       </StyledCommonWrapper>
     </StyledHeader>
   );
 };
+
 const StyledHeader = styled.header`
   border-bottom: 1px solid var(--gray-text-10);
-  /* display: flex;
+  padding: 18px 0;
+`;
+const StyledContainer = styled.div`
+  display: flex;
   align-items: center;
-  padding: 18px; */
+  justify-content: space-between;
+`;
+const StyledContainerUserBtn = styled.div`
+  position: relative;
 `;
 
 export default Header;

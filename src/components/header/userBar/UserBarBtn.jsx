@@ -15,6 +15,9 @@ const UserBarBtn = ({ toggleUserPanel }) => {
 };
 
 const StyledUserBtn = styled.button`
+  @media (max-width: 768px) {
+    display: none;
+  }
   display: flex;
   justify-content: center;
   align-items: center;

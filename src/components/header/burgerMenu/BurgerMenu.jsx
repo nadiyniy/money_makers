@@ -2,6 +2,7 @@ import TransactionsHistoryNav from 'components/header/navBar/TransactionsHistory
 import UserBarBtn from 'components/header/userBar/UserBarBtn';
 import React, { useEffect, useState } from 'react';
 import UserPanel from '../userPanel/UserPanel';
+import styled from 'styled-components';
 
 const BurgerMenu = ({ closeBurgerMenu }) => {
   const [isUserPanelOpen, setIsUserPanelOpen] = useState(false);
@@ -32,12 +33,25 @@ const BurgerMenu = ({ closeBurgerMenu }) => {
   };
 
   return (
-    <div onClick={handleModalClose}>
+    <StyledBurgerMenu onClick={handleModalClose}>
       <button onClick={closeBurgerMenu}>X</button>
       <UserBarBtn toggleUserPanel={toggleUserPanel} />
       {isUserPanelOpen && <UserPanel />} <TransactionsHistoryNav />
-    </div>
+    </StyledBurgerMenu>
   );
 };
+const StyledBurgerMenu = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-color);
+`;
+const StyledBurgerUserBarBtn = styled(UserBarBtn)`
+  @media (max-width: 768px) {
+    display: flex;
+  }
+`;
 
 export default BurgerMenu;

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const StyledCommonWrapper = styled.div`
-  position: relative;
   max-width: 375px;
   padding-left: 20px;
   padding-right: 20px;
