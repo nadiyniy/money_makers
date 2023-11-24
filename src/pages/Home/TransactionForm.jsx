@@ -1,67 +1,49 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 // import { useModal } from './hooks/useModal';
 // import CategoriesModal from './CategoriesModal';
 
 const TransactionForm = ({ transactionsType }) => {
-  //   const { isOpen, openModal, closeModal } = useModal();
-  const [transaction] = useState(transactionsType);
+  // const { isOpen, openModal, closeModal } = useModal();
 
-  const [date] = useState(new Date().toISOString().slice(0, 10)); //Поточна дата у форматі "YYYY-MM-DD"
-  const [time] = useState(new Date().toTimeString().slice(0, 5)); // Поточний час у форматі "HH:MM"
-  const [category] = useState('');
-  const [sum] = useState('');
-  const [comment] = useState('');
-
-  const handleTypeChange = e => {
-    //логіка вибору типу транзакції
+  const { register, handleSubmit } = useForm();
+  const submit = ({ type, date, time, category, sum, comment }) => {
+    const formData = {
+      id: '6529eff94ceb918e15a171f1',
+      type,
+      date,
+      time,
+      category: {
+        _id: '6522bf1f9027bb7d55d6512b',
+        categoryName: category,
+      },
+      sum: parseInt(sum),
+      comment,
+    };
+    console.log(formData);
   };
 
-  const handleDateChange = e => {
-    // реагування на зміни у полі вибору дати
-  };
-
-  const handleTimeChange = e => {
-    //зміни у полі вибору часу
-  };
-
-  //   const handleCategoryChange = selectedCategory => {
-
-  //обробляю обрану категорію
-  //   };
-
-  const handleSumChange = e => {
-    // реагую на зміни у полі вводу суми
-  };
-
-  const handleCommentChange = e => {
-    // реагую на зміни у полі вводу коментаря
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    //  логіка відправки форми
-  };
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(submit)}>
         <div>
           <label>
             Expense
-            <input type="radio" value="expense" checked={transaction === 'expense'} onChange={handleTypeChange} />
+            <input {...register('type')} type="radio" value="expenses" />
           </label>
           <label>
             Income
-            <input type="radio" value="income" checked={transaction === 'income'} onChange={handleTypeChange} />
+            <input {...register('type')} type="radio" value="incomes" />
           </label>
         </div>
         <div>
           <label>
             Date:
-            <input type="date" value={date} onChange={handleDateChange} placeholder="mm/dd/yyyy" />
+            <input type="date" {...register('date')} placeholder="mm/dd/yyyy" />
           </label>
           <label>
             Time:
-            <input type="time" value={time} onChange={handleTimeChange} placeholder="00:00:00" />
+            <input type="time" {...register('time')} placeholder="00:00:00" />
           </label>
         </div>
         <div>
@@ -69,7 +51,7 @@ const TransactionForm = ({ transactionsType }) => {
             Category:
             <input
               type="text"
-              value={category}
+              {...register('category')}
               placeholder="Different"
               onChange={() => {
                 // Логіка для відкриття модального вікна з категоріями
@@ -84,13 +66,13 @@ const TransactionForm = ({ transactionsType }) => {
         <div>
           <label>
             Sum:
-            <input type="number" value={sum} onChange={handleSumChange} placeholder="Enter the sum" />
+            <input type="number" {...register('sum')} placeholder="Enter the sum" />
           </label>
         </div>
         <div>
           <label>
             Comment:
-            <textarea value={comment} onChange={handleCommentChange} rows={4} cols={50} placeholder="Enter the text" />
+            <textarea {...register('comment')} rows={4} cols={50} placeholder="Enter the text" />
           </label>
         </div>
         <button type="submit">Add</button>
