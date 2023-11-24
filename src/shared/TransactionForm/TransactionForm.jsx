@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useModal } from 'shared/hooks/useModal';
 import Modal from 'shared/Modal/Modal';
 import CategoriesModalList from 'pages/Home/CategoriesModalList';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { selectCategoriesExpenses, selectCategoriesIncomes } from 'redux/category/selectors';
 import { fetchCategoriesThunk } from 'redux/category/operations';
 
 const TransactionForm = ({ transactionsType }) => {
   const { isOpen, openModal, closeModal } = useModal();
+  const [currentCategory, setCurrentCategory] = useState([]);
+  const [chooseCategory, setchooseCategory] = useState('');
+  const [takeCategoryId, setTakeCategoryId] = useState('');
   const incomes = useSelector(selectCategoriesIncomes);
   const expenses = useSelector(selectCategoriesExpenses);
   const dispatch = useDispatch();
@@ -16,29 +20,30 @@ const TransactionForm = ({ transactionsType }) => {
   useEffect(() => {
     dispatch(fetchCategoriesThunk());
   }, [dispatch]);
-  //запит за категоріями?
-  const { register, handleSubmit } = useForm();
-  const submit = ({ type, date, time, id, sum, comment }) => {
+
+  const { register, handleSubmit, reset } = useForm();
+
+  const submit = ({ comment, date, sum, time, type }) => {
     const formData = {
-      type,
-      date,
-      time,
-      category: id,
-      sum: parseInt(sum),
+      category: takeCategoryId,
       comment,
+      date,
+      sum,
+      time,
+      type,
     };
+    reset();
     console.log(formData);
   };
+
   const chooseCategoryByList = () => {
     let list;
     if (transactionsType === 'incomes') {
-      list = incomes.categoryName;
-      console.log(list);
+      list = incomes;
     } else {
-      list = expenses.categoryName;
-      console.log(list);
+      list = expenses;
     }
-
+    setCurrentCategory(list);
     openModal();
   };
 
@@ -46,7 +51,6 @@ const TransactionForm = ({ transactionsType }) => {
     <>
       <div>
         <form onSubmit={handleSubmit(submit)}>
-          <button type="button">close</button>
           <div>
             <label>
               Expense
@@ -72,6 +76,7 @@ const TransactionForm = ({ transactionsType }) => {
               Category:
               <input
                 type="text"
+                value={chooseCategory}
                 {...register('category')}
                 placeholder="Different"
                 onClick={chooseCategoryByList}
@@ -96,7 +101,12 @@ const TransactionForm = ({ transactionsType }) => {
 
       {isOpen ? (
         <Modal closeModal={closeModal}>
-          <CategoriesModalList closeModal={closeModal} transactionsType={transactionsType} />
+          <CategoriesModalList
+            setchooseCategory={setchooseCategory}
+            setTakeCategoryId={setTakeCategoryId}
+            closeModal={closeModal}
+            categories={currentCategory}
+          />
         </Modal>
       ) : null}
     </>
