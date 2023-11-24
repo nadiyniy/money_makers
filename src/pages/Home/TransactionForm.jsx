@@ -5,18 +5,14 @@ import { useForm } from 'react-hook-form';
 
 const TransactionForm = ({ transactionsType }) => {
   // const { isOpen, openModal, closeModal } = useModal();
-
+  //запит за категоріями?
   const { register, handleSubmit } = useForm();
-  const submit = ({ type, date, time, category, sum, comment }) => {
+  const submit = ({ type, date, time, id, sum, comment }) => {
     const formData = {
-      id: '6529eff94ceb918e15a171f1',
       type,
       date,
       time,
-      category: {
-        _id: '6522bf1f9027bb7d55d6512b',
-        categoryName: category,
-      },
+      category: id,
       sum: parseInt(sum),
       comment,
     };
