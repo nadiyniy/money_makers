@@ -3,3 +3,6 @@ export const selectCategoriesIncomes = state => state.category.categories.income
 export const selectCategoriesExpenses = state => state.category.categories.expenses;
 export const selectIsLoading = state => state.category.isLoading;
 export const selectError = state => state.category.error;
+console.log(selectCategories);
+console.log(selectCategoriesIncomes);
+console.log(selectCategoriesExpenses);
