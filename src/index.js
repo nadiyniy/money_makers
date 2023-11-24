@@ -19,5 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <ToastContainer />
       </PersistGate>
     </Provider>
+
+    <ToastContainer />
   </BrowserRouter>
 );

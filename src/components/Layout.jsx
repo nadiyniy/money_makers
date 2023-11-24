@@ -1,6 +1,9 @@
 import React, { Suspense } from 'react';
 import { Route, Outlet } from 'react-router-dom';
 
+// import Header from './header';
+// import BgImageWrapper from './BgImageWrapper';
+
 // Імпорт компонентів
 // Імпорти, назви папок/компонентів взяв по дефолту,вам слід адаптувати імпорти відповідно.
 // import Header from './Header';
@@ -28,7 +31,11 @@ const SharedLayout = () => {
             {/* <Route path="/transactions" element={<MainTransactionsPage />} /> */}
             {/* <Route path="/transactions/history" element={<TransactionsHistoryPage />} /> */}
             {/* <Route path="/loader" element={<Loader />} /> */}
-            <Outlet />
+               <Suspense>
+ <Outlet />
+                     </Suspense>
+
+
           </div>
         )}
       />

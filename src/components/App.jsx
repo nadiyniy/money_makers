@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
-import Layout from './Layout';
+import { Layout } from './Layout';
+import MainTransactionsPage from 'pages/Home/MainTransactionsPage';
 import Header from './header/Header';
 
 export const App = () => {
@@ -14,6 +15,7 @@ export const App = () => {
             </div>
           }
         />
+        <Route path="transactions/:transactionsType" element={<MainTransactionsPage />} />
       </Route>
     </Routes>
   );
