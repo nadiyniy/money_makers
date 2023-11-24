@@ -1,33 +1,20 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import Logo from './logo/Logo';
+import TransactionsHistoryNav from './navBar/TransactionsHistoryNav';
+import UserBarBtn from './userBar/UserBarBtn';
+import UserSetsModal from './userSetsModal/UserSetsModal';
+import BurgerMenuBtn from './burgerMenuBtn/BurgerMenuBtn';
 
 const Header = () => {
   return (
     <div>
       <header>
-        <div>
-          <img src="" alt="Logo" />
-          <span>ExpenseTracker</span>
-        </div>
-        <ul>
-          <li>
-            <NavLink to="#">All Expense</NavLink>
-          </li>
-          <li>
-            <NavLink to="#">All Income</NavLink>
-          </li>
-        </ul>
-        <div>
-          <img src="#" alt="User icon" />
-          <p>Alex Rybachok</p>
-          <button>X</button>
-        </div>
+        <Logo />
+        <TransactionsHistoryNav />
+        <UserBarBtn />
+        <BurgerMenuBtn />
       </header>
-      <div>
-        <Link to="#">Profile settings</Link>
-        <Link to="#">Log out</Link>
-      </div>
-      <div></div>
+      <UserSetsModal />
     </div>
   );
 };
