@@ -37,37 +37,51 @@ const StyledModal = styled.div`
   display: flex;
   flex-direction: column;
   position: fixed;
-  height: 477px;
   inset: 0;
-  width: 500px;
+  width: 100%;
+  width: 100%;
   border-radius: 30px;
   border: 1px solid var(--gray-text-10);
   background: var(--gray-dark-color);
   position: relative;
-  padding: 40px 40px 60px;
+  padding: 40px 20px 60px;
+  @media (min-width: 768px) {
+    max-width: 500px;
+    padding: 40px 40px 60px;
+    height: 477px;
+    width: 500px;
+  }
   h2 {
     color: var(--white-color);
 
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 400;
     letter-spacing: -0.02em;
     margin-bottom: 40px;
+    @media (min-width: 768px) {
+      font-size: 28px;
+    }
   }
   button {
     cursor: pointer;
   }
 `;
+
 const StyledModalCloseBtn = styled.button`
   background-color: transparent;
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   position: absolute;
   top: 20px;
   right: 20px;
+  @media (min-width: 768px) {
+    width: 24px;
+    height: 24px;
+  }
 `;
 const StyledAvatar = styled.div`
   display: flex;
@@ -78,9 +92,13 @@ const StyledAvatar = styled.div`
 
   img {
     border-radius: var(--border-radius-rounded);
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     background-color: var(--gray-avatar-color);
+    @media (min-width: 768px) {
+      width: 100px;
+      height: 100px;
+    }
   }
   div {
     display: flex;
@@ -106,7 +124,7 @@ const StyledForm = styled.form`
 
     select {
       padding: 12px 18px;
-      color: #fafafa;
+      color: var(--white-color);
 
       font-size: 16px;
       font-style: normal;
@@ -119,9 +137,9 @@ const StyledForm = styled.form`
     input {
       width: 100%;
       padding: 12px 18px;
-      color: #fafafa;
+      color: var(--white-color);
       background: transparent;
-      font-size: 16px;
+      font-size: 14px;
       line-height: 1.5;
       border-radius: 12px;
       border: 1px solid var(--gray-text-40);
@@ -130,6 +148,10 @@ const StyledForm = styled.form`
         color: var(--white-color);
         font-size: 16px;
         line-height: 1.5;
+      }
+      @media (min-width: 768px) {
+        font-size: 16px;
+        line-height: 1.3;
       }
     }
   }
