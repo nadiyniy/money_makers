@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useModal } from 'shared/hooks/useModal';
 import Modal from 'shared/Modal/Modal';
 import CategoriesModalList from 'pages/Home/CategoriesModalList';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCategoriesExpenses, selectCategoriesIncomes } from 'redux/category/selectors';
+import { fetchCategoriesThunk } from 'redux/category/operations';
 
 const TransactionForm = ({ transactionsType }) => {
-  const { isOpen, closeModal } = useModal();
+  const { isOpen, openModal, closeModal } = useModal();
+  const incomes = useSelector(selectCategoriesIncomes);
+  const expenses = useSelector(selectCategoriesExpenses);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCategoriesThunk());
+  }, [dispatch]);
   //запит за категоріями?
   const { register, handleSubmit } = useForm();
   const submit = ({ type, date, time, id, sum, comment }) => {
@@ -19,10 +29,18 @@ const TransactionForm = ({ transactionsType }) => {
     };
     console.log(formData);
   };
-  // const chooseCategoryByList = () => {
-  //   //логіка типу запиту: якщо тип витрати - запит за витратами, якщо доходи запит за списком доходів
-  //   openModal();
-  // };
+  const chooseCategoryByList = () => {
+    let list;
+    if (transactionsType === 'incomes') {
+      list = incomes.categoryName;
+      console.log(list);
+    } else {
+      list = expenses.categoryName;
+      console.log(list);
+    }
+
+    openModal();
+  };
 
   return (
     <>
@@ -56,8 +74,8 @@ const TransactionForm = ({ transactionsType }) => {
                 type="text"
                 {...register('category')}
                 placeholder="Different"
-                onClick={() => {}}
-                onFocus={() => {}}
+                onClick={chooseCategoryByList}
+                onFocus={chooseCategoryByList}
               />
             </label>
           </div>
