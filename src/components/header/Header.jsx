@@ -2,8 +2,8 @@ import React from 'react';
 import Logo from './logo/Logo';
 import TransactionsHistoryNav from './navBar/TransactionsHistoryNav';
 import UserBarBtn from './userBar/UserBarBtn';
-import UserSetsModal from './userSetsModal/UserSetsModal';
 import BurgerMenuBtn from './burgerMenuBtn/BurgerMenuBtn';
+import UserPanel from './userPanel/UserPanel';
 
 const Header = () => {
   return (
@@ -12,9 +12,9 @@ const Header = () => {
         <Logo />
         <TransactionsHistoryNav />
         <UserBarBtn />
+        <UserPanel />
         <BurgerMenuBtn />
       </header>
-      <UserSetsModal />
     </div>
   );
 };
