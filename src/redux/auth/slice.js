@@ -31,10 +31,12 @@ const slice = createSlice({
       .addCase(refreshThunk.pending, state => {
         state.isRefreshing = true;
       })
-      .addMatcher(isAnyOf(logoutThunk.fulfilled, refreshThunk.fulfilled), (state, { payload }) => {
+      .addMatcher(isAnyOf(loginThunk.fulfilled, refreshThunk.fulfilled), (state, { payload }) => {
         state.user.name = payload.user.name;
         state.user.email = payload.user.email;
         state.accessToken = payload.accessToken;
+        state.refreshToken = payload.refreshToken;
+        state.sid = payload.sid;
         state.isLoggedIn = true;
         state.error = null;
       })
