@@ -1,7 +1,7 @@
 import React from 'react';
-import TransactionsTotalAmount from './TransactionsTotalAmount';
+import TransactionsTotalAmount from '../../shared/TransactionsTotalAmount/TransactionsTotalAmount';
 import TransactionsChart from './TransactionsChart';
-import TransactionForm from './TransactionForm';
+import TransactionForm from '../../shared/TransactionForm/TransactionForm';
 import { useParams } from 'react-router-dom';
 
 const MainTransactionsPage = () => {

@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { Route, Outlet } from 'react-router-dom';
 // import Header from './header';
-import BgImageWrapper from './BgImageWrapper';
+// import BgImageWrapper from './BgImageWrapper';
 
 const SharedLayout = ({ children }) => {
   return (
@@ -12,7 +12,7 @@ const SharedLayout = ({ children }) => {
         path="/"
         render={() => (
           <div>
-            <BgImageWrapper />
+            {/* <BgImageWrapper /> */}
             {children}
           </div>
         )}
