@@ -2,9 +2,9 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-const TransactionsHistoryNav = () => {
+const TransactionsHistoryNav = ({ variant }) => {
   return (
-    <StyledListTransactions>
+    <StyledListTransactions variant={variant}>
       <li>
         <NavLink to="#">All Expense</NavLink>
       </li>
@@ -18,7 +18,7 @@ const StyledListTransactions = styled.ul`
   display: flex;
   gap: 16px;
   @media (max-width: 768px) {
-    display: none;
+    display: ${props => (props.variant === 'burger' ? 'flex' : 'none')};
   }
 
   a {

@@ -34,19 +34,38 @@ const BurgerMenu = ({ closeBurgerMenu }) => {
 
   return (
     <StyledBurgerMenu onClick={handleModalClose}>
-      <button onClick={closeBurgerMenu}>X</button>
-      <UserBarBtn toggleUserPanel={toggleUserPanel} />
-      {isUserPanelOpen && <UserPanel />} <TransactionsHistoryNav />
+      <StyledCloseBurgerBtn onClick={closeBurgerMenu}>X</StyledCloseBurgerBtn>
+      <StyledContainerUserBtn>
+        <UserBarBtn variant="burger" toggleUserPanel={toggleUserPanel} />
+        {isUserPanelOpen && <UserPanel />}
+      </StyledContainerUserBtn>
+
+      <TransactionsHistoryNav variant="burger" />
     </StyledBurgerMenu>
   );
 };
+const StyledCloseBurgerBtn = styled.button`
+  position: absolute;
+  z-index: 1;
+  top: 30px;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+`;
+const StyledContainerUserBtn = styled.div`
+  position: relative;
+`;
 const StyledBurgerMenu = styled.div`
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   background-color: var(--primary-color);
+  padding: 18px 20px;
+  @media (min-width: 768px) {
+    width: 50%;
+  }
 `;
 
 export default BurgerMenu;
