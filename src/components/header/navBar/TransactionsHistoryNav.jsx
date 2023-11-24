@@ -2,9 +2,9 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-const TransactionsHistoryNav = () => {
+const TransactionsHistoryNav = ({ variant }) => {
   return (
-    <StyledListTransactions>
+    <StyledListTransactions variant={variant}>
       <li>
         <NavLink to="#">All Expense</NavLink>
       </li>
@@ -17,8 +17,12 @@ const TransactionsHistoryNav = () => {
 const StyledListTransactions = styled.ul`
   display: flex;
   gap: 16px;
+  align-items: ${props => (props.variant === 'burger' ? 'center' : 'start')};
+  flex-direction: ${props => (props.variant === 'burger' ? 'column' : 'row')};
+  margin-top: ${props => (props.variant === 'burger' ? '300px' : '0')};
+
   @media (max-width: 768px) {
-    display: none;
+    display: ${props => (props.variant === 'burger' ? 'flex' : 'none')};
   }
 
   a {

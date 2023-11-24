@@ -19,9 +19,9 @@ const Header = () => {
       <StyledCommonWrapper>
         <StyledContainer>
           <Logo />
-          <TransactionsHistoryNav />
+          <TransactionsHistoryNav variant="default" />
           <StyledContainerUserBtn>
-            <UserBarBtn toggleUserPanel={toggleUserPanel} />
+            <UserBarBtn variant="default" toggleUserPanel={toggleUserPanel} />
             {isUserPanelOpen && <UserPanel />}
           </StyledContainerUserBtn>
           <BurgerMenuBtn />

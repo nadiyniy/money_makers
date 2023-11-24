@@ -6,15 +6,10 @@ export const ModalBackdrop = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--backdrop-color);
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-export const ModalContent = styled.div`
-  /* background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); */
-`;
+export const ModalContent = styled.div``;
