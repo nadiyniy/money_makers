@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Modal from 'shared/Modal/Modal';
 import { useModal } from 'shared/hooks/useModal';
 import UserSetsModal from '../userSetsModal/UserSetsModal';
@@ -15,6 +14,7 @@ const UserPanel = () => {
   return (
     <>
       <div>
+
         <button onClick={() => openModal()}>Profile settings</button>
         <button onClick={handleLogout}>Log out</button>
       </div>
