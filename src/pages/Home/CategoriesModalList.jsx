@@ -1,31 +1,50 @@
 import React, { useState } from 'react';
-import CategoriesForm from './CategoriesForm';
+import NewCategoriesForm from './NewCategoriesForm';
+import EditCategoriesForm from './EditCategoriesForm';
+import { useDispatch } from 'react-redux';
+import { deleteCategoryThunk } from 'redux/category/operations';
 
-//приклад оформлення без бекенду
-const CategoriesModalList = ({ closeModal, transactionType }) => {
-  const [categories] = useState(['movies', 'cars', 'work']);
+const CategoriesModalList = ({ closeModal, categories, setchooseCategory, setTakeCategoryId }) => {
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const dispatch = useDispatch();
 
-  // const handleChoose = () => {
-  //   closeModal();
-  // };
+  const handleChooseCategory = category => {
+    setTakeCategoryId(category.id);
+    setchooseCategory(category.categoryName);
+
+    closeModal();
+  };
+
+  const handleEditCategory = category => {
+    setSelectedCategory(category);
+    setIsEditing(true);
+  };
   return (
     <div>
       <button onClick={closeModal}>Close</button>
-      <h2>{transactionType} Categories</h2>
+      <h2>{categories[0].type[0].toUpperCase() + categories[0].type.slice(1)}</h2>
       <ul>
-        {categories.map((category, index) => (
-          <li key={index}>
-            {category.name}
-            <button type="button" onClick={() => {}}>
+        {categories?.map(category => (
+          <li key={category.id}>
+            {category.categoryName}
+            <button type="button" onClick={() => handleChooseCategory(category)}>
               Choose
             </button>
-            <button type="button">Edit</button>
-            <button type="button">Delete</button>
+            <button type="button" onClick={() => handleEditCategory(category)}>
+              Edit
+            </button>
+            <button type="button" onClick={() => dispatch(deleteCategoryThunk(category.id))}>
+              Delete
+            </button>
           </li>
         ))}
       </ul>
-      <CategoriesForm />
-      {/* умова типу Ecspenses ? (first form) : (second form) */}
+      {isEditing ? (
+        <EditCategoriesForm category={selectedCategory} setIsEditing={setIsEditing} />
+      ) : (
+        <NewCategoriesForm category={selectedCategory} />
+      )}
     </div>
   );
 };

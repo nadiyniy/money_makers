@@ -3,15 +3,47 @@ const { addedCategoryThunk, deleteCategoryThunk, updateCategoryThunk, fetchCateg
 
 const initialState = {
   categories: {
-    incomes: [],
-    expenses: [],
+    incomes: [
+      {
+        id: '656080c3a060383823c287hg',
+        categoryName: 'Movies',
+        type: 'incomes',
+      },
+      {
+        id: '656080c3a060383823c2nb76',
+        categoryName: 'Medicine',
+        type: 'incomes',
+      },
+      {
+        id: '656080c3a060383823c2fg56',
+        categoryName: 'Cosmetologi',
+        type: 'incomes',
+      },
+    ],
+    expenses: [
+      {
+        id: '656084aba060383823c2fgder',
+        categoryName: 'Travel',
+        type: 'expenses',
+      },
+      {
+        id: '656084aba060383823c2fgdd',
+        categoryName: 'Burgers',
+        type: 'expenses',
+      },
+      {
+        id: '656084aba060383823c212wq',
+        categoryName: 'Pay rent',
+        type: 'expenses',
+      },
+    ],
   },
   error: null,
   isLoading: false,
 };
 
 const slice = createSlice({
-  name: 'category',
+  name: 'categories',
   initialState,
   extraReducers: builder => {
     builder
