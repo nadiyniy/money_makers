@@ -1,28 +1,46 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { instance } from 'redux/fetchInstance';
 
-export const fetchThunk = createAsyncThunk('user/fetchUser', async (_, thunkApi) => {
+export const currentInfoUserThunk = createAsyncThunk('currentInfoUser', async (_, thunkApi) => {
   try {
-    const response = await instance.get(`/users/current`);
-    return response.data;
+    const { data } = await instance.get('users/current');
+    return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
   }
 });
 
-export const updateThunk = createAsyncThunk('user/updateUser', async ({ userId, userData }, thunkApi) => {
+export const updateInfoUserThunk = createAsyncThunk('updateInfoUser', async (userData, thunkApi) => {
   try {
-    const response = await instance.put(`/users/${userId}`, userData);
-    return response.data;
+    const { data } = await instance.patch('users/info', userData);
+    return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
   }
 });
 
-export const deleteThunk = createAsyncThunk('user/deleteUser', async (userId, thunkApi) => {
+export const updateAvatarThunk = createAsyncThunk('updateAvatar', async (avatarFile, thunkApi) => {
   try {
-    await instance.delete(`/users/${userId}`);
-    return userId;
+    const formData = new FormData();
+    formData.append('avatar', avatarFile);
+
+    const { data } = await instance.patch('users/avatar', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    return data;
+  } catch (error) {
+    return thunkApi.rejectWithValue(error.message);
+  }
+});
+
+export const deleteAvatarThunk = createAsyncThunk('deleteAvatar', async (avatarId, thunkApi) => {
+  try {
+    const { data } = await instance.delete(`users/${avatarId}`);
+
+    return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
   }

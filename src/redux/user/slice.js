@@ -1,34 +1,68 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchThunk, updateThunk, deleteThunk } from './operations.js';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { currentInfoUserThunk, deleteAvatarThunk, updateAvatarThunk, updateInfoUserThunk } from './operations';
 
 const initialState = {
-  data: null,
-  isLoading: false,
+  name: '',
+  email: '',
+  currency: '',
+  avatarUrl: null,
+  categories: {
+    incomes: [],
+    expenses: [],
+  },
+  transactionsTotal: {
+    incomes: null,
+    expenses: null,
+  },
+  loading: false,
   error: null,
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
+  reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(fetchThunk.pending, state => {
-        state.isLoading = true;
+      .addCase(currentInfoUserThunk.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.user = payload;
       })
-      .addCase(fetchThunk.fulfilled, (state, action) => {
-        state.data = action.payload;
-        state.isLoading = false;
+      .addCase(updateInfoUserThunk.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.user = payload;
       })
-      .addCase(fetchThunk.rejected, (state, action) => {
-        state.error = action.payload;
-        state.isLoading = false;
+      .addCase(updateAvatarThunk.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.user.avatar = payload;
       })
-      .addCase(updateThunk.fulfilled, (state, action) => {
-        state.data = { ...state.data, ...action.payload };
+      .addCase(deleteAvatarThunk.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.user.avatar = payload;
       })
-      .addCase(deleteThunk.fulfilled, state => {
-        state.data = null;
-      });
+      .addMatcher(
+        isAnyOf(
+          currentInfoUserThunk.pending,
+          updateInfoUserThunk.pending,
+          updateAvatarThunk.pending,
+          deleteAvatarThunk.pending
+        ),
+        (state, { payload }) => {
+          state.loading = true;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          currentInfoUserThunk.rejected,
+          updateInfoUserThunk.rejected,
+          updateAvatarThunk.rejected,
+          deleteAvatarThunk.rejected
+        ),
+        (state, { payload }) => {
+          state.loading = false;
+          state.error = payload;
+        }
+      );
   },
 });
 
