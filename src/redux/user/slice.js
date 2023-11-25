@@ -2,18 +2,7 @@ import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { currentInfoUserThunk, deleteAvatarThunk, updateAvatarThunk, updateInfoUserThunk } from './operations';
 
 const initialState = {
-  name: '',
-  email: '',
-  currency: '',
-  avatarUrl: null,
-  categories: {
-    incomes: [],
-    expenses: [],
-  },
-  transactionsTotal: {
-    incomes: null,
-    expenses: null,
-  },
+  user: {},
   loading: false,
   error: null,
 };
@@ -27,6 +16,7 @@ const userSlice = createSlice({
       .addCase(currentInfoUserThunk.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.user = payload;
+        console.log(1, payload);
       })
       .addCase(updateInfoUserThunk.fulfilled, (state, { payload }) => {
         state.loading = false;

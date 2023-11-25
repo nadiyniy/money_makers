@@ -1,8 +1,36 @@
-import React from 'react';
-import avatar from '../../../images/404-page.png';
+import React, { useEffect, useState } from 'react';
 import { StyledAvatar, StyledForm, StyledModal, StyledModalCloseBtn } from './UserSetsModal.styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteAvatarThunk, updateAvatarThunk } from 'redux/user/operations';
+import { selectCurrentUser } from 'redux/user/selectors';
 
 const UserSetsModal = ({ closeModal }) => {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const dispatch = useDispatch();
+  const currentUser = useSelector(selectCurrentUser);
+
+  const handleRemoveClick = () => {
+    const avatarUrl = currentUser.avatarUrl;
+    const parts = avatarUrl.split('/');
+    const avatarId = parts[parts.length - 1].slice(0, -5);
+    console.log(avatarId);
+    dispatch(deleteAvatarThunk(avatarId));
+    closeModal();
+  };
+
+  const handleFileChange = event => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  };
+  useEffect(() => {}, []);
+
+  const handleUploadClick = () => {
+    if (selectedFile) {
+      dispatch(updateAvatarThunk(selectedFile));
+      closeModal();
+    }
+  };
+
   return (
     <StyledModal>
       <StyledModalCloseBtn onClick={closeModal}>
@@ -13,10 +41,11 @@ const UserSetsModal = ({ closeModal }) => {
       </StyledModalCloseBtn>
       <h2>Profile settings</h2>
       <StyledAvatar>
-        <img src={avatar} alt="User icon" />
+        <img src={currentUser.avatarUrl} alt="User icon" />
         <div>
-          <button>Upload new photo</button>
-          <button>Remove</button>
+          <input type="file" onChange={handleFileChange} />
+          <button onClick={handleUploadClick}>Upload new photo</button>
+          <button onClick={handleRemoveClick}>Remove</button>
         </div>
       </StyledAvatar>
       <StyledForm>

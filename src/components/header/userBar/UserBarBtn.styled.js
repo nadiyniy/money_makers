@@ -24,3 +24,13 @@ export const StyledUserBtn = styled.button`
     border-radius: var(--border-radius-rounded);
   }
 `;
+export const StyledContainerAvatar = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: var(--border-radius-rounded);
+  border: 1px solid var(--gray-text-10);
+`;
