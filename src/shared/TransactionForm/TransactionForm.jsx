@@ -7,12 +7,20 @@ import CategoriesModalList from 'pages/Home/CategoriesModalList';
 
 import { selectCategoriesExpenses, selectCategoriesIncomes } from 'redux/category/selectors';
 import { fetchCategoriesThunk } from 'redux/category/operations';
+import {
+  RadioCustom,
+  RadioCustomChecked,
+  RadioInput,
+  RadioLabel,
+  TransactionFormStyle,
+} from './TransactionForm.styles';
 
 const TransactionForm = ({ transactionsType }) => {
   const { isOpen, openModal, closeModal } = useModal();
   const [currentCategory, setCurrentCategory] = useState([]);
   const [chooseCategory, setchooseCategory] = useState('');
   const [takeCategoryId, setTakeCategoryId] = useState('');
+  const [checked, setCheked] = useState(false);
   const incomes = useSelector(selectCategoriesIncomes);
   const expenses = useSelector(selectCategoriesExpenses);
   const dispatch = useDispatch();
@@ -36,7 +44,7 @@ const TransactionForm = ({ transactionsType }) => {
     console.log(formData);
   };
 
-  const chooseCategoryByList = () => {
+  const renderCategoryByType = () => {
     let list;
     if (transactionsType === 'incomes') {
       list = incomes;
@@ -47,28 +55,48 @@ const TransactionForm = ({ transactionsType }) => {
     openModal();
   };
 
+  const handleTypeChange = e => {
+    const value = e.target.value;
+    setCheked(value);
+  };
+
   return (
     <>
       <div>
-        <form onSubmit={handleSubmit(submit)}>
+        <TransactionFormStyle onSubmit={handleSubmit(submit)}>
           <div>
-            <label>
+            <RadioLabel>
+              <RadioInput
+                {...register('type', { required: true })}
+                type="radio"
+                checked={checked === 'expenses'}
+                value="expenses"
+                onChange={handleTypeChange}
+              />
               Expense
-              <input {...register('type')} type="radio" value="expenses" />
-            </label>
-            <label>
+              {checked === 'expenses' ? <RadioCustomChecked /> : <RadioCustom />}
+            </RadioLabel>
+
+            <RadioLabel>
+              <RadioInput
+                {...register('type', { required: true })}
+                type="radio"
+                checked={checked === 'incomes'}
+                value="incomes"
+                onChange={handleTypeChange}
+              />
               Income
-              <input {...register('type')} type="radio" value="incomes" />
-            </label>
+              {checked === 'incomes' ? <RadioCustomChecked /> : <RadioCustom />}
+            </RadioLabel>
           </div>
           <div>
             <label>
               Date:
-              <input type="date" {...register('date')} placeholder="mm/dd/yyyy" />
+              <input type="date" {...register('date', { required: true })} placeholder="mm/dd/yyyy" />
             </label>
             <label>
               Time:
-              <input type="time" {...register('time')} placeholder="00:00:00" />
+              <input type="time" {...register('time', { required: true })} placeholder="00:00:00" />
             </label>
           </div>
           <div>
@@ -79,24 +107,24 @@ const TransactionForm = ({ transactionsType }) => {
                 value={chooseCategory}
                 {...register('category')}
                 placeholder="Different"
-                onClick={chooseCategoryByList}
-                onFocus={chooseCategoryByList}
+                onClick={renderCategoryByType}
+                onFocus={renderCategoryByType}
               />
             </label>
           </div>
           <div>
             <label htmlFor="amountInput">Sum:</label>
-            <input type="text" id="amountInput" {...register('sum')} placeholder="Enter the sum" />
+            <input type="text" id="amountInput" {...register('sum', { required: true })} placeholder="Enter the sum" />
             <span>{'грн'}</span>
           </div>
           <div>
             <label>
               Comment:
-              <textarea {...register('comment')} rows={4} cols={50} placeholder="Enter the text" />
+              <textarea {...register('comment', { required: true })} rows={4} cols={50} placeholder="Enter the text" />
             </label>
           </div>
           <button type="submit">Add</button>
-        </form>
+        </TransactionFormStyle>
       </div>
 
       {isOpen ? (

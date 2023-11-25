@@ -48,22 +48,30 @@ const slice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(addedCategoryThunk.fulfilled, (state, { payload }) => {
-        state.categories.incomes.push(payload.incomes);
-        state.categories.expenses.push(payload.expenses);
+        if (payload.type === 'incomes') {
+          state.categories.incomes.push(payload);
+        }
+        state.categories.expenses.push(payload);
       })
       .addCase(deleteCategoryThunk.fulfilled, (state, { payload }) => {
-        state.categories.incomes = state.categories.incomes.filter(category => category.id !== payload.id);
+        if (payload.type === 'incomes') {
+          state.categories.incomes = state.categories.incomes.filter(category => category.id !== payload.id);
+        }
         state.categories.expenses = state.categories.expenses.filter(category => category.id !== payload.id);
       })
       .addCase(updateCategoryThunk.fulfilled, (state, { payload }) => {
-        const editCategoryIncomes = state.categories.incomes.find(category => category.id === payload.id);
+        if (payload.type === 'incomes') {
+          const editCategoryIncomes = state.categories.incomes.find(category => category.id === payload.id);
+          editCategoryIncomes.categoryName = payload.categoryName;
+        }
         const editCategoryExpenses = state.categories.incomes.find(category => category.id === payload.id);
-        editCategoryIncomes.categoryName = payload.categoryName;
         editCategoryExpenses.categoryName = payload.categoryName;
       })
       .addCase(fetchCategoriesThunk.fulfilled, (state, { payload }) => {
-        state.categories.incomes = payload.incomes;
-        state.categories.expenses = payload.expenses;
+        if (payload.type === 'incomes') {
+          state.categories.incomes = payload;
+        }
+        state.categories.expenses = payload;
       })
       .addMatcher(
         isAnyOf(
