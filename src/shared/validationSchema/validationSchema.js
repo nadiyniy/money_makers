@@ -9,6 +9,9 @@ export const validationSchema = yup.object({
     .required(),
 });
 
+export const validationCategoryFormSchema = yup.object({
+  categoryName: yup.string().min(3, 'Category must contain at least 3 symbols').required(),
+});
 // export const validationSchema = yup.object().shape({
 //   email: yup
 //   .string('Please, enter your e-mail')

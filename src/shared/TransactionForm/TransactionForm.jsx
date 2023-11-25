@@ -44,7 +44,7 @@ const TransactionForm = ({ transactionsType }) => {
     console.log(formData);
   };
 
-  const chooseCategoryByList = () => {
+  const renderCategoryByType = () => {
     let list;
     if (transactionsType === 'incomes') {
       list = incomes;
@@ -107,8 +107,8 @@ const TransactionForm = ({ transactionsType }) => {
                 value={chooseCategory}
                 {...register('category')}
                 placeholder="Different"
-                onClick={chooseCategoryByList}
-                onFocus={chooseCategoryByList}
+                onClick={renderCategoryByType}
+                onFocus={renderCategoryByType}
               />
             </label>
           </div>
