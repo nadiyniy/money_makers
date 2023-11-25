@@ -3,21 +3,25 @@ import { Layout } from './Layout';
 import MainTransactionsPage from 'pages/Home/MainTransactionsPage';
 import Header from './header/Header';
 
-          
-          import RegisterPage from 'pages/Auth/RegisterPage';
+import RegisterPage from 'pages/Auth/RegisterPage';
 import LoginPage from 'pages/Auth/LoginPage';
-import { useEffect } from 'react';
-import { refreshThunk } from 'redux/auth/operations';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectIsRefreshing } from 'redux/auth/selectors';
+// import { useEffect } from 'react';
+// import { refreshThunk } from 'redux/auth/operations';
+import { 
+  // useDispatch, 
+  useSelector } from 'react-redux';
+import { selectIsRefreshing, selectSid } from 'redux/auth/selectors';
 
 export const App = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
+  const sid = useSelector(selectSid);
 
-  useEffect(() => {
-    dispatch(refreshThunk());
-  }, [dispatch]);
+  console.log(sid);
+
+  // useEffect(() => {
+  //   dispatch(refreshThunk(sid));
+  // }, [dispatch, sid]);
 
   return isRefreshing ? (
     <p>loading...</p>
@@ -34,8 +38,8 @@ export const App = () => {
     <Route path="/transactions" element={<MainTransactionsPage />} />
     <Route path="/transactions/history" element={<TransactionsHistoryPage />} />
     <Route path="/loader" element={<Loader />} /> */}
-        <Route path="login" element={<LoginPage />} />
-        <Route path="register" element={<RegisterPage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
         </Route>
       </Routes>
     </div>
