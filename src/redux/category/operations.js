@@ -33,8 +33,9 @@ export const updateCategoryThunk = createAsyncThunk('updateCategoryById', async 
 
 export const fetchCategoriesThunk = createAsyncThunk('fetchAllCategories', async (_, thunkApi) => {
   try {
-    const { data } = await instance.get(`categories`);
+    const { data } = await instance.get('categories');
     setToken(data.accessToken);
+    console.log(data.accessToken);
     return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);

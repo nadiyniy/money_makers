@@ -20,11 +20,9 @@ const Layout = () => {
   return (
     <>
       <Header />
-      <div>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Outlet />
-        </Suspense>
-      </div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };
