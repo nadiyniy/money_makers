@@ -36,15 +36,16 @@ export const logoutThunk = createAsyncThunk('logout', async (_, thunkApi) => {
   }
 });
 
-export const refreshThunk = createAsyncThunk('auth/refresh', async (sid, thunkApi) => {
-  const savedToken = thunkApi.getState().auth.accessToken;
+export const refreshThunk = createAsyncThunk('auth/refresh', async (_, thunkApi) => {
+  const savedToken = thunkApi.getState().auth.refreshToken;
+  const sid = thunkApi.getState().auth.sid;
 
   if (!savedToken) {
     throw new Error('Token does not exist');
   }
   try {
     setToken(savedToken);
-    const { data } = await instance.post('auth/refresh', sid);
+    const { data } = await instance.post('auth/refresh', { sid });
     return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
