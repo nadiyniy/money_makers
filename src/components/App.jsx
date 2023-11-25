@@ -12,10 +12,9 @@ import { refreshThunk } from 'redux/auth/operations';
 
 export const App = () => {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(refreshThunk());
-  }, [dispatch]);
+  }, []);
 
   return (
     <div>

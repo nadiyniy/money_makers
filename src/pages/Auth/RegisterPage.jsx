@@ -18,7 +18,6 @@ const RegisterPage = () => {
   const dispatch = useDispatch();
 
   const submit = data => {
-    console.log(data);
     dispatch(registerThunk(data));
   };
 

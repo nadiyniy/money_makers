@@ -41,7 +41,6 @@ const TransactionForm = ({ transactionsType }) => {
       type,
     };
     reset();
-    console.log(formData);
   };
 
   const renderCategoryByType = () => {

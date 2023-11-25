@@ -6,7 +6,6 @@ import { selectIsLoggedIn } from 'redux/auth/selectors';
 
 const PublicWelcomeRoute = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  console.log(isLoggedIn);
 
   if (isLoggedIn) {
     return <Navigate to="/transactions/incomes" />;

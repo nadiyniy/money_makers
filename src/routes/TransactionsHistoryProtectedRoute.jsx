@@ -5,7 +5,6 @@ import TransactionsHistoryPage from '../pages/TransactionsHistory.jsx/Transactio
 
 const TransactionsHistoryProtectedRoute = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  console.log(isLoggedIn);
 
   if (!isLoggedIn) {
     return <Navigate to="/" />;
