@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { logoutThunk } from 'redux/auth/operations';
 import styled from 'styled-components';
 
-const UserPanel = () => {
+const UserPanel = ({ variant }) => {
   const { isOpen, openModal, closeModal } = useModal();
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -14,7 +14,7 @@ const UserPanel = () => {
   };
   return (
     <>
-      <StyledModalLink>
+      <StyledModalLink variant={variant}>
         <button onClick={() => openModal()}>Profile settings</button>
         <button onClick={handleLogout}>Log out</button>
       </StyledModalLink>
@@ -33,12 +33,16 @@ const StyledModalLink = styled.div`
   width: 100%;
   padding: 18px 16px;
   display: flex;
+
   flex-direction: column;
   gap: 12px;
   border-radius: var(--border-radius-15);
   border: 1px solid var(--gray-text-10);
   background: var(--black-color);
   align-items: flex-start;
+  @media (max-width: 768px) {
+    display: ${props => (props.variant === 'burger' ? 'flex' : 'none')};
+  }
   button {
     cursor: pointer;
     color: rgba(250, 250, 250, 0.5);

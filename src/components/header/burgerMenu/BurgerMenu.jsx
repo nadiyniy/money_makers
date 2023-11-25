@@ -46,7 +46,7 @@ const BurgerMenu = ({ closeBurgerMenu }) => {
         <div>
           <StyledContainerUserBtn>
             <UserBarBtn variant="burger" toggleUserPanel={toggleUserPanel} />
-            {isUserPanelOpen && <UserPanel />}
+            {isUserPanelOpen && <UserPanel variant="burger" />}
           </StyledContainerUserBtn>
         </div>
         <TransactionsHistoryNav variant="burger" />

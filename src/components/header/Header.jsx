@@ -22,7 +22,7 @@ const Header = () => {
           <TransactionsHistoryNav variant="default" />
           <StyledContainerUserBtn>
             <UserBarBtn variant="default" toggleUserPanel={toggleUserPanel} />
-            {isUserPanelOpen && <UserPanel />}
+            {isUserPanelOpen && <UserPanel variant="default" />}
           </StyledContainerUserBtn>
           <BurgerMenuBtn />
         </StyledContainer>

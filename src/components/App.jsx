@@ -7,9 +7,10 @@ import RegisterPage from 'pages/Auth/RegisterPage';
 import LoginPage from 'pages/Auth/LoginPage';
 // import { useEffect } from 'react';
 // import { refreshThunk } from 'redux/auth/operations';
-import { 
-  // useDispatch, 
-  useSelector } from 'react-redux';
+import {
+  // useDispatch,
+  useSelector,
+} from 'react-redux';
 import { selectIsRefreshing, selectSid } from 'redux/auth/selectors';
 
 export const App = () => {
@@ -31,13 +32,13 @@ export const App = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Header />} />
           <Route path="transactions/:transactionsType" element={<MainTransactionsPage />} />
-          {/* <BgImageWrapper />
-    <Route path="/welcome" element={<WellcomePage />} />
-    <Route path="/register" element={<RegisterPage />} />
-    <Route path="/login" element={<LoginPage />} />
-    <Route path="/transactions" element={<MainTransactionsPage />} />
-    <Route path="/transactions/history" element={<TransactionsHistoryPage />} />
-    <Route path="/loader" element={<Loader />} /> */}
+          {/* <BgImageWrapper /> */}
+          {/* <Route path="/welcome" element={<WellcomePage />} /> */}
+          {/* <Route path="/register" element={<RegisterPage />} /> */}
+          {/* <Route path="/login" element={<LoginPage />} /> */}
+          {/* <Route path="/transactions" element={<MainTransactionsPage />} /> */}
+          {/* <Route path="/transactions/history" element={<TransactionsHistoryPage />} /> */}
+          {/* <Route path="/loader" element={<Loader />} /> */}
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
         </Route>
