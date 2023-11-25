@@ -14,7 +14,7 @@ export const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(refreshThunk());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
