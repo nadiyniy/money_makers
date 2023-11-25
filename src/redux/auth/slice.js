@@ -49,11 +49,6 @@ const slice = createSlice({
         state.error = payload;
       })
       .addCase(registerThunk.fulfilled, (state, { payload }) => {
-        state.user.name = payload.user.name;
-        state.user.email = payload.user.email;
-        state.accessToken = payload.accessToken;
-        state.refreshToken = payload.refreshToken;
-        state.sid = payload.sid;
         state.isLoggedIn = true;
         state.error = null;
       })
