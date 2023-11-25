@@ -7,13 +7,13 @@ import { categoriesReducer } from './category/slice';
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['token'],
+  whitelist: ['sid', 'accessToken', 'refreshToken'],
 };
 
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
-     user: userReducer,
+    user: userReducer,
     // transaction: transactionReducer,
     categories: categoriesReducer,
   },
