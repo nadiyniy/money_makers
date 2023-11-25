@@ -3,7 +3,7 @@ import { instance } from 'redux/fetchInstance';
 
 export const fetchThunk = createAsyncThunk('user/fetchUser', async (userId, thunkApi) => {
   try {
-    const response = await instance.get(`/users/${userId}`);
+    const response = await instance.get(`/users/current`);
     return response.data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);

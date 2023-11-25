@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { clearToken, instance, setToken } from 'redux/fetchInstance';
+import { fetchThunk } from 'redux/user/operations';
 
 export const registerThunk = createAsyncThunk('register', async (user, thunkApi) => {
   try {
@@ -36,15 +37,19 @@ export const logoutThunk = createAsyncThunk('logout', async (_, thunkApi) => {
   }
 });
 
-export const refreshThunk = createAsyncThunk('auth/refresh', async (sid, thunkApi) => {
-  const savedToken = thunkApi.getState().auth.accessToken;
+export const refreshThunk = createAsyncThunk('auth/refresh', async (_, thunkApi) => {
+  const savedTokenRefresh = thunkApi.getState().auth.refreshToken;
+  const sid = thunkApi.getState().auth.sid;
 
-  if (!savedToken) {
-    throw new Error('Token does not exist');
+  if (!savedTokenRefresh) {
+ 
+    return thunkApi.rejectWithValue('Token does not exist');
   }
   try {
-    setToken(savedToken);
-    const { data } = await instance.post('auth/refresh', sid);
+    setToken(savedTokenRefresh);
+    const { data } = await instance.post('auth/refresh', { sid });
+    setToken(data.accessToken)
+    thunkApi.dispatch(fetchThunk())
     return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);

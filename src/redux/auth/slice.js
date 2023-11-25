@@ -65,10 +65,11 @@ const slice = createSlice({
         state.error = payload;
       })
       .addCase(refreshThunk.fulfilled, (state, { payload }) => {
-        state.user.name = payload.name;
-        state.user.email = payload.email;
         state.isLoggedIn = true;
         state.isRefreshing = false;
+        state.accessToken = payload.accessToken
+        state.refreshToken = payload.refreshToken
+        state.sid = payload.sid
       })
       .addCase(refreshThunk.pending, state => {
         state.isRefreshing = true;

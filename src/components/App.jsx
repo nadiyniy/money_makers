@@ -5,24 +5,19 @@ import Header from './header/Header';
 
 import RegisterPage from 'pages/Auth/RegisterPage';
 import LoginPage from 'pages/Auth/LoginPage';
-// import { useEffect } from 'react';
-// import { refreshThunk } from 'redux/auth/operations';
-import {
-  // useDispatch,
-  useSelector,
-} from 'react-redux';
-import { selectIsRefreshing, selectSid } from 'redux/auth/selectors';
+import { useEffect } from 'react';
+import { refreshThunk } from 'redux/auth/operations';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsRefreshing } from 'redux/auth/selectors';
+
 
 export const App = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
-  const sid = useSelector(selectSid);
 
-  console.log(sid);
-
-  // useEffect(() => {
-  //   dispatch(refreshThunk(sid));
-  // }, [dispatch, sid]);
+  useEffect(() => {
+    dispatch(refreshThunk());
+  }, [dispatch]);
 
   return isRefreshing ? (
     <p>loading...</p>
