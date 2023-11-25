@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledListTransactions = styled.ul`
+export const StyledListTransactions = styled.nav`
   display: flex;
   gap: 16px;
   align-items: ${props => (props.variant === 'burger' ? 'center' : 'start')};
@@ -23,7 +23,7 @@ export const StyledListTransactions = styled.ul`
 
     letter-spacing: -0.02em;
     &.active {
-      background-color: red;
+      background-color: var(--primary-color);
     }
   }
 `;
