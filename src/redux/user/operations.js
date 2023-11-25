@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { instance } from 'redux/fetchInstance';
 
-export const fetchThunk = createAsyncThunk('user/fetchUser', async (userId, thunkApi) => {
+export const fetchThunk = createAsyncThunk('user/fetchUser', async (_, thunkApi) => {
   try {
     const response = await instance.get(`/users/current`);
     return response.data;

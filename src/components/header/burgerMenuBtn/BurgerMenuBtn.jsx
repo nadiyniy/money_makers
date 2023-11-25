@@ -1,6 +1,7 @@
 import BurgerMenu from 'components/header/burgerMenu/BurgerMenu';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import sprite from '../../../images/sprite.svg';
 
 const BurgerMenuBtn = () => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
@@ -16,21 +17,8 @@ const BurgerMenuBtn = () => {
   return (
     <StyledBurgerBtn>
       <button onClick={openBurgerMenu}>
-        <svg
-          style={{ background: 'none' }}
-          xmlns="http://www.w3.org/2000/svg"
-          width="44"
-          height="44"
-          viewBox="0 0 44 44"
-          fill="none"
-        >
-          <path
-            d="M5.5 15.5833H38.5M5.5 28.4167H38.5"
-            stroke="#FAFAFA"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+        <svg width="27" height="16">
+          <use href={`${sprite}#icon-menu`} />
         </svg>
       </button>
       {isBurgerMenuOpen && <BurgerMenu closeBurgerMenu={closeBurgerMenu} />}{' '}

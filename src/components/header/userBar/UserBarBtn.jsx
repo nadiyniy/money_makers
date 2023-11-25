@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import avatar from '../../../images/404-page.png';
+import sprite from '../../../images/sprite.svg';
 
 const UserBarBtn = ({ variant, toggleUserPanel }) => {
   return (
     <StyledUserBtn variant={variant} onClick={toggleUserPanel}>
       <img src={avatar} alt="User icon" />
       <p>Alex Rybachok</p>
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M5 7.5L10 12.5L15 7.5" stroke="#0EF387" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <svg width="20" height="20">
+        <use href={`${sprite}#icon-arrow-down`} />
       </svg>
     </StyledUserBtn>
   );
