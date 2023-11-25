@@ -27,9 +27,9 @@ const BurgerMenuBtn = () => {
           <path
             d="M5.5 15.5833H38.5M5.5 28.4167H38.5"
             stroke="#FAFAFA"
-            stroke-width="3"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </button>
