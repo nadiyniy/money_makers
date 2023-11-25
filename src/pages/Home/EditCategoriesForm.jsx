@@ -1,13 +1,17 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { updateCategoryThunk } from 'redux/category/operations';
 import { validationCategoryFormSchema } from 'shared/validationSchema/validationSchema';
+import { selectError } from 'redux/auth/selectors';
 
 const EditCategoriesForm = ({ setIsEditing, category }) => {
-  console.log(category);
+  const error = useSelector(selectError);
   const dispatch = useDispatch();
+  console.log(category);
   const {
     register,
     handleSubmit,
@@ -22,7 +26,11 @@ const EditCategoriesForm = ({ setIsEditing, category }) => {
 
     console.log({ _id, ...data });
     setIsEditing(false);
-    reset();
+    if (error === null) {
+      reset();
+    } else {
+      toast.error('Update failed, please try again');
+    }
   };
   return (
     <div>
