@@ -4,9 +4,11 @@
   "private": true,
   "homepage": "https://nadiyniy.github.io/money_makers/",
   "dependencies": {
+    "@hookform/resolvers": "^3.3.2",
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.6.2",
     "react": "^18.1.0",
+    "react-datepicker": "^4.23.0",
     "react-dom": "^18.1.0",
     "react-hook-form": "^7.48.2",
     "react-redux": "^8.1.3",
