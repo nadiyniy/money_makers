@@ -24,11 +24,31 @@ export const Title = styled.h1`
     color: var(--primary-color);
     text-decoration-line: underline;
   }
+
+  @media screen and (min-width: 768px) {
+    font-size: 56px;
+    letter-spacing: -1.12px;
+  }
 `;
 
 export const Description = styled.p`
   margin-bottom: 30px;
   color: var(--gray-text-40);
 
+  font-size: 14px;
   letter-spacing: -0.28px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+  }
 `;
+
+/*
+
+@media screen and (min-width: 768px) {
+}
+
+@media screen and (min-width: 1280px) {
+}
+
+*/

@@ -14,8 +14,18 @@ const commonButtonStyles = `
   width: 100%;
   padding: 14px 44px;
   border-radius: 40px;
+
+  font-size: 14px;
   letter-spacing: -0.28px;
+
+  white-space: nowrap;
   transition: background-color 0.2s ease-in-out;
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    letter-spacing: -0.32px;
+  }
+  
 `;
 
 export const SignUpLink = styled(Link)`
