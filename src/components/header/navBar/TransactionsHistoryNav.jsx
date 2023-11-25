@@ -6,10 +6,16 @@ const TransactionsHistoryNav = ({ variant }) => {
   return (
     <StyledListTransactions variant={variant}>
       <li>
-        <NavLink to="#">All Expense</NavLink>
+        <NavLink to="/transactions/history/expense">All Expense</NavLink>
       </li>
       <li>
-        <NavLink to="#">All Income</NavLink>
+        <NavLink to="/transactions/history/income">All Income</NavLink>
+      </li>
+      <li>
+        <NavLink to="/transactions/expense">expense</NavLink>
+      </li>
+      <li>
+        <NavLink to="/transactions/income">income</NavLink>
       </li>
     </StyledListTransactions>
   );

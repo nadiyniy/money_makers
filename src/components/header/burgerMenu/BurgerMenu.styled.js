@@ -19,6 +19,7 @@ export const StyledCloseBurgerBtn = styled.button`
   height: 27px;
   border: none;
   background: none;
+  z-index: 1;
 `;
 export const StyledContainerUserBtn = styled.div`
   position: relative;

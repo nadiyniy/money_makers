@@ -22,5 +22,8 @@ export const StyledListTransactions = styled.ul`
     color: #fafafa;
 
     letter-spacing: -0.02em;
+    &.active {
+      background-color: red;
+    }
   }
 `;
