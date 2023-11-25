@@ -9,7 +9,7 @@ import RegisterPage from 'pages/Auth/RegisterPage';
 import LoginPage from 'pages/Auth/LoginPage';
 import { refreshThunk } from 'redux/auth/operations';
 import { selectIsRefreshing } from 'redux/auth/selectors';
-
+import TransactionsHistoryPage from 'pages/TransactionsHistory.jsx/TransactionsHistory';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ export const App = () => {
           {/* <Route path="/register" element={<RegisterPage />} /> */}
           {/* <Route path="/login" element={<LoginPage />} /> */}
           {/* <Route path="/transactions" element={<MainTransactionsPage />} /> */}
-          {/* <Route path="/transactions/history" element={<TransactionsHistoryPage />} /> */}
+          <Route path="/transactions/history/:transactionsType" element={<TransactionsHistoryPage />} />
           {/* <Route path="/loader" element={<Loader />} /> */}
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
