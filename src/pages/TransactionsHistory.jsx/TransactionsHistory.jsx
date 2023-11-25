@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 import { fetchTransactions } from 'redux/transactions/operations';
 
-import { selectTransactions, selectTransactionsLoading } from 'redux/transactions/selectors';
+// import { selectTransactions, selectTransactionsLoading } from 'redux/transactions/selectors';
 
 import TransactionsTotalAmount from 'shared/TransactionsTotalAmount/TransactionsTotalAmount';
 
 const TransactionsHistoryPage = () => {
-  const transactions = useSelector(selectTransactions);
+  // const transactions = useSelector(selectTransactions);
   //   const isLoading = useSelector(selectTransactionsLoading);
   const dispatch = useDispatch();
   const { transactionsType } = useParams();
