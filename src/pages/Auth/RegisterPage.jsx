@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { registerThunk } from 'redux/auth/operations';
+import { loginThunk, registerThunk } from 'redux/auth/operations';
 import AuthForm from 'shared/AuthForm/AuthForm';
 import { validationSchema } from 'shared/validationSchema/validationSchema';
 
@@ -18,7 +18,17 @@ const RegisterPage = () => {
   const dispatch = useDispatch();
 
   const submit = data => {
-    dispatch(registerThunk(data));
+    dispatch(registerThunk(data)).then(response => {
+      if (response?.payload) {
+        const sendData = {
+          email: data.email,
+          password: data.password,
+        };
+        dispatch(loginThunk(sendData));
+      } else {
+        console.error('Error');
+      }
+    });
   };
 
   return (
