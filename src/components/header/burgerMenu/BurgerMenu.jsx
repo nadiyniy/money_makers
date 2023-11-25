@@ -2,7 +2,8 @@ import TransactionsHistoryNav from 'components/header/navBar/TransactionsHistory
 import UserBarBtn from 'components/header/userBar/UserBarBtn';
 import React, { useEffect, useState } from 'react';
 import UserPanel from '../userPanel/UserPanel';
-import styled from 'styled-components';
+import { StyledContainerUserBtn } from '../Header.styled';
+import { ModalBackdrop, StyledBurgerMenu, StyledCloseBurgerBtn } from './BurgerMenu.styled';
 
 const BurgerMenu = ({ closeBurgerMenu }) => {
   const [isUserPanelOpen, setIsUserPanelOpen] = useState(false);
@@ -54,43 +55,5 @@ const BurgerMenu = ({ closeBurgerMenu }) => {
     </ModalBackdrop>
   );
 };
-export const ModalBackdrop = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--backdrop-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const StyledCloseBurgerBtn = styled.button`
-  position: absolute;
-  top: 30px;
-  right: 20px;
-  width: 27px;
-  height: 27px;
-  border: none;
-  background: none;
-`;
-const StyledContainerUserBtn = styled.div`
-  position: relative;
-  display: inline-flex;
-`;
-const StyledBurgerMenu = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--primary-color);
-  padding: 18px 20px;
-  display: flex;
-  flex-direction: column;
-  @media (min-width: 768px) {
-    width: 50%;
-  }
-`;
 
 export default BurgerMenu;
