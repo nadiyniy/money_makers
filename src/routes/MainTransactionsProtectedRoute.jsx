@@ -5,7 +5,6 @@ import MainTransactionsPage from '../pages/Home/MainTransactionsPage';
 
 const MainTransactionsProtectedRoute = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  console.log(isLoggedIn, 1);
   if (!isLoggedIn) {
     return <Navigate to="/" />;
   }

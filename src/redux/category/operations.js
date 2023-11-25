@@ -35,7 +35,6 @@ export const fetchCategoriesThunk = createAsyncThunk('fetchAllCategories', async
   try {
     const { data } = await instance.get('categories');
     setToken(data.accessToken);
-    console.log(data.accessToken);
     return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
