@@ -1,5 +1,6 @@
 export { ReactComponent as UserAvatarIcon } from './icons/user-avatar.svg';
 export { ReactComponent as CloseIcon } from './icons/close.svg';
+export { ReactComponent as ArrowRightUpIcon } from './icons/Arrow 15.svg';
 
 export { ReactComponent as ArrowUpCurrency } from './icons/arrow-up_currency.svg';
 // export { ReactComponent as  } from './icons/';
