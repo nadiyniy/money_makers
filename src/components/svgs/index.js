@@ -1,2 +1,23 @@
 export { ReactComponent as UserAvatarIcon } from './icons/user-avatar.svg';
 export { ReactComponent as CloseIcon } from './icons/close.svg';
+
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
