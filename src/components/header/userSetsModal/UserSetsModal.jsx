@@ -1,18 +1,18 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { StyledAvatar, StyledForm, StyledModal, StyledModalCloseBtn } from './UserSetsModal.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAvatarThunk, updateAvatarThunk } from 'redux/user/operations';
 import { selectCurrentUser } from 'redux/user/selectors';
-import { useForm } from 'react-hook-form';
+// import { useForm } from 'react-hook-form';
 import UserAvatar from '../userAvatar/UserAvatar';
 
 const UserSetsModal = ({ closeModal }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
-  const {
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  // const {
+  //   handleSubmit,
+  //   formState: { errors },
+  // } = useForm();
 
   const fileInputRef = useRef(null);
 
