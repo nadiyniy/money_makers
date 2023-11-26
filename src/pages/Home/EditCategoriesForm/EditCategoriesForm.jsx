@@ -4,13 +4,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { addedCategoryThunk } from 'redux/category/operations';
+import { updateCategoryThunk } from 'redux/category/operations';
 import { validationCategoryFormSchema } from 'shared/validationSchema/validationSchema';
 import { selectError } from 'redux/auth/selectors';
 
-const NewCategoriesForm = ({ category }) => {
+const EditCategoriesForm = ({ setIsEditing, category }) => {
   const error = useSelector(selectError);
   const dispatch = useDispatch();
+  console.log(category);
   const {
     register,
     handleSubmit,
@@ -20,25 +21,27 @@ const NewCategoriesForm = ({ category }) => {
     resolver: yupResolver(validationCategoryFormSchema),
   });
   const submit = data => {
-    const type = category.type;
-    console.log({ type, ...data });
-    dispatch(addedCategoryThunk({ type, ...data }));
+    const _id = category.id;
+    dispatch(updateCategoryThunk({ _id, ...data }));
+
+    console.log({ _id, ...data });
+    setIsEditing(false);
     if (error === null) {
       reset();
     } else {
-      toast.error('Сreation failed, please try again');
+      toast.error('Update failed, please try again');
     }
   };
   return (
     <div>
       <form onSubmit={handleSubmit(submit)}>
-        <label htmlFor="add">New Category</label>
-        <input id="add" type="text" placeholder="Enter the text" {...register('categoryName')} />
+        <label htmlFor="edit">Edit Category</label>
+        <input id="edit" type="text" placeholder="Enter the text" {...register('categoryName')} />
         <p>{errors.categoryName?.message}</p>
-        <button type="submit">Add</button>
+        <button type="submit">Edit</button>
       </form>
     </div>
   );
 };
 
-export default NewCategoriesForm;
+export default EditCategoriesForm;

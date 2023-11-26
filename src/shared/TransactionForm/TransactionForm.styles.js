@@ -6,6 +6,7 @@ export const TransactionFormStyle = styled.form`
   max-width: 335px;
   background-color: var(--gray-dark-color);
   border-radius: 30px;
+  color: var(--white-color);
 `;
 
 export const RadioWrapper = styled.div`

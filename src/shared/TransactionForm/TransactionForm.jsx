@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useModal } from 'shared/hooks/useModal';
 import Modal from 'shared/Modal/Modal';
-import CategoriesModalList from 'pages/Home/CategoriesModalList';
+import CategoriesModalList from 'pages/Home/CategoriesModalList/CategoriesModalList';
 
-import { selectCategoriesExpenses, selectCategoriesIncomes } from 'redux/category/selectors';
+import { selectCategories } from 'redux/category/selectors';
 import { fetchCategoriesThunk } from 'redux/category/operations';
 import {
   RadioCustom,
@@ -15,15 +15,16 @@ import {
   TransactionFormStyle,
 } from './TransactionForm.styles';
 
-const TransactionForm = ({ transactionsType }) => {
+const TransactionForm = ({ transactionsType, setRender }) => {
   const { isOpen, openModal, closeModal } = useModal();
   const [currentCategory, setCurrentCategory] = useState([]);
   const [chooseCategory, setchooseCategory] = useState('');
   const [takeCategoryId, setTakeCategoryId] = useState('');
   const [checked, setCheked] = useState(false);
-  const incomes = useSelector(selectCategoriesIncomes);
-  const expenses = useSelector(selectCategoriesExpenses);
+  const categories = useSelector(selectCategories);
   const dispatch = useDispatch();
+
+  console.log(categories);
 
   useEffect(() => {
     dispatch(fetchCategoriesThunk());
@@ -47,9 +48,9 @@ const TransactionForm = ({ transactionsType }) => {
   const renderCategoryByType = () => {
     let list;
     if (transactionsType === 'incomes') {
-      list = incomes;
+      list = categories.incomes;
     } else {
-      list = expenses;
+      list = categories.expenses;
     }
     setCurrentCategory(list);
     openModal();
@@ -57,6 +58,7 @@ const TransactionForm = ({ transactionsType }) => {
 
   const handleTypeChange = e => {
     const value = e.target.value;
+    setRender(value);
     setCheked(value);
   };
 

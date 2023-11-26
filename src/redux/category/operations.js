@@ -4,7 +4,9 @@ import { instance, setToken } from '../fetchInstance';
 export const addedCategoryThunk = createAsyncThunk('addedCategory', async (body, thunkApi) => {
   try {
     const { data } = await instance.post('categories/', body);
+
     setToken(data.accessToken);
+    console.log(data.accessToken);
     return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
@@ -23,7 +25,7 @@ export const deleteCategoryThunk = createAsyncThunk('deleteCategoryById', async 
 
 export const updateCategoryThunk = createAsyncThunk('updateCategoryById', async (body, thunkApi) => {
   try {
-    const { data } = await instance.patch(`categories/${body.id}`);
+    const { data } = await instance.patch(`categories/${body._id}`);
     setToken(data.accessToken);
     return data;
   } catch (error) {
@@ -35,6 +37,7 @@ export const fetchCategoriesThunk = createAsyncThunk('fetchAllCategories', async
   try {
     const { data } = await instance.get('categories');
     setToken(data.accessToken);
+    console.log(data);
     return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
