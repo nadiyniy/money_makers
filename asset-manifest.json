@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/money_makers/static/css/main.7ff4cca4.css",
-    "main.js": "/money_makers/static/js/main.76cb5761.js",
+    "main.css": "/money_makers/static/css/main.9ac0e714.css",
+    "main.js": "/money_makers/static/js/main.b6dc691c.js",
     "static/media/suisse-regular.ttf": "/money_makers/static/media/suisse-regular.7ea99720633194a9e3c4.ttf",
     "static/media/suisse-bold.ttf": "/money_makers/static/media/suisse-bold.6e9941f2a44c1939c4ef.ttf",
     "static/media/sprite.svg": "/money_makers/static/media/sprite.ba88e533a3d20f4caef6d0e99cd106ca.svg",
     "static/media/user-avatar.svg": "/money_makers/static/media/user-avatar.1613dd3554ca6503c85f76857c051807.svg",
     "index.html": "/money_makers/index.html",
     "static/media/close.svg": "/money_makers/static/media/close.69ed3bfd4fc3c43a329982c1caad0788.svg",
-    "main.7ff4cca4.css.map": "/money_makers/static/css/main.7ff4cca4.css.map",
-    "main.76cb5761.js.map": "/money_makers/static/js/main.76cb5761.js.map"
+    "main.9ac0e714.css.map": "/money_makers/static/css/main.9ac0e714.css.map",
+    "main.b6dc691c.js.map": "/money_makers/static/js/main.b6dc691c.js.map"
   },
   "entrypoints": [
-    "static/css/main.7ff4cca4.css",
-    "static/js/main.76cb5761.js"
+    "static/css/main.9ac0e714.css",
+    "static/js/main.b6dc691c.js"
   ]
 }
