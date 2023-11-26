@@ -5,6 +5,7 @@ import { currentInfoUserThunk } from 'redux/user/operations';
 export const registerThunk = createAsyncThunk('register', async (user, thunkApi) => {
   try {
     const { data } = await instance.post('auth/register', user);
+
     return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
@@ -15,6 +16,7 @@ export const loginThunk = createAsyncThunk('login', async (user, thunkApi) => {
   try {
     const { data } = await instance.post('auth/login', user);
     setToken(data.accessToken);
+    thunkApi.dispatch(currentInfoUserThunk());
     return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
