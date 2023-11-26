@@ -149,3 +149,14 @@ export const StyledForm = styled.form`
     letter-spacing: -0.02em;
   }
 `;
+
+export const StyledAvatarWrapper = styled.div`
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius-rounded);
+  background: var(--gray-avatar-color);
+  color: var(--primary-color);
+`;
