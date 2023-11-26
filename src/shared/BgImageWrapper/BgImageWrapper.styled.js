@@ -4,6 +4,7 @@ import { homeImages } from 'images/home/home-images';
 const { img1Desk, img2Desk, img1Mob, img2Mob, img1Tab, img2Tab } = homeImages;
 
 export const StyledBgImageWrapper = styled.div`
+  position: relative;
   width: 335px;
   height: 381px;
   margin-top: 40px;
