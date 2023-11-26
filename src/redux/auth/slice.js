@@ -22,6 +22,7 @@ const slice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(logoutThunk.fulfilled, state => {
+        console.log(initialState);
         return (state = initialState);
       })
       .addCase(logoutThunk.pending, state => {
