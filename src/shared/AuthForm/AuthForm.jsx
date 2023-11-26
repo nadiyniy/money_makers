@@ -33,10 +33,8 @@ const AuthForm = ({
             autoComplete={field.type === 'email' ? 'email' : 'current-password'}
           />
           {
-            formState.errors[field.name] && 
-            toast.error(formState.errors[field.name].message)
+            formState.errors[field.name] && toast.error(formState.errors[field.name].message)
             // toast.error('error')
-            // console.log(formState.errors[field.name].message)
           }
         </div>
       ))}

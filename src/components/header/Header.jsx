@@ -13,13 +13,11 @@ import { selectIsLoggedIn } from 'redux/auth/selectors';
 const Header = () => {
   const [isUserPanelOpen, setIsUserPanelOpen] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  console.log(isLoggedIn);
 
   const toggleUserPanel = () => {
     setIsUserPanelOpen(!isUserPanelOpen);
   };
   const auth = useSelector(selectCurrentUser);
-  console.log(auth);
   if (!isLoggedIn) {
     return (
       <StyledHeader>
