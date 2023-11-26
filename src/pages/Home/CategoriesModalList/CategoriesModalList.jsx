@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import NewCategoriesForm from './NewCategoriesForm';
-import EditCategoriesForm from './EditCategoriesForm';
+import NewCategoriesForm from '../NewCategoriesForm/NewCategoriesForm';
+import EditCategoriesForm from '../EditCategoriesForm/EditCategoriesForm';
 import { useDispatch } from 'react-redux';
 import { deleteCategoryThunk } from 'redux/category/operations';
 
@@ -9,8 +9,10 @@ const CategoriesModalList = ({ closeModal, categories, setchooseCategory, setTak
   const [isEditing, setIsEditing] = useState(false);
   const dispatch = useDispatch();
 
+  console.log(categories);
+
   const handleChooseCategory = category => {
-    setTakeCategoryId(category.id);
+    setTakeCategoryId(category._id);
     setchooseCategory(category.categoryName);
 
     closeModal();
@@ -23,10 +25,11 @@ const CategoriesModalList = ({ closeModal, categories, setchooseCategory, setTak
   return (
     <div>
       <button onClick={closeModal}>Close</button>
-      <h2>{categories[0].type[0].toUpperCase() + categories[0].type.slice(1)}</h2>
+      <h1>{categories[0].type[0].toUpperCase() + categories[0].type.slice(1)}</h1>
+      <h2>All Category</h2>
       <ul>
         {categories?.map(category => (
-          <li key={category.id}>
+          <li key={category._id}>
             {category.categoryName}
             <button type="button" onClick={() => handleChooseCategory(category)}>
               Choose
@@ -34,7 +37,7 @@ const CategoriesModalList = ({ closeModal, categories, setchooseCategory, setTak
             <button type="button" onClick={() => handleEditCategory(category)}>
               Edit
             </button>
-            <button type="button" onClick={() => dispatch(deleteCategoryThunk(category.id))}>
+            <button type="button" onClick={() => dispatch(deleteCategoryThunk(category._id))}>
               Delete
             </button>
           </li>
@@ -43,7 +46,7 @@ const CategoriesModalList = ({ closeModal, categories, setchooseCategory, setTak
       {isEditing ? (
         <EditCategoriesForm category={selectedCategory} setIsEditing={setIsEditing} />
       ) : (
-        <NewCategoriesForm category={selectedCategory} />
+        <NewCategoriesForm />
       )}
     </div>
   );

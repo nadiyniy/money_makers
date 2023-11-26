@@ -3,40 +3,8 @@ const { addedCategoryThunk, deleteCategoryThunk, updateCategoryThunk, fetchCateg
 
 const initialState = {
   categories: {
-    incomes: [
-      {
-        id: '656080c3a060383823c287hg',
-        categoryName: 'Movies',
-        type: 'incomes',
-      },
-      {
-        id: '656080c3a060383823c2nb76',
-        categoryName: 'Medicine',
-        type: 'incomes',
-      },
-      {
-        id: '656080c3a060383823c2fg56',
-        categoryName: 'Cosmetologi',
-        type: 'incomes',
-      },
-    ],
-    expenses: [
-      {
-        id: '656084aba060383823c2fgder',
-        categoryName: 'Travel',
-        type: 'expenses',
-      },
-      {
-        id: '656084aba060383823c2fgdd',
-        categoryName: 'Burgers',
-        type: 'expenses',
-      },
-      {
-        id: '656084aba060383823c212wq',
-        categoryName: 'Pay rent',
-        type: 'expenses',
-      },
-    ],
+    incomes: [],
+    expenses: [],
   },
   error: null,
   isLoading: false,
@@ -48,18 +16,21 @@ const slice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(addedCategoryThunk.fulfilled, (state, { payload }) => {
+        console.log(`add: ${payload}`);
         if (payload.type === 'incomes') {
           state.categories.incomes.push(payload);
         }
         state.categories.expenses.push(payload);
       })
       .addCase(deleteCategoryThunk.fulfilled, (state, { payload }) => {
+        console.log(`delete: ${payload}`);
         if (payload.type === 'incomes') {
           state.categories.incomes = state.categories.incomes.filter(category => category.id !== payload.id);
         }
         state.categories.expenses = state.categories.expenses.filter(category => category.id !== payload.id);
       })
       .addCase(updateCategoryThunk.fulfilled, (state, { payload }) => {
+        console.log(`update: ${payload}`);
         if (payload.type === 'incomes') {
           const editCategoryIncomes = state.categories.incomes.find(category => category.id === payload.id);
           editCategoryIncomes.categoryName = payload.categoryName;
@@ -68,10 +39,7 @@ const slice = createSlice({
         editCategoryExpenses.categoryName = payload.categoryName;
       })
       .addCase(fetchCategoriesThunk.fulfilled, (state, { payload }) => {
-        if (payload.type === 'incomes') {
-          state.categories.incomes = payload;
-        }
-        state.categories.expenses = payload;
+        state.categories = payload;
       })
       .addMatcher(
         isAnyOf(
