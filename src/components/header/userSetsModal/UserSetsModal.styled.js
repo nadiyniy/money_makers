@@ -35,6 +35,38 @@ export const StyledModal = styled.div`
 `;
 export const StyledSetsBtn = styled.div`
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  label {
+    height: 30px;
+    padding: 8px 16px;
+    border-radius: var(--border-radius-40);
+    background: var(--gray-btn);
+    border: none;
+    color: var(--white-color);
+
+    font-size: 12px;
+    letter-spacing: -0.02em;
+  }
+  input {
+    display: none;
+  }
+
+  button {
+    height: 30px;
+
+    padding: 8px 16px;
+    border-radius: var(--border-radius-40);
+    background: var(--gray-btn);
+    border: none;
+    color: var(--white-color);
+
+    font-size: 12px;
+    letter-spacing: -0.02em;
+  }
 `;
 
 export const StyledModalCloseBtn = styled.button`
@@ -70,62 +102,17 @@ export const StyledAvatar = styled.div`
       height: 100px;
     }
   }
-
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-
-    label {
-      height: 30px;
-      padding: 8px 16px;
-      border-radius: var(--border-radius-40);
-      background: var(--gray-btn);
-      border: none;
-      color: var(--white-color);
-
-      font-size: 12px;
-      letter-spacing: -0.02em;
-    }
-    input {
-      display: none;
-    }
-
-    button {
-      height: 30px;
-
-      padding: 8px 16px;
-      border-radius: var(--border-radius-40);
-      background: var(--gray-btn);
-      border: none;
-      color: var(--white-color);
-
-      font-size: 12px;
-      letter-spacing: -0.02em;
-    }
-  }
 `;
 export const StyledForm = styled.form`
-  div {
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  .form-wrapper {
+    display: grid;
+    grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
     gap: 8px;
-    margin-bottom: 20px;
 
-    select {
-      padding: 12px 18px;
-      color: var(--white-color);
-
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 1.5;
-      background: transparent;
-      border-radius: 12px;
-      border: 1px solid var(--gray-text-40);
-    }
     input {
-      width: 100%;
       padding: 12px 18px;
       color: var(--white-color);
       background: transparent;
@@ -169,4 +156,38 @@ export const StyledAvatarWrapper = styled.div`
   border-radius: var(--border-radius-rounded);
   background: var(--gray-avatar-color);
   color: var(--primary-color);
+`;
+export const StyledCurrencies = styled.div`
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  color: var(--white-color);
+  background: transparent;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 12px;
+  border: 1px solid var(--gray-text-40);
+  .currencies-list {
+    padding: 12px 18px;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translateY(100%);
+
+    border-radius: var(--border-radius-15);
+    border: 1px solid var(--gray-text-10);
+
+    background: #0c0d0d;
+  }
+  .currencies-active {
+    width: max-content;
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 18px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
 `;

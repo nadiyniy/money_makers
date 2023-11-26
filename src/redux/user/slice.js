@@ -19,7 +19,8 @@ const userSlice = createSlice({
       })
       .addCase(updateInfoUserThunk.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.user = payload;
+        state.user.name = payload.name;
+        state.user.currency = payload.currency;
       })
       .addCase(updateAvatarThunk.fulfilled, (state, { payload }) => {
         state.loading = false;
