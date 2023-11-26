@@ -1,4 +1,3 @@
-import React from 'react';
 import TransactionsTotalAmount from '../../shared/TransactionsTotalAmount/TransactionsTotalAmount';
 import TransactionsChart from './TransactionsChart';
 import TransactionForm from '../../shared/TransactionForm/TransactionForm';

@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import Header from './header/Header';
 
 // import Header from './header';
 // import BgImageWrapper from './BgImageWrapper';
@@ -17,11 +18,12 @@ import { Outlet } from 'react-router-dom';
 
 const Layout = () => {
   return (
-    <div>
+    <>
+      <Header />
       <Suspense fallback={<div>Loading...</div>}>
         <Outlet />
       </Suspense>
-    </div>
+    </>
   );
 };
 

@@ -1,41 +1,30 @@
-import { Route, Routes } from 'react-router-dom';
-import { Layout } from './Layout';
-import MainTransactionsPage from 'pages/Home/MainTransactionsPage';
-import Header from './header/Header';
-
-import RegisterPage from 'pages/Auth/RegisterPage';
-import LoginPage from 'pages/Auth/LoginPage';
 import { useEffect } from 'react';
-import { refreshThunk } from 'redux/auth/operations';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectIsRefreshing } from 'redux/auth/selectors';
+import { useDispatch } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
 
+import TransactionsHistoryProtectedRoute from 'routes/TransactionsHistoryProtectedRoute';
+import MainTransactionsProtectedRoute from 'routes/MainTransactionsProtectedRoute';
+import { Layout } from './Layout';
+import PublicWelcomeRoute from 'routes/PublicWelcomeRoute';
+import PublicLoginRoute from 'routes/PublicLoginRoute';
+import PublicRegisterRoute from 'routes/PublicRegisterRoute';
+import { refreshThunk } from 'redux/auth/operations';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const isRefreshing = useSelector(selectIsRefreshing);
-
   useEffect(() => {
     dispatch(refreshThunk());
   }, [dispatch]);
 
-  return isRefreshing ? (
-    <p>loading...</p>
-  ) : (
+  return (
     <div>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Header />} />
-          <Route path="transactions/:transactionsType" element={<MainTransactionsPage />} />
-          {/* <BgImageWrapper /> */}
-          {/* <Route path="/welcome" element={<WellcomePage />} /> */}
-          {/* <Route path="/register" element={<RegisterPage />} /> */}
-          {/* <Route path="/login" element={<LoginPage />} /> */}
-          {/* <Route path="/transactions" element={<MainTransactionsPage />} /> */}
-          {/* <Route path="/transactions/history" element={<TransactionsHistoryPage />} /> */}
-          {/* <Route path="/loader" element={<Loader />} /> */}
-          <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
+          <Route path="transactions/:transactionsType" element={<MainTransactionsProtectedRoute />} />
+          <Route path="/transactions/history/:transactionsType" element={<TransactionsHistoryProtectedRoute />} />
+          <Route index element={<PublicWelcomeRoute />} />
+          <Route path="login" element={<PublicLoginRoute />} />
+          <Route path="register" element={<PublicRegisterRoute />} />
         </Route>
       </Routes>
     </div>

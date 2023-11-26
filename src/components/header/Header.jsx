@@ -4,8 +4,8 @@ import TransactionsHistoryNav from './navBar/TransactionsHistoryNav';
 import UserBarBtn from './userBar/UserBarBtn';
 import BurgerMenuBtn from './burgerMenuBtn/BurgerMenuBtn';
 import UserPanel from './userPanel/UserPanel';
-import styled from 'styled-components';
 import { StyledCommonWrapper } from 'styles/Common.styled';
+import { StyledContainer, StyledContainerUserBtn, StyledHeader } from './Header.styled';
 
 const Header = () => {
   const [isUserPanelOpen, setIsUserPanelOpen] = useState(false);
@@ -30,18 +30,5 @@ const Header = () => {
     </StyledHeader>
   );
 };
-
-const StyledHeader = styled.header`
-  border-bottom: 1px solid var(--gray-text-10);
-  padding: 18px 0;
-`;
-const StyledContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-const StyledContainerUserBtn = styled.div`
-  position: relative;
-`;
 
 export default Header;

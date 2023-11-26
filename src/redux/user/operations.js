@@ -38,7 +38,7 @@ export const updateAvatarThunk = createAsyncThunk('updateAvatar', async (avatarF
 
 export const deleteAvatarThunk = createAsyncThunk('deleteAvatar', async (avatarId, thunkApi) => {
   try {
-    const { data } = await instance.delete(`users/${avatarId}`);
+    const { data } = await instance.delete(`users/avatar/${avatarId}`);
 
     return data;
   } catch (error) {

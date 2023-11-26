@@ -14,7 +14,6 @@ const LoginPage = () => {
   const { reset } = useForm();
 
   const onSubmit = data => {
-    console.log(data);
     dispatch(loginThunk(data));
     reset();
   };

@@ -1,7 +1,7 @@
 import BurgerMenu from 'components/header/burgerMenu/BurgerMenu';
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import sprite from '../../../images/sprite.svg';
+import { StyledBurgerBtn } from './BurgerMenuBtn.styled';
 
 const BurgerMenuBtn = () => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
@@ -25,13 +25,5 @@ const BurgerMenuBtn = () => {
     </StyledBurgerBtn>
   );
 };
-
-const StyledBurgerBtn = styled.div`
-  @media (min-width: 768.1px) {
-    display: none;
-  }
-  button {
-  }
-`;
 
 export default BurgerMenuBtn;

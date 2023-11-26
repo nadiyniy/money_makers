@@ -33,8 +33,8 @@ const slice = createSlice({
         state.error = payload;
       })
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
-        state.user.name = payload.user.name;
-        state.user.email = payload.user.email;
+        state.user.name = payload.name;
+        state.user.email = payload.email;
         state.accessToken = payload.accessToken;
         state.refreshToken = payload.refreshToken;
         state.sid = payload.sid;
@@ -49,6 +49,8 @@ const slice = createSlice({
         state.error = payload;
       })
       .addCase(registerThunk.fulfilled, (state, { payload }) => {
+        state.user.name = payload.name;
+        state.user.email = payload.email;
         state.isLoggedIn = true;
         state.error = null;
       })
@@ -62,9 +64,10 @@ const slice = createSlice({
       .addCase(refreshThunk.fulfilled, (state, { payload }) => {
         state.isLoggedIn = true;
         state.isRefreshing = false;
-        state.accessToken = payload.accessToken
-        state.refreshToken = payload.refreshToken
-        state.sid = payload.sid
+        state.accessToken = payload.accessToken;
+        state.refreshToken = payload.refreshToken;
+        state.sid = payload.sid;
+        console.log({ payload });
       })
       .addCase(refreshThunk.pending, state => {
         state.isRefreshing = true;
