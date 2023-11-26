@@ -9,6 +9,7 @@ import PublicWelcomeRoute from 'routes/PublicWelcomeRoute';
 import PublicLoginRoute from 'routes/PublicLoginRoute';
 import PublicRegisterRoute from 'routes/PublicRegisterRoute';
 import { refreshThunk } from 'redux/auth/operations';
+import PageNotFound from 'pages/PageNotFound/PageNotFound';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ export const App = () => {
           <Route path="login" element={<PublicLoginRoute />} />
           <Route path="register" element={<PublicRegisterRoute />} />
         </Route>
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>
   );

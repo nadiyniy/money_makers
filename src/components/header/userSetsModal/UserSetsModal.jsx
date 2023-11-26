@@ -10,7 +10,7 @@ import {
 } from './UserSetsModal.styled';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { currentInfoUserThunk, deleteAvatarThunk, updateAvatarThunk, updateInfoUserThunk } from 'redux/user/operations';
+import { deleteAvatarThunk, updateAvatarThunk, updateInfoUserThunk } from 'redux/user/operations';
 import { selectCurrentUser } from 'redux/user/selectors';
 
 import UserAvatar from '../userAvatar/UserAvatar';
@@ -39,7 +39,7 @@ const UserSetsModal = ({ closeModal }) => {
   const currentUser = useSelector(selectCurrentUser);
 
   const [activeCurrency, setActiveCurrency] = useState(
-    currenciesList.filter(item => item.value === currentUser.currency)[0]
+    currenciesList.find(item => item.value === currentUser.currency)
   );
   const [isDropdownOpened, setIsDropdownOpened] = useState(false);
   const [inputName, setInputName] = useState(currentUser.name);
