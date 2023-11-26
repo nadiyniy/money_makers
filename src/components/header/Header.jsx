@@ -7,7 +7,6 @@ import UserPanel from './userPanel/UserPanel';
 import { StyledCommonWrapper } from 'styles/Common.styled';
 import { StyledContainer, StyledContainerUserBtn, StyledHeader } from './Header.styled';
 import { useSelector } from 'react-redux';
-import { selectCurrentUser } from 'redux/user/selectors';
 import { selectIsLoggedIn } from 'redux/auth/selectors';
 
 const Header = () => {
@@ -17,7 +16,6 @@ const Header = () => {
   const toggleUserPanel = () => {
     setIsUserPanelOpen(!isUserPanelOpen);
   };
-  const auth = useSelector(selectCurrentUser);
   if (!isLoggedIn) {
     return (
       <StyledHeader>

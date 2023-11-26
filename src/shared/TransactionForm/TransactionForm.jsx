@@ -32,14 +32,15 @@ const TransactionForm = ({ transactionsType }) => {
   const { register, handleSubmit, reset } = useForm();
 
   const submit = ({ comment, date, sum, time, type }) => {
-    // const formData = {
-    //   category: takeCategoryId,
-    //   comment,
-    //   date,
-    //   sum,
-    //   time,
-    //   type,
-    // };
+    const formData = {
+      category: takeCategoryId,
+      comment,
+      date,
+      sum,
+      time,
+      type,
+    };
+    console.log(formData);
     reset();
   };
 
