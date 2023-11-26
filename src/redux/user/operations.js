@@ -23,8 +23,13 @@ export const updateAvatarThunk = createAsyncThunk('updateAvatar', async (avatarF
   try {
     const formData = new FormData();
     formData.append('avatar', avatarFile);
+    const savedToken = thunkApi.getState().auth.accessToken;
 
-    const { data } = await instance.patch('users/avatar', formData);
+    const { data } = await instance.patch('users/avatar', formData, {
+      headers: {
+        Authorization: `Bearer ${savedToken}`,
+      },
+    });
 
     return data;
   } catch (error) {
@@ -34,7 +39,12 @@ export const updateAvatarThunk = createAsyncThunk('updateAvatar', async (avatarF
 
 export const deleteAvatarThunk = createAsyncThunk('deleteAvatar', async (avatarId, thunkApi) => {
   try {
-    const { data } = await instance.delete(`users/avatar/${avatarId}`);
+    const savedToken = thunkApi.getState().auth.accessToken;
+    const { data } = await instance.delete(`users/avatar/${avatarId}`, {
+      headers: {
+        Authorization: `Bearer ${savedToken}`,
+      },
+    });
 
     return data;
   } catch (error) {

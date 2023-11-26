@@ -23,14 +23,11 @@ const UserSetsModal = ({ closeModal }) => {
   //   handleSubmit,
   //   formState: { errors },
   // } = useForm();
-
   const fileInputRef = useRef(null);
 
   const handleRemoveClick = () => {
-    const match = currentUser.avatarUrl.match(/\/([a-f0-9]+)\.webp$/);
-    const avatarId = match ? match[1] : null;
-    if (avatarId) {
-      dispatch(deleteAvatarThunk(avatarId));
+    if (currentUser._id) {
+      dispatch(deleteAvatarThunk(currentUser._id));
     }
   };
 

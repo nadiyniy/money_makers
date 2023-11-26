@@ -27,7 +27,7 @@ const userSlice = createSlice({
       })
       .addCase(deleteAvatarThunk.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.user.avatarUrl = payload.avatarUrl;
+        state.user.avatarUrl = null;
       })
       .addMatcher(
         isAnyOf(
