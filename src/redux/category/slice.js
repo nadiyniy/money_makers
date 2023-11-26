@@ -16,27 +16,31 @@ const slice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(addedCategoryThunk.fulfilled, (state, { payload }) => {
-        console.log(`add: ${payload}`);
         if (payload.type === 'incomes') {
           state.categories.incomes.push(payload);
         }
-        state.categories.expenses.push(payload);
+        if (payload.type === 'expenses') {
+          state.categories.expenses.push(payload);
+        }
       })
       .addCase(deleteCategoryThunk.fulfilled, (state, { payload }) => {
-        console.log(`delete: ${payload}`);
         if (payload.type === 'incomes') {
           state.categories.incomes = state.categories.incomes.filter(category => category.id !== payload.id);
         }
-        state.categories.expenses = state.categories.expenses.filter(category => category.id !== payload.id);
+        if (payload.type === 'expenses') {
+          state.categories.expenses = state.categories.expenses.filter(category => category.id !== payload.id);
+        }
       })
       .addCase(updateCategoryThunk.fulfilled, (state, { payload }) => {
-        console.log(`update: ${payload}`);
+        console.log(payload);
         if (payload.type === 'incomes') {
-          const editCategoryIncomes = state.categories.incomes.find(category => category.id === payload.id);
+          const editCategoryIncomes = state.categories.incomes.find(category => category._id === payload._id);
           editCategoryIncomes.categoryName = payload.categoryName;
         }
-        const editCategoryExpenses = state.categories.incomes.find(category => category.id === payload.id);
-        editCategoryExpenses.categoryName = payload.categoryName;
+        if (payload.type === 'expenses') {
+          const editCategoryExpenses = state.categories.expenses.find(category => category._id === payload._id);
+          editCategoryExpenses.categoryName = payload.categoryName;
+        }
       })
       .addCase(fetchCategoriesThunk.fulfilled, (state, { payload }) => {
         state.categories = payload;

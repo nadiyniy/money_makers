@@ -10,7 +10,7 @@ export const MainPageWrapper = styled.div`
 `;
 export const MainPageTitle = styled.h1`
   color: var(--white-color);
-  font-family: Suisse Intl;
+
   font-size: 32px;
   font-style: normal;
   font-weight: 400;
@@ -24,7 +24,7 @@ export const MainPageTitle = styled.h1`
 `;
 export const MainPageText = styled.p`
   color: var(--gray-text-40);
-  font-family: Suisse Intl;
+
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

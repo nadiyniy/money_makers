@@ -3,7 +3,12 @@ import { instance, setToken } from '../fetchInstance';
 
 export const addedCategoryThunk = createAsyncThunk('addedCategory', async (body, thunkApi) => {
   try {
-    const { data } = await instance.post('categories/', body);
+    const savedToken = thunkApi.getState().auth.accessToken;
+    const { data } = await instance.post('categories/', body, {
+      headers: {
+        Authorization: `Bearer ${savedToken}`,
+      },
+    });
 
     setToken(data.accessToken);
     console.log(data.accessToken);
@@ -15,7 +20,12 @@ export const addedCategoryThunk = createAsyncThunk('addedCategory', async (body,
 
 export const deleteCategoryThunk = createAsyncThunk('deleteCategoryById', async (id, thunkApi) => {
   try {
-    const { data } = await instance.delete(`categories/${id}`);
+    const savedToken = thunkApi.getState().auth.accessToken;
+    const { data } = await instance.delete(`categories/${id}`, {
+      headers: {
+        Authorization: `Bearer ${savedToken}`,
+      },
+    });
     setToken(data.accessToken);
     return data;
   } catch (error) {
@@ -23,10 +33,17 @@ export const deleteCategoryThunk = createAsyncThunk('deleteCategoryById', async 
   }
 });
 
-export const updateCategoryThunk = createAsyncThunk('updateCategoryById', async (body, thunkApi) => {
+export const updateCategoryThunk = createAsyncThunk('updateCategoryById', async ({ _id, categoryName }, thunkApi) => {
   try {
-    const { data } = await instance.patch(`categories/${body._id}`);
+    const savedToken = thunkApi.getState().auth.accessToken;
+    console.log(savedToken);
+    const { data } = await instance.patch(`categories/${_id}`, categoryName, {
+      headers: {
+        Authorization: `Bearer ${savedToken}`,
+      },
+    });
     setToken(data.accessToken);
+
     return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
@@ -35,7 +52,12 @@ export const updateCategoryThunk = createAsyncThunk('updateCategoryById', async 
 
 export const fetchCategoriesThunk = createAsyncThunk('fetchAllCategories', async (_, thunkApi) => {
   try {
-    const { data } = await instance.get('categories');
+    const savedToken = thunkApi.getState().auth.accessToken;
+    const { data } = await instance.get('categories', {
+      headers: {
+        Authorization: `Bearer ${savedToken}`,
+      },
+    });
     setToken(data.accessToken);
     return data;
   } catch (error) {

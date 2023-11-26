@@ -9,8 +9,6 @@ const CategoriesModalList = ({ closeModal, categories, setchooseCategory, setTak
   const [isEditing, setIsEditing] = useState(false);
   const dispatch = useDispatch();
 
-  console.log(categories);
-
   const handleChooseCategory = category => {
     setTakeCategoryId(category._id);
     setchooseCategory(category.categoryName);

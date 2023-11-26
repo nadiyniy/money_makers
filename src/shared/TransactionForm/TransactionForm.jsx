@@ -36,8 +36,6 @@ const TransactionForm = ({ transactionsType, setRender }) => {
   const categories = useSelector(selectCategories);
   const dispatch = useDispatch();
 
-  console.log(categories);
-
   useEffect(() => {
     dispatch(fetchCategoriesThunk());
   }, [dispatch]);
@@ -53,7 +51,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
       time,
       type,
     };
-    console.log(formData);
+
     reset();
   };
 
