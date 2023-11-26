@@ -11,6 +11,7 @@ import { selectError } from 'redux/auth/selectors';
 const EditCategoriesForm = ({ setIsEditing, category }) => {
   const error = useSelector(selectError);
   const dispatch = useDispatch();
+  console.log(category);
   const {
     register,
     handleSubmit,

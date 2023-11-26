@@ -7,10 +7,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { addedCategoryThunk } from 'redux/category/operations';
 import { validationCategoryFormSchema } from 'shared/validationSchema/validationSchema';
 import { selectError } from 'redux/auth/selectors';
+import { useParams } from 'react-router-dom';
 
-const NewCategoriesForm = ({ category }) => {
+const NewCategoriesForm = () => {
   const error = useSelector(selectError);
   const dispatch = useDispatch();
+  const type = useParams();
   const {
     register,
     handleSubmit,
@@ -20,8 +22,7 @@ const NewCategoriesForm = ({ category }) => {
     resolver: yupResolver(validationCategoryFormSchema),
   });
   const submit = data => {
-    const type = category.type;
-    dispatch(addedCategoryThunk({ type, ...data }));
+    dispatch(addedCategoryThunk({ type: type.transactionsType, ...data }));
     if (error === null) {
       reset();
     } else {

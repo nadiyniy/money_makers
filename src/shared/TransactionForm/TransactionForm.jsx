@@ -1,29 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
+
 import { useModal } from 'shared/hooks/useModal';
 import Modal from 'shared/Modal/Modal';
-import CategoriesModalList from 'pages/Home/CategoriesModalList';
+import CategoriesModalList from 'pages/Home/CategoriesModalList/CategoriesModalList';
 
-import { selectCategoriesExpenses, selectCategoriesIncomes } from 'redux/category/selectors';
+import { selectCategories } from 'redux/category/selectors';
 import { fetchCategoriesThunk } from 'redux/category/operations';
 import {
+  CategoryInput,
+  CommentInput,
+  DateInput,
+  DateInputWrapper,
+  OneLabel,
+  ParentInputWrapper,
   RadioCustom,
   RadioCustomChecked,
   RadioInput,
   RadioLabel,
+  RadioLabel1,
+  RadioWrapper,
+  SumInput,
+  TransactionButton,
+  TransactionButtonWrapper,
   TransactionFormStyle,
 } from './TransactionForm.styles';
 
-const TransactionForm = ({ transactionsType }) => {
+const TransactionForm = ({ transactionsType, setRender }) => {
   const { isOpen, openModal, closeModal } = useModal();
   const [currentCategory, setCurrentCategory] = useState([]);
   const [chooseCategory, setchooseCategory] = useState('');
   const [takeCategoryId, setTakeCategoryId] = useState('');
   const [checked, setCheked] = useState(false);
-  const incomes = useSelector(selectCategoriesIncomes);
-  const expenses = useSelector(selectCategoriesExpenses);
+  const categories = useSelector(selectCategories);
   const dispatch = useDispatch();
+
+  console.log(categories);
 
   useEffect(() => {
     dispatch(fetchCategoriesThunk());
@@ -47,9 +60,9 @@ const TransactionForm = ({ transactionsType }) => {
   const renderCategoryByType = () => {
     let list;
     if (transactionsType === 'incomes') {
-      list = incomes;
+      list = categories.incomes;
     } else {
-      list = expenses;
+      list = categories.expenses;
     }
     setCurrentCategory(list);
     openModal();
@@ -57,6 +70,7 @@ const TransactionForm = ({ transactionsType }) => {
 
   const handleTypeChange = e => {
     const value = e.target.value;
+    setRender(value);
     setCheked(value);
   };
 
@@ -64,7 +78,7 @@ const TransactionForm = ({ transactionsType }) => {
     <>
       <div>
         <TransactionFormStyle onSubmit={handleSubmit(submit)}>
-          <div>
+          <RadioWrapper>
             <RadioLabel>
               <RadioInput
                 {...register('type', { required: true })}
@@ -77,7 +91,7 @@ const TransactionForm = ({ transactionsType }) => {
               {checked === 'expenses' ? <RadioCustomChecked /> : <RadioCustom />}
             </RadioLabel>
 
-            <RadioLabel>
+            <RadioLabel1>
               <RadioInput
                 {...register('type', { required: true })}
                 type="radio"
@@ -87,22 +101,22 @@ const TransactionForm = ({ transactionsType }) => {
               />
               Income
               {checked === 'incomes' ? <RadioCustomChecked /> : <RadioCustom />}
-            </RadioLabel>
-          </div>
-          <div>
-            <label>
+            </RadioLabel1>
+          </RadioWrapper>
+          <DateInputWrapper>
+            <OneLabel>
               Date:
-              <input type="date" {...register('date', { required: true })} placeholder="mm/dd/yyyy" />
-            </label>
-            <label>
+              <DateInput type="date" {...register('date', { required: true })} placeholder="mm/dd/yyyy" />
+            </OneLabel>
+            <OneLabel>
               Time:
-              <input type="time" {...register('time', { required: true })} placeholder="00:00:00" />
-            </label>
-          </div>
-          <div>
-            <label>
+              <DateInput type="time" {...register('time', { required: true })} placeholder="00:00:00" />
+            </OneLabel>
+          </DateInputWrapper>
+          <ParentInputWrapper>
+            <OneLabel>
               Category:
-              <input
+              <CategoryInput
                 type="text"
                 value={chooseCategory}
                 {...register('category')}
@@ -110,20 +124,28 @@ const TransactionForm = ({ transactionsType }) => {
                 onClick={renderCategoryByType}
                 onFocus={renderCategoryByType}
               />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="amountInput">Sum:</label>
-            <input type="text" id="amountInput" {...register('sum', { required: true })} placeholder="Enter the sum" />
-            <span>{'грн'}</span>
-          </div>
-          <div>
-            <label>
+            </OneLabel>
+          </ParentInputWrapper>
+          <ParentInputWrapper>
+            <OneLabel>
+              Sum:
+              <SumInput type="text" {...register('sum', { required: true })} placeholder="Enter the sum" />
+            </OneLabel>
+          </ParentInputWrapper>
+          <ParentInputWrapper>
+            <OneLabel>
               Comment:
-              <textarea {...register('comment', { required: true })} rows={4} cols={50} placeholder="Enter the text" />
-            </label>
-          </div>
-          <button type="submit">Add</button>
+              <CommentInput
+                {...register('comment', { required: true })}
+                rows={4}
+                cols={50}
+                placeholder="Enter the text"
+              />
+            </OneLabel>
+          </ParentInputWrapper>
+          <TransactionButtonWrapper>
+            <TransactionButton type="submit">Add</TransactionButton>
+          </TransactionButtonWrapper>
         </TransactionFormStyle>
       </div>
 
