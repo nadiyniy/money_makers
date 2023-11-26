@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router';
 import { selectIsLoggedIn } from 'redux/auth/selectors';
-import TransactionsHistoryPage from '../pages/TransactionsHistory.jsx/TransactionsHistory';
+import TransactionsHistoryPage from '../pages/TransactionsHistory/TransactionsHistory';
 
 const TransactionsHistoryProtectedRoute = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
