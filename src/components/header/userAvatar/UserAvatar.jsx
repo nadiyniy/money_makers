@@ -1,8 +1,6 @@
 import { StyledContainerAvatar } from './UserAvatar.styled';
 
 const UserAvatar = ({ user, isMinified }) => {
-  console.log(2, user);
-
   function isEmpty(obj) {
     return Object.keys(obj).length === 0;
   }

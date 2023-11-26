@@ -2,16 +2,13 @@ import React from 'react';
 import Modal from 'shared/Modal/Modal';
 import { useModal } from 'shared/hooks/useModal';
 import UserSetsModal from '../userSetsModal/UserSetsModal';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { logoutThunk } from 'redux/auth/operations';
 import { StyledModalLink } from './UserPanel.styled';
-import { selectCurrentUser } from 'redux/user/selectors';
 
 const UserPanel = ({ variant }) => {
   const { isOpen, openModal, closeModal } = useModal();
   const dispatch = useDispatch();
-
-  const currentUser = useSelector(selectCurrentUser);
 
   const handleLogout = () => {
     dispatch(logoutThunk());

@@ -23,7 +23,6 @@ const EditCategoriesForm = ({ setIsEditing, category }) => {
     const _id = category.id;
     dispatch(updateCategoryThunk({ _id, ...data }));
 
-    console.log({ _id, ...data });
     setIsEditing(false);
     if (error === null) {
       reset();

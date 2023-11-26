@@ -1,18 +1,26 @@
-import React, { useRef, useState } from 'react';
-import { StyledAvatar, StyledForm, StyledModal, StyledModalCloseBtn } from './UserSetsModal.styled';
+import React, { useRef } from 'react';
+import {
+  StyledAvatar,
+  StyledAvatarWrapper,
+  StyledForm,
+  StyledModal,
+  StyledModalCloseBtn,
+} from './UserSetsModal.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAvatarThunk, updateAvatarThunk } from 'redux/user/operations';
 import { selectCurrentUser } from 'redux/user/selectors';
-import { useForm } from 'react-hook-form';
+// import { useForm } from 'react-hook-form';
+
 import UserAvatar from '../userAvatar/UserAvatar';
+import { CloseIcon, UserAvatarIcon } from 'components/svgs';
 
 const UserSetsModal = ({ closeModal }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
-  const {
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  // const {
+  //   handleSubmit,
+  //   formState: { errors },
+  // } = useForm();
 
   const fileInputRef = useRef(null);
 
@@ -28,7 +36,6 @@ const UserSetsModal = ({ closeModal }) => {
     const currentInputRef = fileInputRef?.current;
     if (currentInputRef) {
       const file = currentInputRef.files[0];
-      console.log(file);
       dispatch(updateAvatarThunk(file));
     }
   };
@@ -37,14 +44,17 @@ const UserSetsModal = ({ closeModal }) => {
   return (
     <StyledModal>
       <StyledModalCloseBtn onClick={closeModal}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M18 6L6 18" stroke="#FAFAFA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M6 6L18 18" stroke="#FAFAFA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        <CloseIcon />
       </StyledModalCloseBtn>
       <h2>Profile settings</h2>
       <StyledAvatar>
-        <UserAvatar user={currentUser} />
+        {currentUser.avatarUrl ? (
+          <UserAvatar user={currentUser} />
+        ) : (
+          <StyledAvatarWrapper>
+            <UserAvatarIcon width={38} height={38} />
+          </StyledAvatarWrapper>
+        )}
         <div>
           <div>
             <label htmlFor="uploadPhoto">Upload new photo</label>
