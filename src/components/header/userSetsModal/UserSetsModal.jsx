@@ -6,6 +6,7 @@ import {
   StyledModal,
   StyledModalCloseBtn,
 } from './UserSetsModal.styled';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAvatarThunk, updateAvatarThunk } from 'redux/user/operations';
 import { selectCurrentUser } from 'redux/user/selectors';
