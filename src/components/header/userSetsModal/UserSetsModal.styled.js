@@ -138,6 +138,7 @@ export const StyledForm = styled.form`
   }
   button {
     width: 100%;
+    cursor: pointer;
 
     padding-top: 14px;
     padding-bottom: 14px;
