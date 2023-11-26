@@ -2,6 +2,7 @@ import React, { Suspense, useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from './header/Header';
 import BgImageWrapper from 'shared/BgImageWrapper/BgImageWrapper';
+import styled from 'styled-components';
 
 // import Header from './header';
 // import BgImageWrapper from './BgImageWrapper';
@@ -38,22 +39,55 @@ const Layout = () => {
 
   const pageToRenderDesktop = ['/', '/register', '/login'];
   const pageToRenderMobileTablet = ['/'];
- 
+
   const shouldRender =
     (isMobileOrTablet && pageToRenderMobileTablet.includes(pathname)) ||
     (!isMobileOrTablet && pageToRenderDesktop.includes(pathname));
 
-  // console.log('shouldRender', shouldRender);
+  console.log('shouldRender', shouldRender);
 
   return (
     <>
       <Header />
-      {shouldRender && <BgImageWrapper />}
-      <Suspense fallback={<div>Loading...</div>}>
-        <Outlet />
-      </Suspense>
+      <Container>
+        {shouldRender && (
+          <BgImageWrapperContainer>
+            <BgImageWrapper />
+          </BgImageWrapperContainer>
+        )}
+        <ContentContainer>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Outlet />
+          </Suspense>
+        </ContentContainer>
+      </Container>
     </>
   );
 };
 
 export { Layout };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: 1280px) {
+    flex-direction: row;
+  }
+`;
+
+const BgImageWrapperContainer = styled.div`
+  order: 2;
+  @media (min-width: 1280px) {
+    order: 1;
+  }
+`;
+
+const ContentContainer = styled.div`
+  order: 1; 
+  @media (min-width: 1280px) {
+    order: 2;
+    flex-grow: 1;
+  }
+`;
