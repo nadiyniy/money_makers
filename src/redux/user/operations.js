@@ -12,7 +12,13 @@ export const currentInfoUserThunk = createAsyncThunk('currentInfoUser', async (_
 
 export const updateInfoUserThunk = createAsyncThunk('updateInfoUser', async (userData, thunkApi) => {
   try {
-    const { data } = await instance.patch('users/info', userData);
+    const savedToken = thunkApi.getState().auth.accessToken;
+
+    const { data } = await instance.patch('users/info', userData, {
+      headers: {
+        Authorization: `Bearer ${savedToken}`,
+      },
+    });
     return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);

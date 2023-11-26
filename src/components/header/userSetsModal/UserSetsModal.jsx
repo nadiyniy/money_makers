@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   StyledAvatar,
   StyledAvatarWrapper,
+  StyledCurrencies,
   StyledForm,
   StyledModal,
   StyledModalCloseBtn,
@@ -9,20 +10,40 @@ import {
 } from './UserSetsModal.styled';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteAvatarThunk, updateAvatarThunk } from 'redux/user/operations';
+import { currentInfoUserThunk, deleteAvatarThunk, updateAvatarThunk, updateInfoUserThunk } from 'redux/user/operations';
 import { selectCurrentUser } from 'redux/user/selectors';
-// import { useForm } from 'react-hook-form';
 
 import UserAvatar from '../userAvatar/UserAvatar';
-import { CloseIcon, UserAvatarIcon } from 'components/svgs';
+import { CloseIcon, UserAvatarIcon, ArrowUpCurrency } from 'components/svgs';
+
+const currenciesList = [
+  {
+    value: 'usd',
+    name: 'USD',
+    symbol: '$',
+  },
+  {
+    value: 'uah',
+    name: 'UAH',
+    symbol: '₴',
+  },
+  {
+    value: 'eur',
+    name: 'EUR',
+    symbol: '€',
+  },
+];
 
 const UserSetsModal = ({ closeModal }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
-  // const {
-  //   handleSubmit,
-  //   formState: { errors },
-  // } = useForm();
+
+  const [activeCurrency, setActiveCurrency] = useState(
+    currenciesList.filter(item => item.value === currentUser.currency)[0]
+  );
+  const [isDropdownOpened, setIsDropdownOpened] = useState(false);
+  const [inputName, setInputName] = useState(currentUser.name);
+
   const fileInputRef = useRef(null);
 
   const handleRemoveClick = () => {
@@ -38,7 +59,21 @@ const UserSetsModal = ({ closeModal }) => {
       dispatch(updateAvatarThunk(file));
     }
   };
-  const handleOnChangeName = e => {};
+  const handleSubmit = e => {
+    e.preventDefault();
+    const data = { name: inputName, currency: activeCurrency.value };
+    dispatch(updateInfoUserThunk(data)).then(res => {
+      console.log(res);
+      if (res.meta.requestStatus === 'fulfilled') {
+        closeModal();
+      }
+    });
+  };
+
+  const onCurrencyClick = item => {
+    setActiveCurrency(item);
+    setIsDropdownOpened(false);
+  };
 
   return (
     <StyledModal>
@@ -60,14 +95,43 @@ const UserSetsModal = ({ closeModal }) => {
           <button onClick={handleRemoveClick}>Remove</button>
         </StyledSetsBtn>
       </StyledAvatar>
-      <StyledForm>
-        <div>
-          <select>
-            <option>UAH</option>
-            <option>USD</option>
-            <option>EUR</option>
-          </select>
-          <input onChange={() => handleOnChangeName()} placeholder={currentUser.name}></input>
+      <StyledForm
+        onSubmit={e => {
+          handleSubmit(e);
+        }}
+      >
+        <div className="form-wrapper">
+          <StyledCurrencies>
+            <div
+              className="currencies-active"
+              onClick={() => {
+                setIsDropdownOpened(!isDropdownOpened);
+              }}
+            >
+              <div>
+                {activeCurrency.symbol} {activeCurrency.name}
+              </div>
+
+              <ArrowUpCurrency width={20} height={20} />
+            </div>
+            {isDropdownOpened && (
+              <ul className="currencies-list">
+                {currenciesList.map(item => (
+                  <li key={item.value} onClick={() => onCurrencyClick(item)}>
+                    <span>{item.symbol}</span>
+                    <span>{item.name}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </StyledCurrencies>
+
+          <input
+            placeholder={currentUser.name}
+            onChange={e => {
+              setInputName(e.target.value);
+            }}
+          ></input>
         </div>
         <button>Save</button>
       </StyledForm>
