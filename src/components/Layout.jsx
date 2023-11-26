@@ -44,7 +44,7 @@ const Layout = () => {
     (isMobileOrTablet && pageToRenderMobileTablet.includes(pathname)) ||
     (!isMobileOrTablet && pageToRenderDesktop.includes(pathname));
 
-  console.log('shouldRender', shouldRender);
+  // console.log('shouldRender', shouldRender);
 
   return (
     <>
