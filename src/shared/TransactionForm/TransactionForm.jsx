@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
+
 import { useModal } from 'shared/hooks/useModal';
 import Modal from 'shared/Modal/Modal';
 import CategoriesModalList from 'pages/Home/CategoriesModalList/CategoriesModalList';
@@ -8,10 +9,21 @@ import CategoriesModalList from 'pages/Home/CategoriesModalList/CategoriesModalL
 import { selectCategories } from 'redux/category/selectors';
 import { fetchCategoriesThunk } from 'redux/category/operations';
 import {
+  CategoryInput,
+  CommentInput,
+  DateInput,
+  DateInputWrapper,
+  OneLabel,
+  ParentInputWrapper,
   RadioCustom,
   RadioCustomChecked,
   RadioInput,
   RadioLabel,
+  RadioLabel1,
+  RadioWrapper,
+  SumInput,
+  TransactionButton,
+  TransactionButtonWrapper,
   TransactionFormStyle,
 } from './TransactionForm.styles';
 
@@ -66,7 +78,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
     <>
       <div>
         <TransactionFormStyle onSubmit={handleSubmit(submit)}>
-          <div>
+          <RadioWrapper>
             <RadioLabel>
               <RadioInput
                 {...register('type', { required: true })}
@@ -79,7 +91,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
               {checked === 'expenses' ? <RadioCustomChecked /> : <RadioCustom />}
             </RadioLabel>
 
-            <RadioLabel>
+            <RadioLabel1>
               <RadioInput
                 {...register('type', { required: true })}
                 type="radio"
@@ -89,22 +101,22 @@ const TransactionForm = ({ transactionsType, setRender }) => {
               />
               Income
               {checked === 'incomes' ? <RadioCustomChecked /> : <RadioCustom />}
-            </RadioLabel>
-          </div>
-          <div>
-            <label>
+            </RadioLabel1>
+          </RadioWrapper>
+          <DateInputWrapper>
+            <OneLabel>
               Date:
-              <input type="date" {...register('date', { required: true })} placeholder="mm/dd/yyyy" />
-            </label>
-            <label>
+              <DateInput type="date" {...register('date', { required: true })} placeholder="mm/dd/yyyy" />
+            </OneLabel>
+            <OneLabel>
               Time:
-              <input type="time" {...register('time', { required: true })} placeholder="00:00:00" />
-            </label>
-          </div>
-          <div>
-            <label>
+              <DateInput type="time" {...register('time', { required: true })} placeholder="00:00:00" />
+            </OneLabel>
+          </DateInputWrapper>
+          <ParentInputWrapper>
+            <OneLabel>
               Category:
-              <input
+              <CategoryInput
                 type="text"
                 value={chooseCategory}
                 {...register('category')}
@@ -112,20 +124,28 @@ const TransactionForm = ({ transactionsType, setRender }) => {
                 onClick={renderCategoryByType}
                 onFocus={renderCategoryByType}
               />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="amountInput">Sum:</label>
-            <input type="text" id="amountInput" {...register('sum', { required: true })} placeholder="Enter the sum" />
-            <span>{'грн'}</span>
-          </div>
-          <div>
-            <label>
+            </OneLabel>
+          </ParentInputWrapper>
+          <ParentInputWrapper>
+            <OneLabel>
+              Sum:
+              <SumInput type="text" {...register('sum', { required: true })} placeholder="Enter the sum" />
+            </OneLabel>
+          </ParentInputWrapper>
+          <ParentInputWrapper>
+            <OneLabel>
               Comment:
-              <textarea {...register('comment', { required: true })} rows={4} cols={50} placeholder="Enter the text" />
-            </label>
-          </div>
-          <button type="submit">Add</button>
+              <CommentInput
+                {...register('comment', { required: true })}
+                rows={4}
+                cols={50}
+                placeholder="Enter the text"
+              />
+            </OneLabel>
+          </ParentInputWrapper>
+          <TransactionButtonWrapper>
+            <TransactionButton type="submit">Add</TransactionButton>
+          </TransactionButtonWrapper>
         </TransactionFormStyle>
       </div>
 

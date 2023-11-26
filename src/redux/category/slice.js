@@ -39,7 +39,6 @@ const slice = createSlice({
         editCategoryExpenses.categoryName = payload.categoryName;
       })
       .addCase(fetchCategoriesThunk.fulfilled, (state, { payload }) => {
-        console.log(`get: ${payload}`);
         state.categories = payload;
       })
       .addMatcher(

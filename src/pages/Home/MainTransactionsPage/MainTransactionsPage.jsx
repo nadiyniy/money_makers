@@ -4,6 +4,7 @@ import TransactionForm from '../../../shared/TransactionForm/TransactionForm';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { StyledCommonWrapper } from 'styles/Common.styled';
 import { useEffect, useState } from 'react';
+import { MainPageText, MainPageTitle, MainPageWrapper } from './MainTransactionsPage.styled';
 
 const MainTransactionsPage = () => {
   const { transactionsType } = useParams();
@@ -19,15 +20,15 @@ const MainTransactionsPage = () => {
   return (
     <section>
       <StyledCommonWrapper>
-        <div>
-          <h1>{transactionsType === 'incomes' ? 'Income' : 'Expense'} Log</h1>
-          <p>
+        <MainPageWrapper>
+          <MainPageTitle>{transactionsType === 'incomes' ? 'Income' : 'Expense'} Log</MainPageTitle>
+          <MainPageText>
             Capture and organize every penny spent with ease! A clear view of your financial habits at your fingertips.
-          </p>
+          </MainPageText>
           <TransactionsTotalAmount />
           <TransactionsChart transactionsType={transactionsType} />
           <TransactionForm transactionsType={transactionsType} setRender={setRender} />
-        </div>
+        </MainPageWrapper>
       </StyledCommonWrapper>
     </section>
   );
