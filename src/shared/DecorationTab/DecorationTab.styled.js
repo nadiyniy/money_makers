@@ -26,6 +26,14 @@ export const StyledDecorationTab = styled.div`
     height: 121px;
     padding: 32px 23px;
   }
+
+  @media screen and (min-width: 1280px) {
+    left: -50px;
+    bottom: 132px;
+
+    width: 303px;
+    height: 121px;
+  }
 `;
 
 export const IconWrapper = styled.div`
