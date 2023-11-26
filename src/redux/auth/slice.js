@@ -21,10 +21,6 @@ const slice = createSlice({
 
   extraReducers: builder => {
     builder
-      .addCase(logoutThunk.fulfilled, state => {
-        console.log(initialState);
-        return (state = initialState);
-      })
       .addCase(logoutThunk.pending, state => {
         state.isLoading = true;
         state.error = null;
@@ -32,6 +28,9 @@ const slice = createSlice({
       .addCase(logoutThunk.rejected, (state, { payload }) => {
         state.isRefreshing = false;
         state.error = payload;
+      })
+      .addCase(logoutThunk.fulfilled, state => {
+        return (state = initialState);
       })
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
         state.user.name = payload.name;
@@ -78,44 +77,5 @@ const slice = createSlice({
       });
   },
 });
-/*
-const slice = createSlice({
-  name: 'auth',
-  initialState,
-  extraReducers: builder => {
-    builder
-      .addCase(logoutThunk.fulfilled, state => {
-        return (state = initialState);
-      })
-      .addCase(refreshThunk.fulfilled, (state, { payload }) => {
-        state.user = payload;
-        state.isLoggedIn = true;
-        state.isRefreshing = false;
-      })
-      .addCase(refreshThunk.pending, state => {
-        state.isRefreshing = true;
-      })
-      .addMatcher(isAnyOf(loginThunk.fulfilled, refreshThunk.fulfilled), (state, { payload }) => {
-        state.user.name = payload.user.name;
-        state.user.email = payload.user.email;
-        state.accessToken = payload.accessToken;
-        state.refreshToken = payload.refreshToken;
-        state.sid = payload.sid;
-        state.isLoggedIn = true;
-        state.error = null;
-      })
-      .addMatcher(isAnyOf(logoutThunk.rejected, refreshThunk.rejected), (state, { payload }) => {
-        state.isRefreshing = false;
-        state.error = payload;
-      })
-      .addMatcher(isAnyOf(registerThunk.rejected, loginThunk.rejected), (state, { payload }) => {
-        state.error = payload;
-      })
-      .addMatcher(isAnyOf(registerThunk.pending, loginThunk.pending, logoutThunk.pending), (state, { payload }) => {
-        state.isLoading = true;
-        state.error = null;
-      });
-  },
-});
-*/
+
 export const authReducer = slice.reducer;
