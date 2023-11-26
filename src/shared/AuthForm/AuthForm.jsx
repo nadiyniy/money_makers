@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AuthForm = ({
   fieldsData,
@@ -12,6 +15,7 @@ const AuthForm = ({
 }) => {
   const { handleSubmit, register, formState } = useForm({
     defaultValues: initialState,
+    resolver: yupResolver(validationSchema),
   });
 
   const linkTo = authType === 'register' ? '/login' : '/register';
@@ -28,6 +32,12 @@ const AuthForm = ({
             placeholder={field.label}
             autoComplete={field.type === 'email' ? 'email' : 'current-password'}
           />
+          {
+            formState.errors[field.name] && 
+            toast.error(formState.errors[field.name].message)
+            // toast.error('error')
+            // console.log(formState.errors[field.name].message)
+          }
         </div>
       ))}
 
