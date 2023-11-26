@@ -5,6 +5,7 @@ import {
   StyledForm,
   StyledModal,
   StyledModalCloseBtn,
+  StyledSetsBtn,
 } from './UserSetsModal.styled';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -56,13 +57,11 @@ const UserSetsModal = ({ closeModal }) => {
             <UserAvatarIcon width={38} height={38} />
           </StyledAvatarWrapper>
         )}
-        <div>
-          <div>
-            <label htmlFor="uploadPhoto">Upload new photo</label>
-            <input id="uploadPhoto" type="file" ref={fileInputRef} onChange={handleFileChange} />
-          </div>
+        <StyledSetsBtn>
+          <label htmlFor="uploadPhoto">Upload new photo</label>
+          <input id="uploadPhoto" type="file" ref={fileInputRef} onChange={handleFileChange} />
           <button onClick={handleRemoveClick}>Remove</button>
-        </div>
+        </StyledSetsBtn>
       </StyledAvatar>
       <StyledForm>
         <div>

@@ -33,6 +33,9 @@ export const StyledModal = styled.div`
     cursor: pointer;
   }
 `;
+export const StyledSetsBtn = styled.div`
+  margin-top: 20px;
+`;
 
 export const StyledModalCloseBtn = styled.button`
   background-color: transparent;
@@ -67,11 +70,15 @@ export const StyledAvatar = styled.div`
       height: 100px;
     }
   }
+
   div {
     display: flex;
-    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
     gap: 8px;
+
     label {
+      height: 30px;
       padding: 8px 16px;
       border-radius: var(--border-radius-40);
       background: var(--gray-btn);
@@ -86,6 +93,8 @@ export const StyledAvatar = styled.div`
     }
 
     button {
+      height: 30px;
+
       padding: 8px 16px;
       border-radius: var(--border-radius-40);
       background: var(--gray-btn);
