@@ -1,35 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { StyledAvatar, StyledForm, StyledModal, StyledModalCloseBtn } from './UserSetsModal.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAvatarThunk, updateAvatarThunk } from 'redux/user/operations';
 import { selectCurrentUser } from 'redux/user/selectors';
+import { useForm } from 'react-hook-form';
+import UserAvatar from '../userAvatar/UserAvatar';
 
 const UserSetsModal = ({ closeModal }) => {
-  const [selectedFile, setSelectedFile] = useState(null);
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const fileInputRef = useRef(null);
 
   const handleRemoveClick = () => {
-    const avatarUrl = currentUser.avatarUrl;
-    const parts = avatarUrl.split('/');
-    const avatarId = parts[parts.length - 1].slice(0, -5);
-    console.log(avatarId);
-    dispatch(deleteAvatarThunk(avatarId));
-    closeModal();
-  };
-
-  const handleFileChange = event => {
-    const file = event.target.files[0];
-    setSelectedFile(file);
-  };
-  useEffect(() => {}, []);
-
-  const handleUploadClick = () => {
-    if (selectedFile) {
-      dispatch(updateAvatarThunk(selectedFile));
-      closeModal();
+    const match = currentUser.avatarUrl.match(/\/([a-f0-9]+)\.webp$/);
+    const avatarId = match ? match[1] : null;
+    if (avatarId) {
+      dispatch(deleteAvatarThunk(avatarId));
     }
   };
+
+  const handleFileChange = () => {
+    const currentInputRef = fileInputRef?.current;
+    if (currentInputRef) {
+      const file = currentInputRef.files[0];
+      console.log(file);
+      dispatch(updateAvatarThunk(file));
+    }
+  };
+  const handleOnChangeName = e => {};
 
   return (
     <StyledModal>
@@ -41,10 +44,12 @@ const UserSetsModal = ({ closeModal }) => {
       </StyledModalCloseBtn>
       <h2>Profile settings</h2>
       <StyledAvatar>
-        <img src={currentUser.avatarUrl} alt="User icon" />
+        <UserAvatar user={currentUser} />
         <div>
-          <input type="file" onChange={handleFileChange} />
-          <button onClick={handleUploadClick}>Upload new photo</button>
+          <div>
+            <label htmlFor="uploadPhoto">Upload new photo</label>
+            <input id="uploadPhoto" type="file" ref={fileInputRef} onChange={handleFileChange} />
+          </div>
           <button onClick={handleRemoveClick}>Remove</button>
         </div>
       </StyledAvatar>
@@ -55,7 +60,7 @@ const UserSetsModal = ({ closeModal }) => {
             <option>USD</option>
             <option>EUR</option>
           </select>
-          <input placeholder="Alex Rybachok"></input>
+          <input onChange={() => handleOnChangeName()} placeholder={currentUser.name}></input>
         </div>
         <button>Save</button>
       </StyledForm>

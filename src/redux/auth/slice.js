@@ -67,7 +67,6 @@ const slice = createSlice({
         state.accessToken = payload.accessToken;
         state.refreshToken = payload.refreshToken;
         state.sid = payload.sid;
-        console.log({ payload });
       })
       .addCase(refreshThunk.pending, state => {
         state.isRefreshing = true;

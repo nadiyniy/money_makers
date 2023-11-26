@@ -71,7 +71,7 @@ export const StyledAvatar = styled.div`
     display: flex;
     margin-top: 20px;
     gap: 8px;
-    input {
+    label {
       padding: 8px 16px;
       border-radius: var(--border-radius-40);
       background: var(--gray-btn);
@@ -81,6 +81,10 @@ export const StyledAvatar = styled.div`
       font-size: 12px;
       letter-spacing: -0.02em;
     }
+    input {
+      display: none;
+    }
+
     button {
       padding: 8px 16px;
       border-radius: var(--border-radius-40);

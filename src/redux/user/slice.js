@@ -16,7 +16,6 @@ const userSlice = createSlice({
       .addCase(currentInfoUserThunk.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.user = payload;
-        console.log(1, payload);
       })
       .addCase(updateInfoUserThunk.fulfilled, (state, { payload }) => {
         state.loading = false;
@@ -24,11 +23,11 @@ const userSlice = createSlice({
       })
       .addCase(updateAvatarThunk.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.user.avatar = payload;
+        state.user.avatarUrl = payload.avatarUrl;
       })
       .addCase(deleteAvatarThunk.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.user.avatar = payload;
+        state.user.avatarUrl = payload.avatarUrl;
       })
       .addMatcher(
         isAnyOf(

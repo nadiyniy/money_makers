@@ -24,11 +24,7 @@ export const updateAvatarThunk = createAsyncThunk('updateAvatar', async (avatarF
     const formData = new FormData();
     formData.append('avatar', avatarFile);
 
-    const { data } = await instance.patch('users/avatar', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+    const { data } = await instance.patch('users/avatar', formData);
 
     return data;
   } catch (error) {
