@@ -21,7 +21,6 @@ const NewCategoriesForm = ({ category }) => {
   });
   const submit = data => {
     const type = category.type;
-    console.log({ type, ...data });
     dispatch(addedCategoryThunk({ type, ...data }));
     if (error === null) {
       reset();

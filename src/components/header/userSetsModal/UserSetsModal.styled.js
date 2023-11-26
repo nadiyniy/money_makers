@@ -47,7 +47,7 @@ export const StyledSetsBtn = styled.div`
     background: var(--gray-btn);
     border: none;
     color: var(--white-color);
-
+    cursor: pointer;
     font-size: 12px;
     letter-spacing: -0.02em;
   }

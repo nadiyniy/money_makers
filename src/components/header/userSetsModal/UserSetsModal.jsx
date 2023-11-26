@@ -63,7 +63,6 @@ const UserSetsModal = ({ closeModal }) => {
     e.preventDefault();
     const data = { name: inputName, currency: activeCurrency.value };
     dispatch(updateInfoUserThunk(data)).then(res => {
-      console.log(res);
       if (res.meta.requestStatus === 'fulfilled') {
         closeModal();
       }

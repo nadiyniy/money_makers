@@ -19,7 +19,6 @@ import styled from 'styled-components';
 const Layout = () => {
   const location = useLocation();
   const { pathname } = location;
-  // console.log(pathname);
 
   const [isMobileOrTablet, setIsMobileOrTablet] = useState(window.innerWidth < 1280);
 
@@ -35,16 +34,12 @@ const Layout = () => {
     };
   }, []);
 
-  // console.log('isMobileOrTablet', isMobileOrTablet);
-
   const pageToRenderDesktop = ['/', '/register', '/login'];
   const pageToRenderMobileTablet = ['/'];
 
   const shouldRender =
     (isMobileOrTablet && pageToRenderMobileTablet.includes(pathname)) ||
     (!isMobileOrTablet && pageToRenderDesktop.includes(pathname));
-
-  // console.log('shouldRender', shouldRender);
 
   return (
     <>
@@ -85,7 +80,7 @@ const BgImageWrapperContainer = styled.div`
 `;
 
 const ContentContainer = styled.div`
-  order: 1; 
+  order: 1;
   @media (min-width: 1280px) {
     order: 2;
     flex-grow: 1;
