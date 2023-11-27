@@ -1,12 +1,11 @@
 .datePicker input {
   border: none;
   background-color: transparent;
-  color: #fafafa;
+  color: var(--white-color);
 }
 
 :focus {
   outline: none;
-  /* margin-left: auto; */
 }
 
 .react-datepicker__input-time-container {
@@ -15,7 +14,7 @@
 
 .react-datepicker {
   border-radius: 8px;
-  background: #0ef387;
+  background: var(--primary-color);
   margin-left: 15px;
 }
 
@@ -31,29 +30,29 @@
 .react-datepicker__year-text--selected,
 .react-datepicker__year-text--in-selecting-range,
 .react-datepicker__year-text--in-range {
-  background-color: black;
+  background-color: var(--black-color);
   border-radius: 50%;
 }
 
 .react-datepicker__header {
-  background: #0ef387;
+  background: var(--primary-color);
 }
 
 .react-datepicker__year-read-view--down-arrow,
 .react-datepicker__month-read-view--down-arrow,
 .react-datepicker__month-year-read-view--down-arrow,
 .react-datepicker__navigation-icon::before {
-  border-color: #000000;
+  border-color: var(--black-color);
 }
 
 .react-datepicker-popper[data-placement^='bottom'] .react-datepicker__triangle::before,
 .react-datepicker-popper[data-placement^='bottom'] .react-datepicker__triangle::after {
-  border-bottom-color: #0ef387;
+  border-bottom-color: var(--primary-color);
 }
 
 .react-datepicker-popper[data-placement^='top'] .react-datepicker__triangle::before,
 .react-datepicker-popper[data-placement^='top'] .react-datepicker__triangle::after {
-  border-top-color: #0ef387;
+  border-top-color: var(--primary-color);
 }
 
 .react-datepicker-ignore-onclickoutside {
