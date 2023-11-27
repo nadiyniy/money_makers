@@ -1,14 +1,15 @@
 import AuthNav from '../AuthNav/AuthNav';
-import AllUsersTab from '../AllUsersTab';
+import AllUsersTab from '../AllUsersTab/AllUsersTab';
 import { StyledCommonWrapper } from 'styles/Common.styled';
 import { Description, Text, Title } from './WelcomePage.styled';
+import { Wrapper } from '../RegisterPage/RegisterPage.styled';
 
 const WelcomePage = () => {
   return (
     <StyledCommonWrapper
     // style={{ outline: '1px solid white' }}
     >
-      <div>
+      <Wrapper>
         <Text>Expense log</Text>
         <Title>
           Manage Your <span>Finances</span> Masterfully!
@@ -20,7 +21,7 @@ const WelcomePage = () => {
         </Description>
 
         <AuthNav />
-      </div>
+      </Wrapper>
       <AllUsersTab />
     </StyledCommonWrapper>
   );
