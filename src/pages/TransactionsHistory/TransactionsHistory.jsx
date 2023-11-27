@@ -5,7 +5,7 @@ import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
-import { fetchTransactions } from 'redux/transactions/operations';
+import { fetchTransactionsThunk } from 'redux/transactions/operations';
 
 // import { selectTransactions, selectTransactionsLoading } from 'redux/transactions/selectors';
 
@@ -32,11 +32,11 @@ const TransactionsHistoryPage = () => {
   const dispatch = useDispatch();
   const { transactionsType } = useParams();
   useEffect(() => {
-    dispatch(fetchTransactions(transactionsType));
+    dispatch(fetchTransactionsThunk(transactionsType));
   }, [dispatch, transactionsType]);
 
   //   const getAllExpenses = type => {
-  //     dispatch(fetchTransactions(type));
+  //     dispatch(fetchTransactionsThunk(type));
   //   };
 
   const [startDate, setStartDate] = useState(new Date());
