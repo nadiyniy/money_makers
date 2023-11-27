@@ -23,13 +23,14 @@ export const TransactionFormStyle = styled.form`
   @media screen and (min-width: 768px) {
     max-height: 600px;
     max-width: 704px;
-    padding: 40px;
+    padding: 40px 109px;
   }
   @media screen and (min-width: 1280px) {
     width: 566px;
     max-height: 600px;
     margin: 0;
     margin-left: 44px;
+    padding: 40px 40px;
   }
 `;
 export const ParentInputWrapper = styled.div`
@@ -123,6 +124,11 @@ export const DateInputWrapper = styled.div`
   align-items: center;
   justify-content: center;
   gap: 14px;
+  @media screen and (min-width: 768px) {
+    gap: 20px;
+  }
+  @media screen and (min-width: 1280px) {
+  }
 `;
 export const DateLabel = styled.label`
   display: flex;
@@ -150,6 +156,7 @@ export const CalendarIcon = styled.button`
   height: auto;
 `;
 export const DateInput = styled(ReactDatePicker)`
+  width: 100%;
   max-width: 140px;
   gap: 18px;
   color: var(--white-color);
@@ -174,7 +181,10 @@ export const DateInput = styled(ReactDatePicker)`
     color: var(--gray-text-20);
   }
   @media screen and (min-width: 768px) {
-    max-width: 242px;
+    max-width: 262px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 234px;
   }
 `;
 
