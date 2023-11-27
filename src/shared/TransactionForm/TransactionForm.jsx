@@ -25,6 +25,7 @@ import {
   TransactionButton,
   TransactionButtonWrapper,
   TransactionFormStyle,
+  TransactionWrapper,
 } from './TransactionForm.styles';
 
 const TransactionForm = ({ transactionsType, setRender }) => {
@@ -51,7 +52,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
       time,
       type,
     };
-
+    console.log(formData);
     reset();
   };
 
@@ -74,7 +75,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
 
   return (
     <>
-      <div>
+      <TransactionWrapper>
         <TransactionFormStyle onSubmit={handleSubmit(submit)}>
           <RadioWrapper>
             <RadioLabel>
@@ -145,7 +146,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
             <TransactionButton type="submit">Add</TransactionButton>
           </TransactionButtonWrapper>
         </TransactionFormStyle>
-      </div>
+      </TransactionWrapper>
 
       {isOpen ? (
         <Modal closeModal={closeModal}>
