@@ -2,6 +2,8 @@ import { useDispatch } from 'react-redux';
 import { loginThunk, registerThunk } from 'redux/auth/operations';
 import AuthForm from 'shared/AuthForm/AuthForm';
 import { validationSchema } from 'shared/validationSchema/validationSchema';
+import { StyledCommonWrapper } from 'styles/Common.styled';
+import { Description, RegisterWrapper, Title, Wrapper } from './RegisterPage.styled';
 
 const fieldsData = [
   { name: 'name', label: 'Name', type: 'text' },
@@ -32,18 +34,23 @@ const RegisterPage = () => {
   };
 
   return (
-    <div>
-      RegisterPage
-      <AuthForm
-        onSubmit={submit}
-        fieldsData={fieldsData}
-        submitButtonText="Sign Up"
-        initialState={{ email: '', password: '', name: '' }}
-        validationSchema={validationSchema}
-        navigationData={navigationData}
-        authType="register"
-      />
-    </div>
+    <StyledCommonWrapper>
+      <Wrapper>
+        <Title>Sign Up</Title>
+        <Description>
+          Step into a world of hassle-free expense management! Your journey towards financial mastery begins here.
+        </Description>
+        <AuthForm
+          onSubmit={submit}
+          fieldsData={fieldsData}
+          submitButtonText="Sign Up"
+          initialState={{ email: '', password: '', name: '' }}
+          validationSchema={validationSchema}
+          navigationData={navigationData}
+          authType="register"
+        />
+      </Wrapper>
+    </StyledCommonWrapper>
   );
 };
 

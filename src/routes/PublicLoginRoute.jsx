@@ -1,4 +1,4 @@
-import LoginPage from 'pages/Auth/LoginPage';
+import LoginPage from 'pages/Auth/LoginPage/LoginPage';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router';

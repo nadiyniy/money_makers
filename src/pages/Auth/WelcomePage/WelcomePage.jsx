@@ -1,5 +1,5 @@
-import AuthNav from './AuthNav';
-import AllUsersTab from './AllUsersTab';
+import AuthNav from '../AuthNav/AuthNav';
+import AllUsersTab from '../AllUsersTab';
 import { StyledCommonWrapper } from 'styles/Common.styled';
 import { Description, Text, Title } from './WelcomePage.styled';
 
