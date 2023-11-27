@@ -1,4 +1,3 @@
-import { Close } from 'components/svgs';
 import styled from 'styled-components';
 export const ModalListWrapper = styled.div`
   width: 100%;
