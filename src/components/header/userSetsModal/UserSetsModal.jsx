@@ -117,7 +117,7 @@ const UserSetsModal = ({ closeModal }) => {
               <ul className="currencies-list">
                 {currenciesList.map(item => (
                   <li key={item.value} onClick={() => onCurrencyClick(item)}>
-                    <span>{item.symbol}</span>
+                    <span>{item.symbol} </span>
                     <span>{item.name}</span>
                   </li>
                 ))}

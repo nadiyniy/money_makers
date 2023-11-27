@@ -20,7 +20,7 @@ const Header = () => {
     return (
       <StyledHeader>
         <StyledCommonWrapper>
-          <StyledContainer isLoggedIn={isLoggedIn}>
+          <StyledContainer className={isLoggedIn ? 'auth-user' : ''}>
             <Logo />
           </StyledContainer>
         </StyledCommonWrapper>
@@ -30,12 +30,12 @@ const Header = () => {
   return (
     <StyledHeader>
       <StyledCommonWrapper>
-        <StyledContainer isLoggedIn={isLoggedIn}>
+        <StyledContainer className={isLoggedIn ? 'auth-user' : ''}>
           <Logo />
-          <TransactionsHistoryNav variant="default" />
+          <TransactionsHistoryNav />
           <StyledContainerUserBtn>
-            <UserBarBtn variant="default" toggleUserPanel={toggleUserPanel} />
-            {isUserPanelOpen && <UserPanel variant="default" />}
+            <UserBarBtn toggleUserPanel={toggleUserPanel} />
+            {isUserPanelOpen && <UserPanel />}
           </StyledContainerUserBtn>
           <BurgerMenuBtn />
         </StyledContainer>
