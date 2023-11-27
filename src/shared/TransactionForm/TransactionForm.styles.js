@@ -1,3 +1,5 @@
+import { Clock } from 'components/svgs';
+import ReactDatePicker from 'react-datepicker';
 import styled from 'styled-components';
 
 export const TransactionWrapper = styled.div`
@@ -9,24 +11,23 @@ export const TransactionFormStyle = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto;
+  margin: 0;
   padding: 28px 20px;
   width: 100%;
-  height: 533px;
+  min-height: 533px;
   background-color: var(--gray-dark-color);
   border-radius: 30px;
   color: var(--white-color);
   margin-bottom: 40px;
 
   @media screen and (min-width: 768px) {
-    height: 600px;
+    max-height: 600px;
     max-width: 704px;
-    padding: 109px 40px;
+    padding: 40px;
   }
   @media screen and (min-width: 1280px) {
     width: 566px;
-    height: 600px;
-    padding: 40px 40px;
+    max-height: 600px;
     margin: 0;
     margin-left: 44px;
   }
@@ -38,7 +39,8 @@ export const RadioWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-
+  padding-left: 32px;
+  padding-right: 44px;
   margin-bottom: 20px;
   @media screen and (min-width: 768px) {
   }
@@ -49,8 +51,6 @@ export const RadioWrapper = styled.div`
 export const RadioLabel = styled.label`
   position: relative;
   display: inline-block;
-  margin-left: 32px;
-  margin-right: 44px;
   cursor: pointer;
   font-size: 14px;
   font-style: normal;
@@ -65,8 +65,7 @@ export const RadioLabel = styled.label`
   }
 `;
 export const RadioLabel1 = styled(RadioLabel)`
-  margin-left: 0px;
-  margin-right: 0px;
+  margin-left: 52px;
 `;
 
 export const RadioInput = styled.input`
@@ -82,17 +81,13 @@ export const RadioInput = styled.input`
 `;
 export const RadioCustom = styled.span`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: -2px;
+  left: -30px;
   height: 20px;
   width: 20px;
   background-color: none;
   border: 2px solid var(--gray-text-20);
   border-radius: 10px;
-  @media screen and (min-width: 768px) {
-  }
-  @media screen and (min-width: 1280px) {
-  }
 `;
 
 export const RadioCustomChecked = styled(RadioCustom)`
@@ -129,13 +124,37 @@ export const DateInputWrapper = styled.div`
   justify-content: center;
   gap: 14px;
 `;
-export const DateInput = styled.input`
-  gap: 18px;
-  color: var(--gray-text-40);
-  background-color: var(--gray-dark-color);
+export const DateLabel = styled.label`
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  color: var(--white-color);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.28px;
+  margin-bottom: 20px;
+  position: relative;
+`;
+
+export const CalendarIcon = styled.button`
+  background: none;
+  border: none;
+  position: absolute;
+  top: 48px;
+  right: 10px; /* Регулюйте відстань від лейбла */
+  transform: translateY(-50%);
+  width: 24px; /* Регулюйте розмір іконки за потребою */
+  height: auto;
+`;
+export const DateInput = styled(ReactDatePicker)`
+  max-width: 140px;
+  gap: 18px;
+  color: var(--white-color);
+  background-color: var(--gray-dark-color);
   padding: 12px 14px;
-  align-items: center;
   border-radius: 12px;
   border: 1px solid var(--gray-text-20);
   font-size: 14px;
@@ -146,9 +165,7 @@ export const DateInput = styled.input`
   margin-top: 8px;
 
   &:focus {
-    outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     background-color: var(--gray-dark-color);
   }
 
@@ -156,16 +173,19 @@ export const DateInput = styled.input`
     background-color: var(--gray-dark-color);
     color: var(--gray-text-20);
   }
+  @media screen and (min-width: 768px) {
+    max-width: 242px;
+  }
 `;
 
 export const OtherInput = styled.input`
   width: 100%;
-  color: var(--gray-text-40);
+  color: var(--white-color);
   background-color: var(--gray-dark-color);
   display: flex;
   padding: 12px 14px;
   align-items: center;
-  gap: 10px;
+
   border-radius: 12px;
   border: 1px solid var(--gray-text-20);
   font-size: 14px;
@@ -174,7 +194,6 @@ export const OtherInput = styled.input`
   line-height: 1.28;
   transition: all 0.3s ease;
   margin-top: 8px;
-  margin-bottom: 20px;
 
   &:focus {
     outline: none;
@@ -193,23 +212,8 @@ export const CategoryInput = styled(OtherInput)`
   padding: 12px 14px;
 `;
 
-export const SumInput = styled(OtherInput)`
-  position: relative;
-
-  &::after {
-    content: 'UAH';
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: var(--gray-text-40);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.28;
-  }
-`;
+export const SumInput = styled(OtherInput)``;
 export const CommentInput = styled(OtherInput)`
-  padding: 12px 14px;
   height: 91px;
   resize: none;
 `;
@@ -223,7 +227,6 @@ export const TransactionButton = styled.button`
   padding: 14px 44px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
   border-radius: 40px;
   background: var(--primary-color);
   transition: all 0.3s ease;
@@ -234,6 +237,7 @@ export const TransactionButton = styled.button`
 `;
 
 export const OneLabel = styled.label`
+  display: block;
   color: var(--white-color);
   font-size: 14px;
   font-style: normal;
@@ -241,4 +245,33 @@ export const OneLabel = styled.label`
   line-height: normal;
   letter-spacing: -0.28px;
   margin-bottom: 20px;
+`;
+export const ErrorMessage = styled.p`
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--error-color);
+`;
+
+export const TwoLabel = styled.label`
+  display: block;
+  color: var(--white-color);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.28px;
+  margin-bottom: 20px;
+  position: relative;
+
+  &::after {
+    content: 'UAH';
+    position: absolute;
+    top: 40px;
+    right: 18px;
+    color: var(--gray-text-40);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.28;
+  }
 `;

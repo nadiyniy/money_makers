@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NewCategoriesForm from '../NewCategoriesForm/NewCategoriesForm';
 import EditCategoriesForm from '../EditCategoriesForm/EditCategoriesForm';
-import { useDispatch } from 'react-redux';
-import { deleteCategoryThunk } from 'redux/category/operations';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteCategoryThunk, fetchCategoriesThunk } from 'redux/category/operations';
 import { Pencil, Delete, Check1 } from '../../../components/svgs/index';
 
 import {
@@ -19,6 +19,7 @@ import {
 } from './CategoriesModalList.styled';
 import { Close } from 'components/svgs';
 import { useLocation } from 'react-router';
+
 const CategoriesModalList = ({ closeModal, categories, setchooseCategory, setTakeCategoryId }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -26,10 +27,13 @@ const CategoriesModalList = ({ closeModal, categories, setchooseCategory, setTak
   const dispatch = useDispatch();
   const location = useLocation();
 
+  useEffect(() => {
+    dispatch(fetchCategoriesThunk());
+  }, [dispatch]);
+
   const handleChooseCategory = category => {
     setTakeCategoryId(category._id);
     setchooseCategory(category.categoryName);
-
     closeModal();
   };
 
@@ -53,9 +57,13 @@ const CategoriesModalList = ({ closeModal, categories, setchooseCategory, setTak
         <ModalScrollbar>
           {categories
             ? categories?.map((category, index) => (
-                <ModalItem key={category._id} onClick={() => handleItemClick(index)} isActive={index === activeIndex}>
+                <ModalItem
+                  key={category._id}
+                  onClick={() => handleItemClick(index)}
+                  className={index === activeIndex ? 'isActive' : null}
+                >
                   <ModalCategoryText>{category.categoryName}</ModalCategoryText>
-                  <ModalButtonWrapper isActive={index === activeIndex}>
+                  <ModalButtonWrapper className={index === activeIndex ? 'isActive' : null}>
                     <ModalListButton type="button" onClick={() => handleChooseCategory(category)}>
                       <Check1 width={16} height={16} />
                     </ModalListButton>

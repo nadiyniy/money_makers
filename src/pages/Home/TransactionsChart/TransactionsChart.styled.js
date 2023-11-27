@@ -13,7 +13,7 @@ export const ChartWrapper = styled.div`
   }
   @media screen and (min-width: 1280px) {
     max-width: 630px;
-    height: 302px;
+    max-height: 302px;
   }
 `;
 export const ChartTitle = styled.h1`

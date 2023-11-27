@@ -15,8 +15,8 @@ export { ReactComponent as Pencil } from './icons/pencil.svg';
 export { ReactComponent as Delete } from './icons/delete.svg';
 
 export { ReactComponent as Check1 } from './icons/check(1).svg';
-// export { ReactComponent as  } from './icons/';
-// export { ReactComponent as  } from './icons/';
+export { ReactComponent as Clock } from './icons/clock.svg';
+export { ReactComponent as Calendar1 } from './icons/calendar (1).svg';
 // export { ReactComponent as  } from './icons/';
 // export { ReactComponent as  } from './icons/';
 // export { ReactComponent as  } from './icons/';

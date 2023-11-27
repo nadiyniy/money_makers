@@ -1,17 +1,26 @@
 import styled from 'styled-components';
 export const ModalListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: relative;
   width: 100%;
   max-width: 335px;
-  height: 400px;
+  max-height: 430px;
   border-radius: 30px;
   border: 1px solid var(--primary-light-color);
   background-color: var(--gray-dark-color);
+  padding-bottom: 20px;
+  padding-top: 20px;
 
   @media screen and (min-width: 375px) {
     width: 335px;
+    padding-bottom: 40px;
+    padding-top: 40px;
   }
   @media screen and (min-width: 768px) {
+    max-height: 460px;
+    min-width: 500px;
   }
   @media screen and (min-width: 1280px) {
   }
@@ -27,35 +36,44 @@ export const ModalListCloseButton = styled.button`
 
 export const ModalListTitle = styled.h1`
   color: var(--white-color);
-  padding-left: 20px;
-  padding-right: 20px;
+  margin-left: 20px;
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.48px;
   margin-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 40px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 28px;
+    margin-left: 40px;
+  }
 `;
 export const ModalListSecondTitle = styled.h2`
-  padding-left: 20px;
-  padding-right: 20px;
+  margin-left: 20px;
+
   color: var(--gray-text-20);
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   margin-bottom: 10px;
+
+  @media screen and (min-width: 768px) {
+    margin-left: 40px;
+  }
 `;
 
 export const ModalWrapper = styled.div`
   width: 100%;
+  margin-bottom: 12px;
 `;
 
 export const ModalScrollbar = styled.ul`
   margin-right: 10px;
   max-height: 192px;
-  overflow-y: auto;
+  overflow: auto;
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -64,7 +82,6 @@ export const ModalScrollbar = styled.ul`
   &::-webkit-scrollbar-thumb {
     background: var(--scroll-color);
     border-radius: 6px;
-    border: 2px solid transparent;
   }
 `;
 
@@ -74,11 +91,13 @@ export const ModalItem = styled.li`
   justify-content: space-between;
   padding: 12px 20px;
 
-  ${({ isActive }) =>
-    isActive &&
-    `  
+  &.isActive {
     background-color: var(--black-color);
-  `};
+  }
+
+  @media screen and (min-width: 768px) {
+    margin-left: 20px;
+  }
 `;
 export const ModalCategoryText = styled.p`
   color: var(--white-color);
@@ -86,12 +105,21 @@ export const ModalCategoryText = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+  }
 `;
 export const ModalButtonWrapper = styled.div`
-  display: ${({ isActive }) => (isActive ? 'flex' : 'none')};
+  display: none;
   align-items: center;
   gap: 14px;
+
+  &.isActive {
+    display: flex;
+  }
 `;
+
 export const ModalListButton = styled.button`
   background-color: transparent;
   border: none;

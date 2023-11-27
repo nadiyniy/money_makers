@@ -18,28 +18,27 @@ const slice = createSlice({
       .addCase(addedCategoryThunk.fulfilled, (state, { payload }) => {
         if (payload.type === 'incomes') {
           state.categories.incomes.push(payload);
-        }
-        if (payload.type === 'expenses') {
+        } else {
           state.categories.expenses.push(payload);
         }
       })
       .addCase(deleteCategoryThunk.fulfilled, (state, { payload }) => {
         if (payload.type === 'incomes') {
           state.categories.incomes = state.categories.incomes.filter(category => category.id !== payload.id);
-        }
-        if (payload.type === 'expenses') {
+        } else {
           state.categories.expenses = state.categories.expenses.filter(category => category.id !== payload.id);
         }
       })
       .addCase(updateCategoryThunk.fulfilled, (state, { payload }) => {
-        console.log(payload);
-        if (payload.type === 'incomes') {
-          const editCategoryIncomes = state.categories.incomes.find(category => category._id === payload._id);
-          editCategoryIncomes.categoryName = payload.categoryName;
-        }
-        if (payload.type === 'expenses') {
-          const editCategoryExpenses = state.categories.expenses.find(category => category._id === payload._id);
-          editCategoryExpenses.categoryName = payload.categoryName;
+        const { _id, categoryName } = payload;
+
+        const editCategoryIncomes = state.categories.incomes.find(category => category._id === _id);
+        const editCategoryExpenses = state.categories.expenses.find(category => category._id === _id);
+
+        if (editCategoryIncomes) {
+          editCategoryIncomes.categoryName = categoryName;
+        } else if (editCategoryExpenses) {
+          editCategoryExpenses.categoryName = categoryName;
         }
       })
       .addCase(fetchCategoriesThunk.fulfilled, (state, { payload }) => {

@@ -8,6 +8,7 @@ import CategoriesModalList from 'pages/Home/CategoriesModalList/CategoriesModalL
 
 import { selectCategories } from 'redux/category/selectors';
 import { fetchCategoriesThunk } from 'redux/category/operations';
+import { Calendar1, Clock } from '../../components/svgs/index';
 import {
   CategoryInput,
   CommentInput,
@@ -26,9 +27,17 @@ import {
   TransactionButtonWrapper,
   TransactionFormStyle,
   TransactionWrapper,
+  ErrorMessage,
+  TwoLabel,
+  DateLabel,
+  CalendarIcon,
 } from './TransactionForm.styles';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { validationTransactionFormSchema } from 'shared/validationSchema/validationSchema';
 
 const TransactionForm = ({ transactionsType, setRender }) => {
+  const [startDate, setStartDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
   const { isOpen, openModal, closeModal } = useModal();
   const [currentCategory, setCurrentCategory] = useState([]);
   const [chooseCategory, setchooseCategory] = useState('');
@@ -41,7 +50,14 @@ const TransactionForm = ({ transactionsType, setRender }) => {
     dispatch(fetchCategoriesThunk());
   }, [dispatch]);
 
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(validationTransactionFormSchema),
+  });
 
   const submit = ({ comment, date, sum, time, type }) => {
     const formData = {
@@ -80,7 +96,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
           <RadioWrapper>
             <RadioLabel>
               <RadioInput
-                {...register('type', { required: true })}
+                {...register('type')}
                 type="radio"
                 checked={checked === 'expenses'}
                 value="expenses"
@@ -92,7 +108,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
 
             <RadioLabel1>
               <RadioInput
-                {...register('type', { required: true })}
+                {...register('type')}
                 type="radio"
                 checked={checked === 'incomes'}
                 value="incomes"
@@ -103,14 +119,38 @@ const TransactionForm = ({ transactionsType, setRender }) => {
             </RadioLabel1>
           </RadioWrapper>
           <DateInputWrapper>
-            <OneLabel>
+            <DateLabel>
               Date:
-              <DateInput type="date" {...register('date', { required: true })} placeholder="mm/dd/yyyy" />
-            </OneLabel>
-            <OneLabel>
+              <DateInput
+                isClearable
+                selected={startDate || null}
+                onChange={date => setStartDate(date)}
+                dateFormat="yyyy-MM-dd"
+                placeholderText="mm/dd/yyyy"
+              />
+              <CalendarIcon>
+                <Calendar1 />
+              </CalendarIcon>
+              <ErrorMessage>{errors.date?.message}</ErrorMessage>
+            </DateLabel>
+            <DateLabel>
               Time:
-              <DateInput type="time" {...register('time', { required: true })} placeholder="00:00:00" />
-            </OneLabel>
+              <DateInput
+                isClearable
+                selected={selectedTime}
+                onChange={time => setSelectedTime(time)}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={15}
+                timeCaption="Time"
+                dateFormat="h:mm"
+                placeholderText="00:00:00"
+              />
+              <CalendarIcon>
+                <Clock />
+              </CalendarIcon>
+              <ErrorMessage>{errors.time?.message}</ErrorMessage>
+            </DateLabel>
           </DateInputWrapper>
           <ParentInputWrapper>
             <OneLabel>
@@ -123,23 +163,21 @@ const TransactionForm = ({ transactionsType, setRender }) => {
                 onClick={renderCategoryByType}
                 onFocus={renderCategoryByType}
               />
+              <ErrorMessage>{errors.category?.message}</ErrorMessage>
             </OneLabel>
           </ParentInputWrapper>
           <ParentInputWrapper>
-            <OneLabel>
+            <TwoLabel>
               Sum:
-              <SumInput type="text" {...register('sum', { required: true })} placeholder="Enter the sum" />
-            </OneLabel>
+              <SumInput type="text" {...register('sum')} placeholder="Enter the sum" />
+              <ErrorMessage>{errors.sum?.message}</ErrorMessage>
+            </TwoLabel>
           </ParentInputWrapper>
           <ParentInputWrapper>
             <OneLabel>
               Comment:
-              <CommentInput
-                {...register('comment', { required: true })}
-                rows={4}
-                cols={50}
-                placeholder="Enter the text"
-              />
+              <CommentInput {...register('comment')} rows={4} cols={50} placeholder="Enter the text" />
+              <ErrorMessage>{errors.comment?.message}</ErrorMessage>
             </OneLabel>
           </ParentInputWrapper>
           <TransactionButtonWrapper>

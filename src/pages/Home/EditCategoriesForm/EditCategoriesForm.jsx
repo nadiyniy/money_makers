@@ -7,6 +7,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import { updateCategoryThunk } from 'redux/category/operations';
 import { validationCategoryFormSchema } from 'shared/validationSchema/validationSchema';
 import { selectError } from 'redux/auth/selectors';
+import {
+  EditCategoriesButton,
+  EditCategoriesInput,
+  EditCategoriesWrapper,
+  EditLabel,
+  ErrorMessage,
+} from './EditCategoriesForm.styled';
 
 const EditCategoriesForm = ({ setIsEditing, category }) => {
   const error = useSelector(selectError);
@@ -18,11 +25,19 @@ const EditCategoriesForm = ({ setIsEditing, category }) => {
     reset,
     formState: { errors },
   } = useForm({
+    defaultValues: {
+      categoryName: category?.categoryName || '',
+    },
     resolver: yupResolver(validationCategoryFormSchema),
   });
   const submit = data => {
-    const _id = category._id;
-    dispatch(updateCategoryThunk({ _id, ...data }));
+    if (category) {
+      const updatedCategory = {
+        _id: category._id,
+        categoryName: { ...data },
+      };
+      dispatch(updateCategoryThunk(updatedCategory));
+    }
 
     setIsEditing(false);
     if (error === null) {
@@ -32,14 +47,16 @@ const EditCategoriesForm = ({ setIsEditing, category }) => {
     }
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit(submit)}>
-        <label htmlFor="edit">Edit Category</label>
-        <input id="edit" type="text" placeholder="Enter the text" {...register('categoryName')} />
-        <p>{errors.categoryName?.message}</p>
-        <button type="submit">Edit</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit(submit)}>
+      <EditCategoriesWrapper>
+        <EditLabel htmlFor="edit">
+          Edit Category
+          <EditCategoriesInput id="edit" type="text" placeholder="Enter the text" {...register('categoryName')} />
+          <EditCategoriesButton type="submit">Edit</EditCategoriesButton>
+        </EditLabel>
+        <ErrorMessage>{errors.categoryName?.message}</ErrorMessage>
+      </EditCategoriesWrapper>
+    </form>
   );
 };
 

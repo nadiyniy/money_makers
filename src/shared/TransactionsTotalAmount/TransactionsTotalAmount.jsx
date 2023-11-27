@@ -14,7 +14,7 @@ const TransactionsTotalAmount = () => {
   const [expensesAmount] = useState(null);
   return (
     <TotalAmountWrapper>
-      <AmountWrapper type="expenses" title="Expenses" amount={expensesAmount}>
+      <AmountWrapper type="expenses" title="Expenses">
         <AmountButton>
           <Arrow15 />
         </AmountButton>
@@ -23,7 +23,7 @@ const TransactionsTotalAmount = () => {
           <AmountText>$632.000{expensesAmount}</AmountText>
         </div>
       </AmountWrapper>
-      <AmountWrapper type="income" title="Income" amount={incomeAmount}>
+      <AmountWrapper type="income" title="Income">
         <AmountButton>
           <Arrow14 />
         </AmountButton>
