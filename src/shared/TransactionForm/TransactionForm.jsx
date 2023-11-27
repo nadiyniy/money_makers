@@ -25,6 +25,7 @@ import {
   TransactionButton,
   TransactionButtonWrapper,
   TransactionFormStyle,
+  TransactionWrapper,
 } from './TransactionForm.styles';
 
 const TransactionForm = ({ transactionsType, setRender }) => {
@@ -35,8 +36,6 @@ const TransactionForm = ({ transactionsType, setRender }) => {
   const [checked, setCheked] = useState(false);
   const categories = useSelector(selectCategories);
   const dispatch = useDispatch();
-
-  console.log(categories);
 
   useEffect(() => {
     dispatch(fetchCategoriesThunk());
@@ -76,7 +75,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
 
   return (
     <>
-      <div>
+      <TransactionWrapper>
         <TransactionFormStyle onSubmit={handleSubmit(submit)}>
           <RadioWrapper>
             <RadioLabel>
@@ -147,7 +146,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
             <TransactionButton type="submit">Add</TransactionButton>
           </TransactionButtonWrapper>
         </TransactionFormStyle>
-      </div>
+      </TransactionWrapper>
 
       {isOpen ? (
         <Modal closeModal={closeModal}>

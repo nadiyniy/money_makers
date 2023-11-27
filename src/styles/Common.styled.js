@@ -13,7 +13,7 @@ export const StyledCommonWrapper = styled.div`
     padding-right: 32px;
   }
   @media screen and (min-width: 1280px) {
-    max-width: 1400px;
+    max-width: 1440px;
     padding-left: 100px;
     padding-right: 100px;
   }
