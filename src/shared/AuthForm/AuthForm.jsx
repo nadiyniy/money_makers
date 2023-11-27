@@ -3,6 +3,9 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ErrorSpan } from './AuthForm.styled';
+
+// const mockToastError = () => undefined;
 
 const AuthForm = ({
   fieldsData,
@@ -23,7 +26,7 @@ const AuthForm = ({
   const { isDirty } = formState;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} noValidate>
       {fieldsData.map(field => (
         <div key={field.name}>
           <input
@@ -33,8 +36,14 @@ const AuthForm = ({
             autoComplete={field.type === 'email' ? 'email' : 'current-password'}
           />
           {
-            formState.errors[field.name] && toast.error(formState.errors[field.name].message)
-            // toast.error('error')
+            formState.errors[field.name] &&
+              (!toast.error(formState.errors[field.name].message) ? (
+                <ErrorSpan>{formState.errors[field.name].message}</ErrorSpan>
+              ) : null)
+
+            // (!mockToastError() ? (
+            //   <ErrorSpan>{formState.errors[field.name].message}</ErrorSpan>
+            // ) : null)
           }
         </div>
       ))}

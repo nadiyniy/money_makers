@@ -1,7 +1,10 @@
 import * as yup from 'yup';
 
 export const validationSchema = yup.object({
+  name: yup.string().required('Name is required'),
+
   email: yup.string().email('Please, enter a valid e-mail').required('E-mail is required'),
+
   password: yup
     .string()
     .min(6, 'Password must contain at least 6 symbols')
