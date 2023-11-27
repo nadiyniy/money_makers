@@ -1,7 +1,6 @@
 //import React from 'react';
 import React, { useState, useEffect } from 'react';
 import { StyledBox, StyledTitle, StyledLink } from './PageNotFound.styled';
-import { Link } from 'react-router-dom';
 
 const TypingEffect = ({ text, speed }) => {
   const [displayedText, setDisplayedText] = useState('');
@@ -9,7 +8,7 @@ const TypingEffect = ({ text, speed }) => {
   useEffect(() => {
     let index = 0;
     const intervalId = setInterval(() => {
-      setDisplayedText((prevText) => prevText + (text[index] || ''));
+      setDisplayedText(prevText => prevText + (text[index] || ''));
       index++;
       if (index > text.length) clearInterval(intervalId);
     }, speed);
@@ -41,12 +40,9 @@ const PageNotFound = () => {
       <StyledTitle>
         <TypingEffect text=" 4404 Page Not Found " speed={150} />
       </StyledTitle>
-      <StyledLink to={'/'}>
-        home page
-      </StyledLink> 
+      <StyledLink to={'/'}>home page</StyledLink>
     </StyledBox>
   );
 };
 
 export default PageNotFound;
-
