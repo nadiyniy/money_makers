@@ -92,5 +92,8 @@
 <path fill="none" stroke="#838383" style="stroke: var(--color5, #838383)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.4471" d="M25.098 27.294v-2.51c0-1.331-0.529-2.608-1.47-3.55s-2.218-1.47-3.549-1.47h-10.039c-1.331 0-2.608 0.529-3.549 1.47s-1.47 2.218-1.47 3.55v2.51"></path>
 <path fill="none" stroke="#838383" style="stroke: var(--color5, #838383)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.4471" d="M15.059 14.745c2.772 0 5.020-2.247 5.020-5.020s-2.247-5.020-5.020-5.020c-2.772 0-5.020 2.247-5.020 5.020s2.247 5.020 5.020 5.020z"></path>
 </symbol>
+<symbol id="icon-X---modal" viewBox="0 0 31 32">
+<path d="M4.323 31.069l-4.323-4.5 11.177-10.735-10.735-11.177 4.253-4.085 10.735 11.177 10.88-10.45 4.323 4.5-10.88 10.45 10.735 11.177-4.253 4.085-10.735-11.177-11.177 10.735z"></path>
+</symbol>
 </defs>
 </svg>
