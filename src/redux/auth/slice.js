@@ -30,19 +30,7 @@ const slice = createSlice({
         state.error = payload;
       })
       .addCase(logoutThunk.fulfilled, state => {
-        state = {
-          user: {
-            name: '',
-            email: '',
-          },
-          accessToken: '',
-          refreshToken: '',
-          sid: '',
-          error: null,
-          isLoggedIn: false,
-          isRefreshing: false,
-          isLoading: false,
-        };
+        return (state = initialState);
       })
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
         state.user.name = payload.name;
