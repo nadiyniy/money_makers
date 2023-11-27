@@ -7,8 +7,7 @@ export const fetchTransactionsThunk = createAsyncThunk(
   async ({ transactionType, date }, thunkApi) => {
     try {
       const savedToken = thunkApi.getState().auth.accessToken;
-      const { data } = await instance.get(`transactions/${transactionType}`, {
-        params: { date },
+      const { data } = await instance.get(`transactions/${transactionType}?date=${date}`, {
         headers: {
           Authorization: `Bearer ${savedToken}`,
         },
@@ -22,10 +21,10 @@ export const fetchTransactionsThunk = createAsyncThunk(
 
 export const createUserTransactionThunk = createAsyncThunk(
   'createUserTransaction',
-  async (transactionType, thunkApi) => {
+  async (userTransaction, thunkApi) => {
     try {
       const savedToken = thunkApi.getState().auth.accessToken;
-      const { data } = await instance.post(`transactions`, transactionType, {
+      const { data } = await instance.post(`transactions`, userTransaction, {
         headers: {
           Authorization: `Bearer ${savedToken}`,
         },
@@ -37,28 +36,23 @@ export const createUserTransactionThunk = createAsyncThunk(
   }
 );
 
-export const removeUserTransactionThunk = createAsyncThunk(
-  'removeUserTransaction',
-  async ({ transactionType, transactionId }, thunkApi) => {
-    try {
-      const savedToken = thunkApi.getState().auth.accessToken;
-      const { data } = await instance.delete(`transactions/${transactionType}`, {
-        params: { transactionId },
-        headers: {
-          Authorization: `Bearer ${savedToken}`,
-        },
-      });
-      return data;
-    } catch (error) {
-      console.log(error);
-      return thunkApi.rejectWithValue(error.message);
-    }
+export const removeUserTransactionThunk = createAsyncThunk('removeUserTransaction', async (transactionId, thunkApi) => {
+  try {
+    const savedToken = thunkApi.getState().auth.accessToken;
+    const { data } = await instance.delete(`transactions/${transactionId}`, {
+      headers: {
+        Authorization: `Bearer ${savedToken}`,
+      },
+    });
+    return data;
+  } catch (error) {
+    return thunkApi.rejectWithValue(error.message);
   }
-);
+});
 
 export const updateUserTransactionThunk = createAsyncThunk(
   'updateTransaction',
-  async ({ type, transactionId, transactionType }, thunkApi) => {
+  async ({ transactionId, transactionType }, thunkApi) => {
     try {
       const savedToken = thunkApi.getState().auth.accessToken;
       const { data } = await instance.patch(`transactions/${transactionType}/${transactionId}`, {
