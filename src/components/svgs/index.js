@@ -15,6 +15,9 @@ export { ReactComponent as Pencil } from './icons/pencil.svg';
 export { ReactComponent as Delete } from './icons/delete.svg';
 
 export { ReactComponent as Check1 } from './icons/check(1).svg';
+
+export { ReactComponent as TrPencil } from './icons/edit-2.svg'
+export { ReactComponent as TrTrash } from './icons/trash-2.svg'
 // export { ReactComponent as  } from './icons/';
 // export { ReactComponent as  } from './icons/';
 // export { ReactComponent as  } from './icons/';
