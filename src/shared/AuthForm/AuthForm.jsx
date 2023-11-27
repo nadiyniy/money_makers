@@ -32,31 +32,34 @@ const AuthForm = ({
 
   return (
     <FormWrapper onSubmit={handleSubmit(onSubmit)} noValidate>
-      {fieldsData.map(field => (
-        <InputGroup key={field.name}>
-          <Input
-            {...register(field.name)}
-            type={field.type}
-            placeholder={field.label}
-            autoComplete={field.type === 'email' ? 'email' : 'current-password'}
-          />
-          {formState.errors[field.name] &&
-            (!toast.error(formState.errors[field.name].message) ? (
-              <ErrorMessage>{formState.errors[field.name].message}</ErrorMessage>
-            ) : null)}
-        </InputGroup>
-      ))}
+      <div>
+        {fieldsData.map(field => (
+          <InputGroup key={field.name}>
+            <Input
+              {...register(field.name)}
+              type={field.type}
+              placeholder={field.label}
+              autoComplete={field.type === 'email' ? 'email' : 'current-password'}
+            />
+            {formState.errors[field.name] &&
+              (!toast.error(formState.errors[field.name].message) ? (
+                <ErrorMessage>{formState.errors[field.name].message}</ErrorMessage>
+              ) : null)}
+          </InputGroup>
+        ))}
+      </div>
+      <div>
+        <SubmitButton type="submit" disabled={!isDirty}>
+          {submitButtonText}
+        </SubmitButton>
 
-      <SubmitButton type="submit" disabled={!isDirty}>
-        {submitButtonText}
-      </SubmitButton>
-
-      {navigationData && (
-        <NavigationWrapper>
-          <span>{navigationData.text} </span>
-          <StyledLink to={linkTo}>{navigationData.buttonText}</StyledLink>
-        </NavigationWrapper>
-      )}
+        {navigationData && (
+          <NavigationWrapper>
+            <span>{navigationData.text} </span>
+            <StyledLink to={linkTo}>{navigationData.buttonText}</StyledLink>
+          </NavigationWrapper>
+        )}
+      </div>
     </FormWrapper>
   );
 };

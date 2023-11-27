@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 
-export const RegisterWrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  /* justify-content: space-between; */
+  min-height: 568px;
 
   margin-top: 110px;
 
   @media screen and (min-width: 768px) {
     min-width: 172px;
+    margin-top: 18px;
   }
 `;
 
@@ -25,6 +28,7 @@ export const Title = styled.h1`
 `;
 
 export const Description = styled.p`
+  max-width: 399px;
   margin-bottom: 40px;
 
   color: var(--gray-text-40);

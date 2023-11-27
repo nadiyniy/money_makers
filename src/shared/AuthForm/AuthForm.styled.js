@@ -2,6 +2,13 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const FormWrapper = styled.form`
+  height: 100%;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 50px;
+
   ul {
     margin-bottom: 80px;
 
@@ -55,6 +62,7 @@ export const SubmitButton = styled.button`
 
   min-width: 138px;
   padding: 14px 44px;
+  /* margin-top: 135px; */
   margin-bottom: 20px;
   border: none;
   border-radius: 40px;

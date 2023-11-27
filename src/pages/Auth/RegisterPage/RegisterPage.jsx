@@ -3,7 +3,7 @@ import { loginThunk, registerThunk } from 'redux/auth/operations';
 import AuthForm from 'shared/AuthForm/AuthForm';
 import { validationSchema } from 'shared/validationSchema/validationSchema';
 import { StyledCommonWrapper } from 'styles/Common.styled';
-import { Description, RegisterWrapper, Title } from './RegisterPage.styled';
+import { Description, RegisterWrapper, Title, Wrapper } from './RegisterPage.styled';
 
 const fieldsData = [
   { name: 'name', label: 'Name', type: 'text' },
@@ -35,7 +35,7 @@ const RegisterPage = () => {
 
   return (
     <StyledCommonWrapper>
-      <RegisterWrapper>
+      <Wrapper>
         <Title>Sign Up</Title>
         <Description>
           Step into a world of hassle-free expense management! Your journey towards financial mastery begins here.
@@ -49,7 +49,7 @@ const RegisterPage = () => {
           navigationData={navigationData}
           authType="register"
         />
-      </RegisterWrapper>
+      </Wrapper>
     </StyledCommonWrapper>
   );
 };
