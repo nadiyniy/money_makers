@@ -3,6 +3,8 @@ import { Outlet, useLocation } from 'react-router-dom';
 import Header from './header/Header';
 import BgImageWrapper from 'shared/BgImageWrapper/BgImageWrapper';
 import styled from 'styled-components';
+import LoaderSpinner from './LoaderSpinner/LoaderSpinner';
+import PageLoader from './PageLoader/PageLoader';
 
 // import Header from './header';
 // import BgImageWrapper from './BgImageWrapper';
@@ -51,7 +53,7 @@ const Layout = () => {
           </BgImageWrapperContainer>
         )}
         <ContentContainer>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<PageLoader />}>
             <Outlet />
           </Suspense>
         </ContentContainer>
