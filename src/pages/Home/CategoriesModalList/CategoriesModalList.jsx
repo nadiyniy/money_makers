@@ -3,9 +3,22 @@ import NewCategoriesForm from '../NewCategoriesForm/NewCategoriesForm';
 import EditCategoriesForm from '../EditCategoriesForm/EditCategoriesForm';
 import { useDispatch } from 'react-redux';
 import { deleteCategoryThunk } from 'redux/category/operations';
-import { ModalListSecondTitle, ModalListTitle, ModalListWrapper } from './CategoriesModalList.styled';
+import { Pencil, Delete, Check1 } from '../../../components/svgs/index';
+
+import {
+  ModalButtonWrapper,
+  ModalCategoryText,
+  ModalItem,
+  ModalListButton,
+  ModalListCloseButton,
+  ModalListSecondTitle,
+  ModalListTitle,
+  ModalListWrapper,
+  ModalWrapper,
+} from './CategoriesModalList.styled';
 import { Close } from 'components/svgs';
 const CategoriesModalList = ({ closeModal, categories, setchooseCategory, setTakeCategoryId }) => {
+  const [activeIndex, setActiveIndex] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const dispatch = useDispatch();
@@ -21,31 +34,38 @@ const CategoriesModalList = ({ closeModal, categories, setchooseCategory, setTak
     setSelectedCategory(category);
     setIsEditing(true);
   };
+
+  const handleItemClick = index => {
+    setActiveIndex(index === activeIndex ? null : index);
+  };
+
   return (
     <ModalListWrapper>
-      <button onClick={closeModal}>
+      <ModalListCloseButton onClick={closeModal}>
         <Close width={20} height={20} />
-      </button>
+      </ModalListCloseButton>
       <ModalListTitle>{categories[0].type[0].toUpperCase() + categories[0].type.slice(1)}</ModalListTitle>
       <ModalListSecondTitle>All Category</ModalListSecondTitle>
-      <div>
+      <ModalWrapper>
         <ul>
-          {categories?.map(category => (
-            <li key={category._id}>
-              {category.categoryName}
-              <button type="button" onClick={() => handleChooseCategory(category)}>
-                Choose
-              </button>
-              <button type="button" onClick={() => handleEditCategory(category)}>
-                Edit
-              </button>
-              <button type="button" onClick={() => dispatch(deleteCategoryThunk(category._id))}>
-                Delete
-              </button>
-            </li>
+          {categories?.map((category, index) => (
+            <ModalItem key={category._id} onClick={() => handleItemClick(index)} isActive={index === activeIndex}>
+              <ModalCategoryText>{category.categoryName}</ModalCategoryText>
+              <ModalButtonWrapper isActive={index === activeIndex}>
+                <ModalListButton type="button" onClick={() => handleChooseCategory(category)}>
+                  <Check1 width={16} height={16} />
+                </ModalListButton>
+                <ModalListButton type="button" onClick={() => handleEditCategory(category)}>
+                  <Pencil width={16} height={16} />
+                </ModalListButton>
+                <ModalListButton type="button" onClick={() => dispatch(deleteCategoryThunk(category._id))}>
+                  <Delete width={16} height={16} />
+                </ModalListButton>
+              </ModalButtonWrapper>
+            </ModalItem>
           ))}
         </ul>
-      </div>
+      </ModalWrapper>
       {isEditing ? (
         <EditCategoriesForm category={selectedCategory} setIsEditing={setIsEditing} />
       ) : (
