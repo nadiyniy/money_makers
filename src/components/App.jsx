@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
 
 import TransactionsHistoryProtectedRoute from 'routes/TransactionsHistoryProtectedRoute';
 import MainTransactionsProtectedRoute from 'routes/MainTransactionsProtectedRoute';
@@ -11,7 +11,6 @@ import PublicRegisterRoute from 'routes/PublicRegisterRoute';
 import { refreshThunk } from 'redux/auth/operations';
 import PageNotFound from 'pages/PageNotFound/PageNotFound';
 import PageLoader from './PageLoader/PageLoader';
-import { selectIsRefreshing } from 'redux/auth/selectors';
 
 export const App = () => {
   const [isLoading, setIsLoading] = useState(true);
