@@ -29,3 +29,31 @@ export { ReactComponent as EyeOffIcon } from './icons/eye-off.svg';
 export { ReactComponent as CheckIcon } from './icons/check.svg';
 export { ReactComponent as CheckCorrectLogin } from './icons/check-correct-login.svg';
 
+
+//export { ReactComponent as Arrow14 } from './icons/Arrow 14.svg';
+//export { ReactComponent as Arrow15 } from './icons/Arrow 15.svg';
+//export { ReactComponent as Close } from './icons/close.svg';
+
+//export { ReactComponent as Calendar } from './icons/calendar.svg';
+//export { ReactComponent as Search } from './icons/search.svg';
+
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';
+// export { ReactComponent as  } from './icons/';

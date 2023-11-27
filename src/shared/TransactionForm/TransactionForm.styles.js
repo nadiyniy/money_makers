@@ -1,12 +1,17 @@
 import styled from 'styled-components';
 
+export const TransactionWrapper = styled.div`
+  @media screen and (min-width: 1280px) {
+    margin-top: 60px;
+  }
+`;
 export const TransactionFormStyle = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
   padding: 28px 20px;
-  max-width: 335px;
+  width: 100%;
   height: 533px;
   background-color: var(--gray-dark-color);
   border-radius: 30px;
@@ -19,9 +24,11 @@ export const TransactionFormStyle = styled.form`
     padding: 109px 40px;
   }
   @media screen and (min-width: 1280px) {
-    max-width: 566px;
+    width: 566px;
     height: 600px;
     padding: 40px 40px;
+    margin: 0;
+    margin-left: 44px;
   }
 `;
 export const ParentInputWrapper = styled.div`
@@ -191,9 +198,9 @@ export const SumInput = styled(OtherInput)`
   &::after {
     content: 'UAH';
     position: absolute;
-    bottom: 0;
-    right: 5px;
-    color: var(--gray-text-40);
+    top: 0;
+    right: 0;
+    background-color: var(--gray-text-40);
     font-size: 14px;
     font-style: normal;
     font-weight: 400;

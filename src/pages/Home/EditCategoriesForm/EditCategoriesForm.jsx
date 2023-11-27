@@ -11,7 +11,7 @@ import { selectError } from 'redux/auth/selectors';
 const EditCategoriesForm = ({ setIsEditing, category }) => {
   const error = useSelector(selectError);
   const dispatch = useDispatch();
-  console.log(category);
+
   const {
     register,
     handleSubmit,
@@ -21,7 +21,7 @@ const EditCategoriesForm = ({ setIsEditing, category }) => {
     resolver: yupResolver(validationCategoryFormSchema),
   });
   const submit = data => {
-    const _id = category.id;
+    const _id = category._id;
     dispatch(updateCategoryThunk({ _id, ...data }));
 
     setIsEditing(false);
