@@ -11,4 +11,5 @@ export const StyledContainer = styled.div`
 `;
 export const StyledContainerUserBtn = styled.div`
   position: relative;
+  width: max-content;
 `;

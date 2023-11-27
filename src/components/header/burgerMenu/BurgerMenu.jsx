@@ -44,12 +44,10 @@ const BurgerMenu = ({ closeBurgerMenu }) => {
             />
           </svg>
         </StyledCloseBurgerBtn>
-        <div>
-          <StyledContainerUserBtn>
-            <UserBarBtn variant="burger" toggleUserPanel={toggleUserPanel} />
-            {isUserPanelOpen && <UserPanel variant="burger" />}
-          </StyledContainerUserBtn>
-        </div>
+        <StyledContainerUserBtn>
+          <UserBarBtn variant="burger" toggleUserPanel={toggleUserPanel} />
+          {isUserPanelOpen && <UserPanel variant="burger" />}
+        </StyledContainerUserBtn>
         <TransactionsHistoryNav variant="burger" />
       </StyledBurgerMenu>
     </ModalBackdrop>
