@@ -1,5 +1,95 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const ErrorSpan = styled.span`
+export const FormWrapper = styled.form`
+  ul {
+    margin-bottom: 80px;
+  }
+`;
+
+export const InputGroup = styled.div`
+  margin-bottom: 20px;
+`;
+
+export const Input = styled.input`
+  width: 100%;
+  height: 42px;
+  padding: 12px 18px;
+
+  background: transparent;
+  border: 1px solid var(--gray-text-20);
+  border-radius: var(--border-radius-12);
+  color: var(--white-color);
+
+  font-size: 16px;
+  line-height: 24px;
+
+  &::placeholder {
+    color: var(--gray-text-40);
+  }
+
+  &:focus {
+    border: 1px solid var(--primary-color);
+    color: var(--white-color);
+  }
+`;
+
+export const SubmitButton = styled.button`
+  cursor: pointer;
+
+  min-width: 138px;
+  padding: 14px 44px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 40px;
+
+  font-size: 14px;
+  letter-spacing: -0.28px;
+
+  white-space: nowrap;
+  transition: background-color 0.2s ease-in-out;
+
+  background: var(--primary-color);
+  color: var(--black-color);
+
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover,
+  &:focus {
+    background-color: var(--primary-hover-color);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    &:hover {
+      background-color: var(--primary-color);
+    }
+  }
+`;
+
+export const NavigationWrapper = styled.div`
+  span {
+    color: var(--gray-text-60);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+`;
+
+export const StyledLink = styled(Link)`
+  color: var(--white-color);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1.5;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const ErrorMessage = styled.p`
   color: var(--error-color);
+  font-size: 10px;
 `;

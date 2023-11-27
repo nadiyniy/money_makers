@@ -1,11 +1,16 @@
-import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ErrorSpan } from './AuthForm.styled';
-
-// const mockToastError = () => undefined;
+import {
+  ErrorMessage,
+  FormWrapper,
+  Input,
+  InputGroup,
+  NavigationWrapper,
+  StyledLink,
+  SubmitButton,
+} from './AuthForm.styled';
 
 const AuthForm = ({
   fieldsData,
@@ -26,41 +31,33 @@ const AuthForm = ({
   const { isDirty } = formState;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+    <FormWrapper onSubmit={handleSubmit(onSubmit)} noValidate>
       {fieldsData.map(field => (
-        <div key={field.name}>
-          <input
+        <InputGroup key={field.name}>
+          <Input
             {...register(field.name)}
             type={field.type}
             placeholder={field.label}
             autoComplete={field.type === 'email' ? 'email' : 'current-password'}
           />
-          {
-            formState.errors[field.name] &&
-              (!toast.error(formState.errors[field.name].message) ? (
-                <ErrorSpan>{formState.errors[field.name].message}</ErrorSpan>
-              ) : null)
-
-            // (!mockToastError() ? (
-            //   <ErrorSpan>{formState.errors[field.name].message}</ErrorSpan>
-            // ) : null)
-          }
-        </div>
+          {formState.errors[field.name] &&
+            (!toast.error(formState.errors[field.name].message) ? (
+              <ErrorMessage>{formState.errors[field.name].message}</ErrorMessage>
+            ) : null)}
+        </InputGroup>
       ))}
 
-      <button type="submit" disabled={!isDirty}>
+      <SubmitButton type="submit" disabled={!isDirty}>
         {submitButtonText}
-      </button>
+      </SubmitButton>
 
       {navigationData && (
-        <div>
-          <div>
-            {navigationData.text}
-            <Link to={linkTo}>{navigationData.buttonText}</Link>
-          </div>
-        </div>
+        <NavigationWrapper>
+          <span>{navigationData.text} </span>
+          <StyledLink to={linkTo}>{navigationData.buttonText}</StyledLink>
+        </NavigationWrapper>
       )}
-    </form>
+    </FormWrapper>
   );
 };
 
