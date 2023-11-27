@@ -1,4 +1,4 @@
-import WelcomePage from 'pages/Auth/WelcomePage';
+import WelcomePage from 'pages/Auth/WelcomePage/WelcomePage';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router';

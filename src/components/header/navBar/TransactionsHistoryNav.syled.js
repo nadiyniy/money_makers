@@ -6,16 +6,19 @@ export const StyledListTransactions = styled.nav`
   align-items: ${props => (props.variant === 'burger' ? 'center' : 'start')};
   flex-direction: ${props => (props.variant === 'burger' ? 'column' : 'row')};
   margin-top: ${props => (props.variant === 'burger' ? '300px' : '0')};
+  &.burger {
+  }
 
   @media (max-width: 768px) {
     display: ${props => (props.variant === 'burger' ? 'flex' : 'none')};
+    &.default {
+    }
   }
 
   a {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 125px;
     padding: 12px 21px;
     border-radius: var(--border-radius-30);
     border: ${props =>

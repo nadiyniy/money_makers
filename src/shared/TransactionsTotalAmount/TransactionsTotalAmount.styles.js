@@ -6,6 +6,7 @@ export const TotalAmountWrapper = styled.div`
   gap: 12px;
   margin-bottom: 40px;
 
+
   @media screen and (min-width: 768px) {
     max-width: 704px;
     flex-direction: row;
@@ -14,6 +15,7 @@ export const TotalAmountWrapper = styled.div`
   @media screen and (min-width: 1280px) {
     max-width: 630px;
     height: 121px;
+    margin-top: 59px;
   }
 `;
 export const AmountWrapper = styled.div`
@@ -30,7 +32,7 @@ export const AmountWrapper = styled.div`
     padding: 32px 23px;
   }
   @media screen and (min-width: 1280px) {
-    width: 300px;
+    width: 303px;
   }
 `;
 export const AmountTitle = styled.h3`

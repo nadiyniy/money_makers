@@ -3,7 +3,7 @@ import { currentInfoUserThunk, deleteAvatarThunk, updateAvatarThunk, updateInfoU
 
 const initialState = {
   user: {},
-  loading: false,
+  isLoading: false,
   error: null,
 };
 
@@ -14,20 +14,20 @@ const userSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(currentInfoUserThunk.fulfilled, (state, { payload }) => {
-        state.loading = false;
+        state.isLoading = false;
         state.user = payload;
       })
       .addCase(updateInfoUserThunk.fulfilled, (state, { payload }) => {
-        state.loading = false;
+        state.isLoading = false;
         state.user.name = payload.name;
         state.user.currency = payload.currency;
       })
       .addCase(updateAvatarThunk.fulfilled, (state, { payload }) => {
-        state.loading = false;
+        state.isLoading = false;
         state.user.avatarUrl = payload.avatarUrl;
       })
       .addCase(deleteAvatarThunk.fulfilled, (state, { payload }) => {
-        state.loading = false;
+        state.isLoading = false;
         state.user.avatarUrl = null;
       })
       .addMatcher(
@@ -38,7 +38,7 @@ const userSlice = createSlice({
           deleteAvatarThunk.pending
         ),
         (state, { payload }) => {
-          state.loading = true;
+          state.isLoading = true;
         }
       )
       .addMatcher(
@@ -49,7 +49,7 @@ const userSlice = createSlice({
           deleteAvatarThunk.rejected
         ),
         (state, { payload }) => {
-          state.loading = false;
+          state.isLoading = false;
           state.error = payload;
         }
       );

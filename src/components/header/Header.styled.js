@@ -7,7 +7,10 @@ export const StyledHeader = styled.header`
 export const StyledContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: ${({ isLoggedIn }) => (isLoggedIn ? 'space-between' : 'center')};
+  justify-content: center;
+  &.auth-user {
+    justify-content: space-between;
+  }
 `;
 export const StyledContainerUserBtn = styled.div`
   position: relative;

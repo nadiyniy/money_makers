@@ -1,4 +1,4 @@
-import RegisterPage from 'pages/Auth/RegisterPage';
+import RegisterPage from 'pages/Auth/RegisterPage/RegisterPage';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router';
