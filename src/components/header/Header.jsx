@@ -16,28 +16,22 @@ const Header = () => {
   const toggleUserPanel = () => {
     setIsUserPanelOpen(!isUserPanelOpen);
   };
-  if (!isLoggedIn) {
-    return (
-      <StyledHeader>
-        <StyledCommonWrapper>
-          <StyledContainer className={isLoggedIn ? 'auth-user' : ''}>
-            <Logo />
-          </StyledContainer>
-        </StyledCommonWrapper>
-      </StyledHeader>
-    );
-  }
+
   return (
     <StyledHeader>
       <StyledCommonWrapper>
         <StyledContainer className={isLoggedIn ? 'auth-user' : ''}>
-          <Logo />
-          <TransactionsHistoryNav />
-          <StyledContainerUserBtn>
-            <UserBarBtn toggleUserPanel={toggleUserPanel} />
-            {isUserPanelOpen && <UserPanel />}
-          </StyledContainerUserBtn>
-          <BurgerMenuBtn />
+          <Logo isLoggedIn={isLoggedIn} />
+          {isLoggedIn && (
+            <>
+              <TransactionsHistoryNav />
+              <StyledContainerUserBtn>
+                <UserBarBtn toggleUserPanel={toggleUserPanel} />
+                {isUserPanelOpen && <UserPanel />}
+              </StyledContainerUserBtn>
+              <BurgerMenuBtn />
+            </>
+          )}
         </StyledContainer>
       </StyledCommonWrapper>
     </StyledHeader>
