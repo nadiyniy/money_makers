@@ -10,6 +10,7 @@ import { persistor, store } from 'redux/store';
 
 import './variables.css';
 import './index.css';
+import './pages/TransactionsHistory/DatePicker.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter basename="/money_makers">

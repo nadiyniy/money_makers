@@ -18,12 +18,15 @@ export const StyledListTransactions = styled.nav`
     width: 125px;
     padding: 12px 21px;
     border-radius: var(--border-radius-30);
-    border: 1px solid var(--gray-text-40);
-    color: #fafafa;
+    border: ${props =>
+      props.variant === 'burger' ? '1px solid var(--gray-avatar-40)' : '1px solid var(--gray-text-40)'};
+    color: ${props => (props.variant === 'burger' ? 'var(--black-color)' : 'var(--white-color)')};
 
     letter-spacing: -0.02em;
     &.active {
-      background-color: var(--primary-color);
+      border: none;
+      color: ${props => (props.variant === 'burger' ? 'var(--white-color)' : 'var(--black-color)')};
+      background-color: ${props => (props.variant === 'burger' ? 'var(--black-color)' : 'var(--primary-color)')};
     }
   }
 `;
