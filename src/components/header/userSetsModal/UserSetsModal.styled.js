@@ -169,6 +169,7 @@ export const StyledCurrencies = styled.div`
   border: 1px solid var(--gray-text-40);
 
   .currencies-list {
+    font-size: 16px;
     padding: 12px 18px;
     position: absolute;
     bottom: -4px;
