@@ -19,7 +19,6 @@ export const StyledListTransactions = styled.nav`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 125px;
     padding: 12px 21px;
     border-radius: var(--border-radius-30);
     border: ${props =>
