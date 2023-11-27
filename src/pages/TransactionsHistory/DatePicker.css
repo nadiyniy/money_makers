@@ -6,7 +6,7 @@
 
 :focus {
   outline: none;
-  margin-left: auto;
+  /* margin-left: auto; */
 }
 
 .react-datepicker__input-time-container {
