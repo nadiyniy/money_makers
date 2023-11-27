@@ -4,11 +4,23 @@ import styled from 'styled-components';
 export const FormWrapper = styled.form`
   ul {
     margin-bottom: 80px;
+
+    @media screen and (min-width: 1280px) {
+      margin-bottom: 60px;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    max-width: 399px;
   }
 `;
 
 export const InputGroup = styled.div`
   margin-bottom: 20px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 24px;
+  }
 `;
 
 export const Input = styled.input`
@@ -32,6 +44,10 @@ export const Input = styled.input`
     border: 1px solid var(--primary-color);
     color: var(--white-color);
   }
+
+  @media screen and (min-width: 768px) {
+    height: 42px;
+  }
 `;
 
 export const SubmitButton = styled.button`
@@ -44,7 +60,7 @@ export const SubmitButton = styled.button`
   border-radius: 40px;
 
   font-size: 14px;
-  letter-spacing: -0.28px;
+  letter-spacing: -0.02em;
 
   white-space: nowrap;
   transition: background-color 0.2s ease-in-out;
@@ -64,6 +80,11 @@ export const SubmitButton = styled.button`
     &:hover {
       background-color: var(--primary-color);
     }
+  }
+
+  @media screen and (min-width: 768px) {
+    min-width: 145px;
+    font-size: 16px;
   }
 `;
 

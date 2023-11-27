@@ -5,6 +5,10 @@ export const RegisterWrapper = styled.div`
   flex-direction: column;
 
   margin-top: 110px;
+
+  @media screen and (min-width: 768px) {
+    min-width: 172px;
+  }
 `;
 
 export const Title = styled.h1`
@@ -14,6 +18,10 @@ export const Title = styled.h1`
   font-size: 32px;
   font-weight: 400;
   letter-spacing: -0.02rem;
+
+  @media screen and (min-width: 768px) {
+    font-size: 56px;
+  }
 `;
 
 export const Description = styled.p`
@@ -23,4 +31,7 @@ export const Description = styled.p`
 
   font-size: 14px;
   /* letter-spacing: -0.28px; */
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+  }
 `;
