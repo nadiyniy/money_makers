@@ -25,7 +25,6 @@ const CategoriesModalList = ({ closeModal, categories, setchooseCategory, setTak
   const [isEditing, setIsEditing] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
-  console.log(location.pathname);
 
   const handleChooseCategory = category => {
     setTakeCategoryId(category._id);

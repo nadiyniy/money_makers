@@ -8,6 +8,7 @@ import { addedCategoryThunk } from 'redux/category/operations';
 import { validationCategoryFormSchema } from 'shared/validationSchema/validationSchema';
 import { selectError } from 'redux/auth/selectors';
 import { useParams } from 'react-router-dom';
+import { NewCategoriesButton, NewCategoriesInput, NewLabel } from './NewCategoriesForm.styled';
 
 const NewCategoriesForm = () => {
   const error = useSelector(selectError);
@@ -31,12 +32,12 @@ const NewCategoriesForm = () => {
   };
   return (
     <div>
-      <form onSubmit={handleSubmit(submit)}>
-        <label htmlFor="add">New Category</label>
-        <input id="add" type="text" placeholder="Enter the text" {...register('categoryName')} />
+      <NewCategoriesForm onSubmit={handleSubmit(submit)}>
+        <NewLabel htmlFor="add">New Category</NewLabel>
+        <NewCategoriesInput id="add" type="text" placeholder="Enter the text" {...register('categoryName')} />
         <p>{errors.categoryName?.message}</p>
-        <button type="submit">Add</button>
-      </form>
+        <NewCategoriesButton type="submit">Add</NewCategoriesButton>
+      </NewCategoriesForm>
     </div>
   );
 };
