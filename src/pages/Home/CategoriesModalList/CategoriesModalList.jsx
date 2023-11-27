@@ -14,6 +14,7 @@ import {
   ModalListSecondTitle,
   ModalListTitle,
   ModalListWrapper,
+  ModalScrollbar,
   ModalWrapper,
 } from './CategoriesModalList.styled';
 import { Close } from 'components/svgs';
@@ -47,7 +48,7 @@ const CategoriesModalList = ({ closeModal, categories, setchooseCategory, setTak
       <ModalListTitle>{categories[0].type[0].toUpperCase() + categories[0].type.slice(1)}</ModalListTitle>
       <ModalListSecondTitle>All Category</ModalListSecondTitle>
       <ModalWrapper>
-        <ul>
+        <ModalScrollbar>
           {categories?.map((category, index) => (
             <ModalItem key={category._id} onClick={() => handleItemClick(index)} isActive={index === activeIndex}>
               <ModalCategoryText>{category.categoryName}</ModalCategoryText>
@@ -64,7 +65,7 @@ const CategoriesModalList = ({ closeModal, categories, setchooseCategory, setTak
               </ModalButtonWrapper>
             </ModalItem>
           ))}
-        </ul>
+        </ModalScrollbar>
       </ModalWrapper>
       {isEditing ? (
         <EditCategoriesForm category={selectedCategory} setIsEditing={setIsEditing} />
