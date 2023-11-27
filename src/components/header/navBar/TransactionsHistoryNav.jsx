@@ -4,7 +4,7 @@ import { StyledListTransactions } from './TransactionsHistoryNav.syled';
 
 const TransactionsHistoryNav = ({ variant }) => {
   return (
-    <StyledListTransactions variant={variant}>
+    <StyledListTransactions className={variant}>
       <NavLink to="/transactions/history/expense">All Expense</NavLink>
       <NavLink to="/transactions/history/income">All Income</NavLink>
     </StyledListTransactions>

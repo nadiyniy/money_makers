@@ -167,17 +167,17 @@ export const StyledCurrencies = styled.div`
   line-height: 1.5;
   border-radius: 12px;
   border: 1px solid var(--gray-text-40);
+  display: flex;
+  gap: 4px;
   .currencies-list {
     padding: 12px 18px;
-
     position: absolute;
-    bottom: 0;
+    bottom: -4px;
     left: 0;
+    width: 100%;
     transform: translateY(100%);
-
     border-radius: var(--border-radius-15);
     border: 1px solid var(--gray-text-10);
-
     background: #0c0d0d;
   }
   .currencies-active {
