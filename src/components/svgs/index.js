@@ -11,10 +11,10 @@ export { ReactComponent as Close } from './icons/close.svg';
 export { ReactComponent as Calendar } from './icons/calendar.svg';
 export { ReactComponent as Search } from './icons/search.svg';
 
-// export { ReactComponent as  } from './icons/';
-// export { ReactComponent as  } from './icons/';
+export { ReactComponent as Pencil } from './icons/pencil.svg';
+export { ReactComponent as Delete } from './icons/delete.svg';
 
-// export { ReactComponent as  } from './icons/';
+export { ReactComponent as Check1 } from './icons/check(1).svg';
 // export { ReactComponent as  } from './icons/';
 // export { ReactComponent as  } from './icons/';
 // export { ReactComponent as  } from './icons/';
