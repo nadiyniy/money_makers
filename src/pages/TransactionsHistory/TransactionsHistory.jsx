@@ -20,7 +20,6 @@ import {
   StyledTableBody,
   StyledTableHead,
   StyledTableName,
-  StyledTableWrapper,
   Text,
   Title,
 } from './TransactionsHistoryStyled';
