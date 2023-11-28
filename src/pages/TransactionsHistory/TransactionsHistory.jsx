@@ -35,8 +35,12 @@ import { Calendar, Search, TrPencil, TrTrash } from 'components/svgs';
 const TransactionsHistoryPage = () => {
   const dispatch = useDispatch();
   const { transactionsType } = useParams();
+  console.log({ transactionsType });
+  //======
+  const date = '2022-12-28';
+
   useEffect(() => {
-    dispatch(fetchTransactionsThunk(transactionsType));
+    dispatch(fetchTransactionsThunk(transactionsType, date));
   }, [dispatch, transactionsType]);
 
   const [startDate, setStartDate] = useState(new Date());
