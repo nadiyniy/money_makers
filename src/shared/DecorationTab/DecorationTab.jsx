@@ -1,12 +1,12 @@
 import React from 'react';
 import { Amount, Flex, IconWrapper, Percent, StyledDecorationTab, Text } from './DecorationTab.styled';
-import { ArrowRightUpIcon } from 'components/svgs';
+import { ArrowUpRight } from 'components/svgs';
 
 const DecorationTab = () => {
   return (
     <StyledDecorationTab>
       <IconWrapper>
-        <ArrowRightUpIcon />
+        <ArrowUpRight />
       </IconWrapper>
       <div>
         <Text>Your balance</Text>

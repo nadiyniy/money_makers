@@ -24,7 +24,7 @@ import {
   Title,
 } from './TransactionsHistoryStyled';
 import { StyledCommonWrapper } from 'styles/Common.styled';
-import { Calendar, Search } from 'components/svgs';
+import { CalendarIcon, SearchIcon } from 'components/svgs';
 
 const TransactionsHistoryPage = () => {
   // const transactions = useSelector(selectTransactions);
@@ -49,7 +49,7 @@ const TransactionsHistoryPage = () => {
         <StyledForm>
           <Input type="text" placeholder="Search for anything..." />
           <Button>
-            <Search />
+            <SearchIcon />
           </Button>
         </StyledForm>
         <StyledFormWrapper>
@@ -60,7 +60,7 @@ const TransactionsHistoryPage = () => {
             onChange={date => setStartDate(date)}
           />
           <Button>
-            <Calendar />
+            <CalendarIcon />
           </Button>
         </StyledFormWrapper>
 

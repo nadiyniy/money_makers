@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+import DonutChart from '../Doughnut/Doughnut';
+import {
+  DonutWrapper,
+  Title,
+} from '../Doughnut/Doughnut.styles';
+// import ColorLegend from '../ColorLegend/ColorLegend';
 
 const TransactionsTotalAmount = () => {
   //отримуємо значення expensesAmount та incomeAmount з бекенду
@@ -15,6 +21,14 @@ const TransactionsTotalAmount = () => {
         <h3>Total Expense</h3>
         <p>{incomeAmount}</p>
       </div>
+      <div>
+        <DonutWrapper>
+          <Title>Expenses categories</Title>
+          <DonutChart />
+          {/* <ColorLegend /> */}
+        </DonutWrapper>
+    </div>
+
     </div>
   );
 };

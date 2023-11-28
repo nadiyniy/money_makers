@@ -8,8 +8,8 @@ export { ReactComponent as CloseErrorLogin } from './icons/close-error-login.svg
 
 export { ReactComponent as ArrowUpRight } from './icons/arrow-up-right.svg';
 export { ReactComponent as ArrowDownLeft } from './icons/arrow-down-left.svg';
-export { ReactComponent as ArrowUpCurrency } from './icons/arrow-up_currency.svg';
-export { ReactComponent as ArrowDownCarrency } from './icons/arrow-down_carrency.svg';
+export { ReactComponent as ArrowUpCurrency } from './icons/arrow-up-currency.svg';
+export { ReactComponent as ArrowDownCarrency } from './icons/arrow-down-carrency.svg';
 export { ReactComponent as ArrowUpColor } from './icons/arrow-up.svg';
 export { ReactComponent as ArrowDownColor } from './icons/arrow-down.svg';
 
