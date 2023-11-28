@@ -30,6 +30,11 @@ export const InputGroup = styled.div`
   }
 `;
 
+export const InputContainer = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
 export const Input = styled.input`
   width: 100%;
   height: 42px;
@@ -52,9 +57,21 @@ export const Input = styled.input`
     color: var(--white-color);
   }
 
+  &.error {
+    border: 1px solid var(--error-color);
+  }
+
   @media screen and (min-width: 768px) {
     height: 42px;
   }
+`;
+
+export const IconContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 14px;
+  cursor: pointer;
 `;
 
 export const SubmitButton = styled.button`
@@ -62,7 +79,6 @@ export const SubmitButton = styled.button`
 
   min-width: 138px;
   padding: 14px 44px;
-  /* margin-top: 135px; */
   margin-bottom: 20px;
   border: none;
   border-radius: 40px;

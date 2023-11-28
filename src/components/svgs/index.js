@@ -19,6 +19,12 @@ export { ReactComponent as LogoIcon } from './icons/logo-icon.svg';
 
 export { ReactComponent as CloseBurgerIcon } from './icons/close-modal.svg';
 export { ReactComponent as UserBarArrowIcon } from './icons/arrow-up.svg';
+
+export { ReactComponent as Eye } from './icons/eye.svg';
+export { ReactComponent as EyeOff } from './icons/eye-off.svg';
+export { ReactComponent as Error } from './icons/error.svg';
+
+
 // export { ReactComponent as  } from './icons/';
 // export { ReactComponent as  } from './icons/';
 // export { ReactComponent as  } from './icons/';
