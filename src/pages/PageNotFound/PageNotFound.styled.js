@@ -1,5 +1,3 @@
-
-
 import styled from 'styled-components';
 import backgroundImage from '../../images/4044-page.png';
 
@@ -12,6 +10,7 @@ export const StyledBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 0 20px; // Padding to ensure content doesn't touch the edges on smaller screens
 `;
 
 export const StyledTitle = styled.h1`
@@ -19,6 +18,19 @@ export const StyledTitle = styled.h1`
   font-family: 'Your Futuristic Font', sans-serif;
   text-transform: uppercase;
   margin-bottom: 1rem;
+  font-size: 2.5rem; // Default font size
+
+  @media (max-width: 1440px) {
+    font-size: 2rem; // Smaller font size for smaller screens
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem; // Even smaller font size for tablet screens
+  }
+
+  @media (max-width: 375px) {
+    font-size: 1.2rem; // Smaller font size for mobile screens
+  }
 `;
 
 export const StyledButton = styled.button`
@@ -32,14 +44,25 @@ export const StyledButton = styled.button`
   text-transform: uppercase;
   box-shadow: 0 0 10px #8cffa0; // Neon glow effect
   transition: all 0.3s ease;
-  margin-left: auto;
-   margin-right: auto;
+  font-size: 1rem; // Default font size for buttons
 
   &:hover {
     background-color: #242424; // A slightly lighter shade on hover
     box-shadow: 0 0 20px #8cffa0; // Increase glow effect on hover
   }
+
+  @media (max-width: 1440px) {
+    padding: 0.4rem 0.9rem; // Slightly smaller padding
+    font-size: 0.9rem; // Slightly smaller font size
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.3rem 0.8rem; // Even smaller padding for tablet screens
+    font-size: 0.8rem; // Smaller font size for tablet screens
+  }
+
+  @media (max-width: 375px) {
+    padding: 0.2rem 0.7rem; // Smaller padding for mobile screens
+    font-size: 0.7rem; // Smaller font size for mobile screens
+  }
 `;
-
-
-
