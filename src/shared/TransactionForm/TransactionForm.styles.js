@@ -271,16 +271,15 @@ export const TwoLabel = styled.label`
   letter-spacing: -0.28px;
   margin-bottom: 20px;
   position: relative;
-
-  &::after {
-    content: 'UAH';
-    position: absolute;
-    top: 40px;
-    right: 18px;
-    color: var(--gray-text-40);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.28;
-  }
+`;
+export const Currency = styled.span`
+  content: '';
+  position: absolute;
+  top: 40px;
+  right: 18px;
+  color: var(--gray-text-40);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.28;
 `;

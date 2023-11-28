@@ -15,20 +15,6 @@ const slice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-      .addCase(addedCategoryThunk.fulfilled, (state, { payload }) => {
-        if (payload.type === 'incomes') {
-          state.categories.incomes.push(payload);
-        } else {
-          state.categories.expenses.push(payload);
-        }
-      })
-      .addCase(deleteCategoryThunk.fulfilled, (state, { payload }) => {
-        if (payload.type === 'incomes') {
-          state.categories.incomes = state.categories.incomes.filter(category => category.id !== payload.id);
-        } else {
-          state.categories.expenses = state.categories.expenses.filter(category => category.id !== payload.id);
-        }
-      })
       .addCase(updateCategoryThunk.fulfilled, (state, { payload }) => {
         const { _id, categoryName } = payload;
 
@@ -42,7 +28,8 @@ const slice = createSlice({
         }
       })
       .addCase(fetchCategoriesThunk.fulfilled, (state, { payload }) => {
-        state.categories = payload;
+        state.categories.expenses = payload?.expenses;
+        state.categories.incomes = payload?.incomes;
       })
       .addMatcher(
         isAnyOf(

@@ -15,10 +15,3 @@ export const validationSchema = yup.object({
 export const validationCategoryFormSchema = yup.object({
   categoryName: yup.string().min(3, 'Category must contain at least 3 symbols').required(),
 });
-
-export const validationTransactionFormSchema = yup.object({
-  date: yup.string().required(),
-  time: yup.string().required(),
-  category: yup.string().required(),
-  sum: yup.string().required(),
-});

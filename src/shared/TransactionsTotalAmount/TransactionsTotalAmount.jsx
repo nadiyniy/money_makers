@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   AmountButton,
   AmountText,
@@ -7,29 +7,47 @@ import {
   TotalAmountWrapper,
 } from './TransactionsTotalAmount.styles';
 import { Arrow14, Arrow15 } from '../../components/svgs';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCurrentUser } from 'redux/user/selectors';
+import { currentInfoUserThunk } from 'redux/user/operations';
 const TransactionsTotalAmount = () => {
-  //отримуємо значення expensesAmount та incomeAmount з бекенду
-  //логіка середнього статистичного?
-  const [incomeAmount] = useState(null);
-  const [expensesAmount] = useState(null);
+  const currentUser = useSelector(selectCurrentUser);
+  const dispatch = useDispatch();
+
+  console.log(currentUser);
+
+  useEffect(() => {
+    dispatch(currentInfoUserThunk());
+  }, [dispatch]);
+
   return (
     <TotalAmountWrapper>
-      <AmountWrapper type="expenses" title="Expenses">
+      <AmountWrapper>
         <AmountButton>
           <Arrow15 />
         </AmountButton>
         <div>
           <AmountTitle>Total Income</AmountTitle>
-          <AmountText>$632.000{expensesAmount}</AmountText>
+          {currentUser.transactionsTotal && (
+            <AmountText>
+              {currentUser.currency.toUpperCase()}
+              {currentUser.transactionsTotal.incomes?.toFixed(3)}
+            </AmountText>
+          )}
         </div>
       </AmountWrapper>
-      <AmountWrapper type="income" title="Income">
+      <AmountWrapper>
         <AmountButton>
           <Arrow14 />
         </AmountButton>
         <div>
           <AmountTitle>Total Expense</AmountTitle>
-          <AmountText>$632.000{incomeAmount}</AmountText>
+          {currentUser.transactionsTotal && (
+            <AmountText>
+              {currentUser.currency.toUpperCase()}
+              {currentUser.transactionsTotal.expenses?.toFixed(3)}
+            </AmountText>
+          )}
         </div>
       </AmountWrapper>
     </TotalAmountWrapper>
