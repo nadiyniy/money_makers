@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/money_makers/static/css/main.30e3a371.css",
-    "main.js": "/money_makers/static/js/main.05db3692.js",
+    "main.js": "/money_makers/static/js/main.8ba32a20.js",
     "static/media/4044-page.png": "/money_makers/static/media/4044-page.ea8edbd76f4b9c5f3360.png",
     "static/media/img-1_desk@2x.jpg": "/money_makers/static/media/img-1_desk@2x.2a6784d6e404e8100441.jpg",
     "static/media/img-1_tab@2x.jpg": "/money_makers/static/media/img-1_tab@2x.f38ba292d08cab3bc000.jpg",
@@ -16,14 +16,17 @@
     "static/media/img-2_desk@2x.png": "/money_makers/static/media/img-2_desk@2x.b753323b6111bab4680c.png",
     "static/media/user-avatar.svg": "/money_makers/static/media/user-avatar.1613dd3554ca6503c85f76857c051807.svg",
     "static/media/logo-icon.svg": "/money_makers/static/media/logo-icon.8b8db1ffdd21a19d53e9110740dfe2fa.svg",
+    "static/media/eye-off.svg": "/money_makers/static/media/eye-off.b1108d4c0804104e160eb5598364a812.svg",
     "static/media/delete.svg": "/money_makers/static/media/delete.547666f82169ab68cea0d95d41bc2f8b.svg",
     "static/media/trash-2.svg": "/money_makers/static/media/trash-2.d2607e5f313f17470b99ddfb41e97d4d.svg",
     "index.html": "/money_makers/index.html",
     "static/media/calendar (1).svg": "/money_makers/static/media/calendar (1).fe89359b535fc3d348480568a5368fa4.svg",
     "static/media/calendar.svg": "/money_makers/static/media/calendar.c856daf349d3542bd46899968b5ed485.svg",
     "static/media/edit-2.svg": "/money_makers/static/media/edit-2.6c7cf7e592d213b8e1549309301d0727.svg",
+    "static/media/error.svg": "/money_makers/static/media/error.9dffa3c548a425b2581fb25922c3c0aa.svg",
     "static/media/pencil.svg": "/money_makers/static/media/pencil.1e473d99518067d47b56dd6580d48d8c.svg",
     "static/media/clock.svg": "/money_makers/static/media/clock.9fd222010a8db4bff02abe2d8f45c1d6.svg",
+    "static/media/eye.svg": "/money_makers/static/media/eye.8c1bb9756ec8641cb35e9fabade865af.svg",
     "static/media/Arrow 15.svg": "/money_makers/static/media/Arrow 15.b95624a926dbb0ec6e848d7fc88ece95.svg",
     "static/media/Arrow 14.svg": "/money_makers/static/media/Arrow 14.d2e03ecb70c0a16c635d6b6bbcebfbdd.svg",
     "static/media/search.svg": "/money_makers/static/media/search.04a7f16ea0b4cb60f1f4e5f0c1d07b10.svg",
@@ -34,10 +37,10 @@
     "static/media/arrow-down_currency.svg": "/money_makers/static/media/arrow-down_currency.2fb62ac77d027fa8acff4480dd1ae02a.svg",
     "static/media/arrow-up.svg": "/money_makers/static/media/arrow-up.97dc0ed2b2fcdfd9de6cc3a4e8820713.svg",
     "main.30e3a371.css.map": "/money_makers/static/css/main.30e3a371.css.map",
-    "main.05db3692.js.map": "/money_makers/static/js/main.05db3692.js.map"
+    "main.8ba32a20.js.map": "/money_makers/static/js/main.8ba32a20.js.map"
   },
   "entrypoints": [
     "static/css/main.30e3a371.css",
-    "static/js/main.05db3692.js"
+    "static/js/main.8ba32a20.js"
   ]
 }
