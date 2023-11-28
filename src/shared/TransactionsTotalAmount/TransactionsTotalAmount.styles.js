@@ -8,7 +8,7 @@ export const TotalAmountWrapper = styled.div`
 
 
   @media screen and (min-width: 768px) {
-    max-width: 500px;
+    max-width: 704px;
     flex-direction: row;
     gap: 24px;
   }

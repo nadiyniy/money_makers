@@ -11,7 +11,7 @@ export const addedCategoryThunk = createAsyncThunk('addedCategory', async (body,
     });
 
     setToken(data.accessToken);
-    console.log(data.accessToken);
+
     return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
@@ -36,7 +36,7 @@ export const deleteCategoryThunk = createAsyncThunk('deleteCategoryById', async 
 export const updateCategoryThunk = createAsyncThunk('updateCategoryById', async ({ _id, categoryName }, thunkApi) => {
   try {
     const savedToken = thunkApi.getState().auth.accessToken;
-    console.log(savedToken);
+
     const { data } = await instance.patch(`categories/${_id}`, categoryName, {
       headers: {
         Authorization: `Bearer ${savedToken}`,
