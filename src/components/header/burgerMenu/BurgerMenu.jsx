@@ -7,7 +7,6 @@ import { ModalBackdrop, StyledBurgerMenu, StyledCloseBurgerBtn } from './BurgerM
 import { CloseBurgerIcon } from 'components/svgs';
 import ReactDOM from 'react-dom';
 const modalRoot = document.querySelector('#modal');
-console.log(modalRoot);
 const BurgerMenu = ({ closeBurgerMenu }) => {
   const [isUserPanelOpen, setIsUserPanelOpen] = useState(false);
 
