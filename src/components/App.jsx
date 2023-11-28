@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import TransactionsHistoryProtectedRoute from 'routes/TransactionsHistoryProtectedRoute';
 import MainTransactionsProtectedRoute from 'routes/MainTransactionsProtectedRoute';
-import { Layout } from './Layout';
+import { Layout } from './Layout/Layout';
 import PublicWelcomeRoute from 'routes/PublicWelcomeRoute';
 import PublicLoginRoute from 'routes/PublicLoginRoute';
 import PublicRegisterRoute from 'routes/PublicRegisterRoute';

@@ -1,10 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { loginThunk } from 'redux/auth/operations';
-import AuthForm from 'shared/AuthForm/AuthForm';
-import { validationSchemaLogin } from 'shared/validationSchema/validationSchema';
-import { StyledCommonWrapper } from 'styles/Common.styled';
-import { Description, Title, Wrapper } from '../RegisterPage/RegisterPage.styled';
+import AuthForm from 'pages/Auth/AuthForm/AuthForm';
+import { validationSchema } from 'shared/validationSchema/validationSchema';
+import { Description, StyledAuthWrapper, Title } from '../commonAuthStyles';
+
 
 const fieldsData = [
   { name: 'email', label: 'Email', type: 'email' },
@@ -26,8 +26,7 @@ const LoginPage = () => {
   };
 
   return (
-    <StyledCommonWrapper>
-      <Wrapper>
+    <StyledAuthWrapper>
         <Title>Sign In</Title>
         <Description>Welcome back to effortless expense tracking! Your financial dashboard awaits.</Description>
 
@@ -40,8 +39,7 @@ const LoginPage = () => {
           navigationData={navigationData}
           authType="login"
         />
-      </Wrapper>
-    </StyledCommonWrapper>
+    </StyledAuthWrapper>
   );
 };
 
