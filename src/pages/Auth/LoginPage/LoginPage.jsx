@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { loginThunk } from 'redux/auth/operations';
 import AuthForm from 'shared/AuthForm/AuthForm';
-import { validationSchema } from 'shared/validationSchema/validationSchema';
+import { validationSchemaLogin } from 'shared/validationSchema/validationSchema';
 import { StyledCommonWrapper } from 'styles/Common.styled';
 import { Description, Title, Wrapper } from '../RegisterPage/RegisterPage.styled';
 
@@ -35,7 +35,7 @@ const LoginPage = () => {
           fieldsData={fieldsData}
           submitButtonText="Sign In"
           initialState={{ email: '', password: '' }}
-          validationSchema={validationSchema}
+          validationSchema={validationSchemaLogin}
           onSubmit={onSubmit}
           navigationData={navigationData}
           authType="login"
