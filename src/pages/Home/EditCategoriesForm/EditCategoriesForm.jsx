@@ -22,7 +22,6 @@ const EditCategoriesForm = ({ setIsEditing, category }) => {
   const categories = useSelector(selectCategories);
   const error = useSelector(selectError);
   const dispatch = useDispatch();
-  console.log(category);
   const {
     register,
     handleSubmit,

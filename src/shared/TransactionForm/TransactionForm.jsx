@@ -72,7 +72,6 @@ const TransactionForm = ({ transactionsType, setRender }) => {
         time: time.toISOString().slice(11, 16),
         type,
       };
-      console.log(formData);
       await dispatch(createUserTransactionThunk(formData)).unwrap();
     } catch (error) {
       toast.error('Sorry, registration failed, please added all field to transaction form');
