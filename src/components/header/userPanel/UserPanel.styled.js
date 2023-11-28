@@ -7,7 +7,6 @@ export const StyledModalLink = styled.div`
   width: 100%;
   padding: 18px 16px;
   display: flex;
-
   flex-direction: column;
   gap: 12px;
   border-radius: var(--border-radius-15);
@@ -22,12 +21,16 @@ export const StyledModalLink = styled.div`
   }
   button {
     cursor: pointer;
-    color: rgba(250, 250, 250, 0.5);
+    color: var(--gray-text-50);
     background-color: transparent;
     border: none;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    &:hover,
+    &:focus {
+      color: var(--white-color);
+    }
   }
 `;

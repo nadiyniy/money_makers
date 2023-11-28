@@ -6,6 +6,11 @@ export const StyledLogo = styled.div`
     justify-content: center;
     align-items: center;
     gap: 8px;
+    transition: var(--transition);
+    &:hover .logo-icon-svg,
+    &:focus .logo-icon-svg {
+      transform: rotate(50deg);
+    }
     p {
       color: #fafafa;
       font-size: 20px;

@@ -31,13 +31,17 @@ export const StyledConfirmBtn = styled.div`
   display: flex;
   gap: 8px;
   button {
+    transition: var(--transition);
     &:nth-child(1) {
       background: var(--primary-color);
       color: var(--black-color);
+      &:hover,
+      &:focus {
+        background-color: var(--primary-hover-color);
+      }
     }
     width: 100%;
     white-space: nowrap;
-
     padding: 14px 44px;
     border-radius: var(--border-radius-40);
     background: var(--gray-btn);
@@ -46,7 +50,10 @@ export const StyledConfirmBtn = styled.div`
     font-size: 14px;
     letter-spacing: -0.02em;
     cursor: pointer;
-
+    &:hover,
+    &:focus {
+      background-color: var(--gray-hover-color);
+    }
     @media (min-width: 768px) {
       font-size: 16px;
     }

@@ -50,6 +50,11 @@ export const StyledSetsBtn = styled.div`
     cursor: pointer;
     font-size: 12px;
     letter-spacing: -0.02em;
+    transition: var(--transition);
+    &:hover,
+    &:focus {
+      background-color: var(--gray-hover-color);
+    }
   }
   input {
     display: none;
@@ -57,15 +62,18 @@ export const StyledSetsBtn = styled.div`
 
   button {
     height: 30px;
-
     padding: 8px 16px;
     border-radius: var(--border-radius-40);
     background: var(--gray-btn);
     border: none;
     color: var(--white-color);
-
     font-size: 12px;
     letter-spacing: -0.02em;
+    transition: var(--transition);
+    &:hover,
+    &:focus {
+      background-color: var(--gray-hover-color);
+    }
   }
 `;
 
@@ -155,6 +163,11 @@ export const StyledForm = styled.form`
     color: var(--black-color);
     font-size: 16px;
     letter-spacing: -0.02em;
+    transition: var(--transition);
+    &:hover,
+    &:focus {
+      background-color: var(--primary-hover-color);
+    }
   }
 `;
 

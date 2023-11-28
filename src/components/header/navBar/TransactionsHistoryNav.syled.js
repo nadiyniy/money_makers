@@ -38,14 +38,23 @@ export const StyledListTransactions = styled.nav`
     border: 1px solid var(--gray-text-40);
     color: var(--white-color);
     letter-spacing: -0.02em;
+    transition: var(--transition);
     &.burger {
       color: var(--black-color);
       border: 1px solid var(--gray-avatar-40);
+    }
+    &:hover,
+    &:focus {
+      background-color: var(--gray-hover-color);
     }
     &.active {
       border: none;
       color: var(--black-color);
       background-color: var(--primary-color);
+      &:hover,
+      &:focus {
+        background-color: var(--primary-hover-color);
+      }
     }
   }
 `;

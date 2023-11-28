@@ -14,12 +14,13 @@
   --gray-text-60: rgba(250, 250, 250, 0.6);
   --gray-btn: #29292b;
   --gray-dark-color: #171719;
+  --gray-hover-color: #222020;
   --gray-avatar-color: rgba(12, 13, 13, 0.5);
   --gray-avatar-40: rgba(12, 13, 13, 0.4);
   --backdrop-color: rgba(0, 0, 0, 0.5);
   --scroll-color: #444446;
 
-  --transition: all 0.3s ease-in;
+  --transition: all 0.2s ease-in;
 
   --border-radius-8: 8px;
   --border-radius-12: 12px;

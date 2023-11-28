@@ -7,7 +7,7 @@ const Logo = ({ isLoggedIn }) => {
   return (
     <StyledLogo>
       <Link to={isLoggedIn ? '/transactions/incomes' : '/'}>
-        <LogoIcon width={27} height={16} />
+        <LogoIcon className="logo-icon-svg" width={27} height={16} />
 
         <p>ExpenseTracker</p>
       </Link>

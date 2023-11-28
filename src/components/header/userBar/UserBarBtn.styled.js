@@ -14,6 +14,11 @@ export const StyledUserBtn = styled.button`
   color: rgba(250, 250, 250, 0.4);
   font-size: 16px;
   letter-spacing: -0.02em;
+  transition: var(--transition);
+  &:hover,
+  &:focus {
+    background-color: var(--gray-hover-color);
+  }
 
   @media (max-width: 768px) {
     display: none;
