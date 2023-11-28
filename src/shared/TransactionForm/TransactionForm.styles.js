@@ -142,6 +142,10 @@ export const DateLabel = styled.label`
   letter-spacing: -0.28px;
   margin-bottom: 20px;
   position: relative;
+  width: 100%;
+  .react-datepicker-wrapper {
+    width: 100%;
+  }
 `;
 
 export const CalendarIcon = styled.button`
