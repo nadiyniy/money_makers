@@ -1,15 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import sprite from '../../../images/sprite.svg';
 import { StyledLogo } from './Logo.styled';
+import { LogoIcon } from 'components/svgs';
 
 const Logo = ({ isLoggedIn }) => {
   return (
     <StyledLogo>
       <Link to={isLoggedIn ? '/transactions/incomes' : '/'}>
-        <svg width="27" height="16">
-          <use href={`${sprite}#icon-Icon`} />
-        </svg>
+        <LogoIcon width={27} height={16} />
 
         <p>ExpenseTracker</p>
       </Link>

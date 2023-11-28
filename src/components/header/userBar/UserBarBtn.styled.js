@@ -16,7 +16,10 @@ export const StyledUserBtn = styled.button`
   letter-spacing: -0.02em;
 
   @media (max-width: 768px) {
-    display: ${props => (props.variant === 'burger' ? 'flex' : 'none')};
+    display: none;
+    &.burger {
+      display: flex;
+    }
   }
   img {
     width: 44px;

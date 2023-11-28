@@ -15,7 +15,10 @@ export const StyledModalLink = styled.div`
   background: var(--black-color);
   align-items: flex-start;
   @media (max-width: 768px) {
-    display: ${props => (props.variant === 'burger' ? 'flex' : 'none')};
+    display: none;
+    &.burger {
+      display: flex;
+    }
   }
   button {
     cursor: pointer;

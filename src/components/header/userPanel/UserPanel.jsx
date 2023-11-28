@@ -29,7 +29,7 @@ const UserPanel = ({ variant }) => {
 
   return (
     <>
-      <StyledModalLink variant={variant}>
+      <StyledModalLink className={variant}>
         <button onClick={handleSettings}>Profile settings</button>
         <button onClick={handleLogout}>Log out</button>
       </StyledModalLink>

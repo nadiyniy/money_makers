@@ -11,10 +11,11 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAvatarThunk, updateAvatarThunk, updateInfoUserThunk } from 'redux/user/operations';
-import { selectCurrentUser } from 'redux/user/selectors';
+import { selectCurrentUser, selectIsLoading } from 'redux/user/selectors';
 
 import UserAvatar from '../userAvatar/UserAvatar';
 import { CloseIcon, UserAvatarIcon, ArrowUpCurrency } from 'components/svgs';
+import LoaderSpinner from 'components/LoaderSpinner/LoaderSpinner';
 
 const currenciesList = [
   {
@@ -35,6 +36,8 @@ const currenciesList = [
 ];
 
 const UserSetsModal = ({ closeModal }) => {
+  const isLoadingAvatar = useSelector(selectIsLoading);
+
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
 
@@ -82,7 +85,17 @@ const UserSetsModal = ({ closeModal }) => {
       <h2>Profile settings</h2>
       <StyledAvatar>
         {currentUser.avatarUrl ? (
-          <UserAvatar user={currentUser} />
+          isLoadingAvatar ? (
+            <div className="avatar-spinner">
+              <LoaderSpinner />
+            </div>
+          ) : (
+            <UserAvatar user={currentUser} />
+          )
+        ) : isLoadingAvatar ? (
+          <div className="avatar-spinner">
+            <LoaderSpinner />
+          </div>
         ) : (
           <StyledAvatarWrapper>
             <UserAvatarIcon width={38} height={38} />
@@ -111,7 +124,7 @@ const UserSetsModal = ({ closeModal }) => {
                 {activeCurrency.symbol} {activeCurrency.name}
               </div>
 
-              <ArrowUpCurrency width={20} height={20} />
+              <ArrowUpCurrency width={12} height={12} />
             </div>
             {isDropdownOpened && (
               <ul className="currencies-list">
