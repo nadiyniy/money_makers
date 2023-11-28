@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { loginThunk, registerThunk } from 'redux/auth/operations';
-import AuthForm from 'shared/AuthForm/AuthForm';
+import AuthForm from 'pages/Auth/AuthForm/AuthForm';
 import { validationSchema } from 'shared/validationSchema/validationSchema';
 import { Description, StyledAuthWrapper, Title } from '../commonAuthStyles';
 
