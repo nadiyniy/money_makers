@@ -1,11 +1,13 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Eye, EyeOff, Error } from 'components/svgs';
 import {
   ErrorMessage,
   FormWrapper,
+  IconContainer,
   Input,
+  InputContainer,
   InputGroup,
   NavigationWrapper,
   StyledLink,
@@ -26,25 +28,38 @@ const AuthForm = ({
     resolver: yupResolver(validationSchema),
   });
 
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
   const linkTo = authType === 'register' ? '/login' : '/register';
 
   const { isDirty } = formState;
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(prev => !prev);
+  };
 
   return (
     <FormWrapper onSubmit={handleSubmit(onSubmit)} noValidate>
       <div>
         {fieldsData.map(field => (
           <InputGroup key={field.name}>
-            <Input
-              {...register(field.name)}
-              type={field.type}
-              placeholder={field.label}
-              autoComplete={field.type === 'email' ? 'email' : 'current-password'}
-            />
-            {formState.errors[field.name] &&
-              (!toast.error(formState.errors[field.name].message) ? (
-                <ErrorMessage>{formState.errors[field.name].message}</ErrorMessage>
-              ) : null)}
+            <InputContainer>
+              <Input
+                {...register(field.name)}
+                type={isPasswordVisible ? 'text' : field.type}
+                placeholder={field.label}
+                autoComplete={field.type === 'email' ? 'email' : 'current-password'}
+                className={formState.errors[field.name] ? 'error' : ''}
+              />
+
+              {field.type === 'password' && (
+                <IconContainer onClick={togglePasswordVisibility}>
+                  {formState.errors[field.name] ? <Error /> : !isPasswordVisible ? <EyeOff /> : <Eye />}
+                </IconContainer>
+              )}
+            </InputContainer>
+
+            {formState.errors[field.name] && <ErrorMessage>{formState.errors[field.name].message}</ErrorMessage>}
           </InputGroup>
         ))}
       </div>
