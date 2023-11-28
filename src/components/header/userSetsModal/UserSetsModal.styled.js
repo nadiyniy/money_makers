@@ -211,4 +211,11 @@ export const StyledCurrencies = styled.div`
     font-size: 16px;
     line-height: 1.5;
   }
+  &.arrow-icon {
+    transform: rotate(0);
+    transform: scale(3);
+  }
+  &.dropdown-open .arrow-icon {
+    transform: rotate(180deg);
+  }
 `;

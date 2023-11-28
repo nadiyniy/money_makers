@@ -14,7 +14,7 @@ import { deleteAvatarThunk, updateAvatarThunk, updateInfoUserThunk } from 'redux
 import { selectCurrentUser, selectIsLoading } from 'redux/user/selectors';
 
 import UserAvatar from '../userAvatar/UserAvatar';
-import { CloseIcon, UserAvatarIcon, ArrowUpCurrency } from 'components/svgs';
+import { CloseIcon, UserAvatarIcon, ArrowDownCurrency } from 'components/svgs';
 import LoaderSpinner from 'components/LoaderSpinner/LoaderSpinner';
 
 const currenciesList = [
@@ -113,7 +113,7 @@ const UserSetsModal = ({ closeModal }) => {
         }}
       >
         <div className="form-wrapper">
-          <StyledCurrencies>
+          <StyledCurrencies className={isDropdownOpened ? 'dropdown-open' : ''}>
             <div
               className="currencies-active"
               onClick={() => {
@@ -124,7 +124,7 @@ const UserSetsModal = ({ closeModal }) => {
                 {activeCurrency.symbol} {activeCurrency.name}
               </div>
 
-              <ArrowUpCurrency width={12} height={12} />
+              <ArrowDownCurrency width={12} height={12} className="arrow-icon" />
             </div>
             {isDropdownOpened && (
               <ul className="currencies-list">

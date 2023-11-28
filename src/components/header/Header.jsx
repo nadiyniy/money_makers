@@ -26,7 +26,7 @@ const Header = () => {
             <>
               <TransactionsHistoryNav />
               <StyledContainerUserBtn>
-                <UserBarBtn toggleUserPanel={toggleUserPanel} />
+                <UserBarBtn toggleUserPanel={toggleUserPanel} isUserPanelOpen={isUserPanelOpen} />
                 {isUserPanelOpen && <UserPanel />}
               </StyledContainerUserBtn>
               <BurgerMenuBtn />

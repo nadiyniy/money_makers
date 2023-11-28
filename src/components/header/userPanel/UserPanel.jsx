@@ -28,7 +28,7 @@ const UserPanel = ({ variant }) => {
   };
 
   return (
-    <>
+    <div className="user-panel">
       <StyledModalLink className={variant}>
         <button onClick={handleSettings}>Profile settings</button>
         <button onClick={handleLogout}>Log out</button>
@@ -45,7 +45,7 @@ const UserPanel = ({ variant }) => {
           <WarningLogout closeModal={() => setOpenLogout(false)} onConfirmLogout={handleConfirmLogout} />
         </Modal>
       )}
-    </>
+    </div>
   );
 };
 

@@ -26,4 +26,15 @@ export const StyledUserBtn = styled.button`
     height: 44px;
     border-radius: var(--border-radius-rounded);
   }
+  .arrow-icon {
+    transform: rotate(180deg);
+  }
+  &.panel-open .arrow-icon {
+    transform: rotate(0);
+  }
+
+  /* &:hover > .arrow-icon,
+  &:focus > .arrow-icon {
+    transform: rotate(45deg);
+  } */
 `;
