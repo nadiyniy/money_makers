@@ -105,7 +105,6 @@ const transactionsSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(fetchTransactionsThunk.fulfilled, (state, { payload }) => {
-        console.log('fetchTransactions', payload);
         state.transactions = payload;
         state.isLoading = false;
       })

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
 import { useModal } from 'shared/hooks/useModal';
 import Modal from 'shared/Modal/Modal';
 import CategoriesModalList from 'pages/Home/CategoriesModalList/CategoriesModalList';
-
-import { selectCategories } from 'redux/category/selectors';
+import { createUserTransactionThunk } from 'redux/transactions/operations';
 import { fetchCategoriesThunk } from 'redux/category/operations';
-import { Calendar1, Clock } from '../../components/svgs/index';
+
 import {
   CategoryInput,
   CommentInput,
@@ -31,55 +30,52 @@ import {
   TwoLabel,
   DateLabel,
   CalendarIcon,
+  Currency,
 } from './TransactionForm.styles';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { validationTransactionFormSchema } from 'shared/validationSchema/validationSchema';
+import { Calendar1, Clock } from '../../components/svgs/index';
+import { selectCurrentUser } from 'redux/user/selectors';
+import { currentInfoUserThunk } from 'redux/user/operations';
 
 const TransactionForm = ({ transactionsType, setRender }) => {
-  const [startDate, setStartDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState(null);
   const { isOpen, openModal, closeModal } = useModal();
-  const [currentCategory, setCurrentCategory] = useState([]);
   const [chooseCategory, setchooseCategory] = useState('');
   const [takeCategoryId, setTakeCategoryId] = useState('');
   const [checked, setCheked] = useState(false);
-  const categories = useSelector(selectCategories);
   const dispatch = useDispatch();
+  const currentUser = useSelector(selectCurrentUser);
+
+  // useEffect(() => {
+  //   dispatch(currentInfoUserThunk());
+  // }, [dispatch]);
 
   useEffect(() => {
+    dispatch(currentInfoUserThunk());
     dispatch(fetchCategoriesThunk());
   }, [dispatch]);
 
   const {
+    control,
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(validationTransactionFormSchema),
-  });
+  } = useForm({});
 
   const submit = ({ comment, date, sum, time, type }) => {
     const formData = {
       category: takeCategoryId,
       comment,
-      date,
-      sum,
-      time,
+      date: date.toISOString().slice(0, 10),
+      sum: parseInt(sum),
+      time: time.toISOString().slice(11, 16),
       type,
     };
+    dispatch(createUserTransactionThunk(formData));
     console.log(formData);
     reset();
   };
 
   const renderCategoryByType = () => {
-    let list;
-    if (transactionsType === 'incomes') {
-      list = categories.incomes;
-    } else {
-      list = categories.expenses;
-    }
-    setCurrentCategory(list);
     openModal();
   };
 
@@ -121,12 +117,17 @@ const TransactionForm = ({ transactionsType, setRender }) => {
           <DateInputWrapper>
             <DateLabel>
               Date:
-              <DateInput
-                isClearable
-                selected={startDate || null}
-                onChange={date => setStartDate(date)}
-                dateFormat="yyyy-MM-dd"
-                placeholderText="mm/dd/yyyy"
+              <Controller
+                control={control}
+                name="date"
+                render={({ field }) => (
+                  <DateInput
+                    placeholderText="mm/dd/yyyy"
+                    onChange={date => field.onChange(date)}
+                    selected={field.value}
+                    rules={{ required: true }}
+                  />
+                )}
               />
               <CalendarIcon>
                 <Calendar1 />
@@ -135,16 +136,22 @@ const TransactionForm = ({ transactionsType, setRender }) => {
             </DateLabel>
             <DateLabel>
               Time:
-              <DateInput
-                isClearable
-                selected={selectedTime}
-                onChange={time => setSelectedTime(time)}
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={15}
-                timeCaption="Time"
-                dateFormat="h:mm"
-                placeholderText="00:00:00"
+              <Controller
+                control={control}
+                name="time"
+                render={({ field }) => (
+                  <DateInput
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={15}
+                    timeCaption="Time"
+                    dateFormat="h:mm"
+                    placeholderText="00:00:00"
+                    onChange={date => field.onChange(date)}
+                    selected={field.value}
+                    rules={{ required: true }}
+                  />
+                )}
               />
               <CalendarIcon>
                 <Clock />
@@ -170,6 +177,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
             <TwoLabel>
               Sum:
               <SumInput type="text" {...register('sum')} placeholder="Enter the sum" />
+              {currentUser.transactionsTotal && <Currency>{currentUser.currency.toUpperCase()}</Currency>}
               <ErrorMessage>{errors.sum?.message}</ErrorMessage>
             </TwoLabel>
           </ParentInputWrapper>
@@ -192,7 +200,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
             setchooseCategory={setchooseCategory}
             setTakeCategoryId={setTakeCategoryId}
             closeModal={closeModal}
-            categories={currentCategory}
+            categoryName={transactionsType}
           />
         </Modal>
       ) : null}

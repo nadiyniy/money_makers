@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { instance, setToken } from '../fetchInstance';
+import { instance } from '../fetchInstance';
 
 export const addedCategoryThunk = createAsyncThunk('addedCategory', async (body, thunkApi) => {
   try {
@@ -9,8 +9,7 @@ export const addedCategoryThunk = createAsyncThunk('addedCategory', async (body,
         Authorization: `Bearer ${savedToken}`,
       },
     });
-
-    setToken(data.accessToken);
+    thunkApi.dispatch(fetchCategoriesThunk());
 
     return data;
   } catch (error) {
@@ -18,7 +17,7 @@ export const addedCategoryThunk = createAsyncThunk('addedCategory', async (body,
   }
 });
 
-export const deleteCategoryThunk = createAsyncThunk('deleteCategoryById', async (id, thunkApi) => {
+export const deleteCategoryThunk = createAsyncThunk('deleteCategoryById', async ({ id }, thunkApi) => {
   try {
     const savedToken = thunkApi.getState().auth.accessToken;
     const { data } = await instance.delete(`categories/${id}`, {
@@ -26,7 +25,7 @@ export const deleteCategoryThunk = createAsyncThunk('deleteCategoryById', async 
         Authorization: `Bearer ${savedToken}`,
       },
     });
-    setToken(data.accessToken);
+    thunkApi.dispatch(fetchCategoriesThunk());
     return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
@@ -42,7 +41,6 @@ export const updateCategoryThunk = createAsyncThunk('updateCategoryById', async 
         Authorization: `Bearer ${savedToken}`,
       },
     });
-    setToken(data.accessToken);
 
     return data;
   } catch (error) {
@@ -58,7 +56,7 @@ export const fetchCategoriesThunk = createAsyncThunk('fetchAllCategories', async
         Authorization: `Bearer ${savedToken}`,
       },
     });
-    setToken(data.accessToken);
+
     return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);

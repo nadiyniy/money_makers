@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router';
+import { selectCategories } from 'redux/category/selectors';
+import { useParams } from 'react-router-dom';
+import { deleteCategoryThunk, fetchCategoriesThunk } from 'redux/category/operations';
+
 import NewCategoriesForm from '../NewCategoriesForm/NewCategoriesForm';
 import EditCategoriesForm from '../EditCategoriesForm/EditCategoriesForm';
-import { useDispatch } from 'react-redux';
-import { deleteCategoryThunk, fetchCategoriesThunk } from 'redux/category/operations';
-import { Pencil, Delete, Check1 } from '../../../components/svgs/index';
 
 import {
   ModalButtonWrapper,
@@ -17,15 +20,16 @@ import {
   ModalScrollbar,
   ModalWrapper,
 } from './CategoriesModalList.styled';
-import { Close } from 'components/svgs';
-import { useLocation } from 'react-router';
+import { Close, Pencil, Delete, Check1 } from 'components/svgs';
 
-const CategoriesModalList = ({ closeModal, categories, setchooseCategory, setTakeCategoryId }) => {
+const CategoriesModalList = ({ closeModal, categoryName, setchooseCategory, setTakeCategoryId }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
+  const categories = useSelector(selectCategories);
+  const { transactionsType } = useParams();
 
   useEffect(() => {
     dispatch(fetchCategoriesThunk());
@@ -56,7 +60,7 @@ const CategoriesModalList = ({ closeModal, categories, setchooseCategory, setTak
       <ModalWrapper>
         <ModalScrollbar>
           {categories
-            ? categories?.map((category, index) => (
+            ? categories[categoryName]?.map((category, index) => (
                 <ModalItem
                   key={category._id}
                   onClick={() => handleItemClick(index)}
@@ -70,7 +74,10 @@ const CategoriesModalList = ({ closeModal, categories, setchooseCategory, setTak
                     <ModalListButton type="button" onClick={() => handleEditCategory(category)}>
                       <Pencil width={16} height={16} />
                     </ModalListButton>
-                    <ModalListButton type="button" onClick={() => dispatch(deleteCategoryThunk(category._id))}>
+                    <ModalListButton
+                      type="button"
+                      onClick={() => dispatch(deleteCategoryThunk({ id: category._id, type: transactionsType }))}
+                    >
                       <Delete width={16} height={16} />
                     </ModalListButton>
                   </ModalButtonWrapper>

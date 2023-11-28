@@ -102,6 +102,17 @@ export const StyledAvatar = styled.div`
       height: 100px;
     }
   }
+  .avatar-spinner {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media (min-width: 768px) {
+      width: 100px;
+      height: 100px;
+    }
+  }
 `;
 export const StyledForm = styled.form`
   display: flex;
@@ -199,5 +210,12 @@ export const StyledCurrencies = styled.div`
     padding: 12px 18px;
     font-size: 16px;
     line-height: 1.5;
+  }
+  &.arrow-icon {
+    transform: rotate(0);
+    transform: scale(3);
+  }
+  &.dropdown-open .arrow-icon {
+    transform: rotate(180deg);
   }
 `;

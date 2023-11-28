@@ -16,11 +16,25 @@ export const StyledUserBtn = styled.button`
   letter-spacing: -0.02em;
 
   @media (max-width: 768px) {
-    display: ${props => (props.variant === 'burger' ? 'flex' : 'none')};
+    display: none;
+    &.burger {
+      display: flex;
+    }
   }
   img {
     width: 44px;
     height: 44px;
     border-radius: var(--border-radius-rounded);
   }
+  .arrow-icon {
+    transform: rotate(180deg);
+  }
+  &.panel-open .arrow-icon {
+    transform: rotate(0);
+  }
+
+  /* &:hover > .arrow-icon,
+  &:focus > .arrow-icon {
+    transform: rotate(45deg);
+  } */
 `;
