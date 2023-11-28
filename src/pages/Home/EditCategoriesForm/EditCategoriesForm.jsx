@@ -4,9 +4,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 import { updateCategoryThunk } from 'redux/category/operations';
 import { validationCategoryFormSchema } from 'shared/validationSchema/validationSchema';
 import { selectError } from 'redux/auth/selectors';
+
 import {
   EditCategoriesButton,
   EditCategoriesInput,
@@ -14,11 +16,13 @@ import {
   EditLabel,
   ErrorMessage,
 } from './EditCategoriesForm.styled';
+import { selectCategories } from 'redux/category/selectors';
 
 const EditCategoriesForm = ({ setIsEditing, category }) => {
+  const categories = useSelector(selectCategories);
   const error = useSelector(selectError);
   const dispatch = useDispatch();
-
+  console.log(category);
   const {
     register,
     handleSubmit,
@@ -32,20 +36,33 @@ const EditCategoriesForm = ({ setIsEditing, category }) => {
   });
   const submit = data => {
     if (category) {
-      const updatedCategory = {
-        _id: category._id,
-        categoryName: { ...data },
-      };
-      dispatch(updateCategoryThunk(updatedCategory));
-    }
+      const categoryIncomesExsist = categories.incomes.find(
+        category => category.categoryName.toLowerCase().trim() === data.categoryName.toLowerCase().trim()
+      );
 
-    setIsEditing(false);
-    if (error === null) {
-      reset();
-    } else {
-      toast.error('Update failed, please try again');
+      const categoryExpensesExists = categories.expenses.find(
+        category => category.categoryName.toLowerCase().trim() === data.categoryName.toLowerCase().trim()
+      );
+
+      if (categoryIncomesExsist || categoryExpensesExists) {
+        toast.info(`${data.categoryName} is already in your list.`);
+        return;
+      } else {
+        const updatedCategory = {
+          _id: category._id,
+          categoryName: { ...data },
+        };
+        dispatch(updateCategoryThunk(updatedCategory));
+      }
+      setIsEditing(false);
+      if (error === null) {
+        reset();
+      } else {
+        toast.error('Update failed, please try again');
+      }
     }
   };
+
   return (
     <form onSubmit={handleSubmit(submit)}>
       <EditCategoriesWrapper>

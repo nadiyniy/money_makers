@@ -1,10 +1,12 @@
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
+import { useEffect, useState } from 'react';
+
 import TransactionsTotalAmount from '../../../shared/TransactionsTotalAmount/TransactionsTotalAmount';
 import TransactionsChart from '../TransactionsChart/TransactionsChart';
 import TransactionForm from '../../../shared/TransactionForm/TransactionForm';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useMediaQuery } from 'react-responsive';
+
 import { StyledCommonWrapper } from 'styles/Common.styled';
-import { useEffect, useState } from 'react';
 import { MainPageSection, MainPageText, MainPageTitle, MainPageWrapper } from './MainTransactionsPage.styled';
 
 const MainTransactionsPage = () => {
@@ -19,9 +21,11 @@ const MainTransactionsPage = () => {
   });
 
   useEffect(() => {
-    if (render !== nextRender) navigate(`/${(location.pathname = `transactions/${render}`)}`);
-    setNextRender(render);
-    return;
+    if (render !== nextRender) {
+      navigate(`/${(location.pathname = `transactions/${render}`)}`);
+      setNextRender(render);
+      return;
+    }
   }, [render, location, navigate, nextRender]);
   return (
     <MainPageSection>
