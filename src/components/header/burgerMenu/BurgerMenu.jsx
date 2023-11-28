@@ -46,7 +46,7 @@ const BurgerMenu = ({ closeBurgerMenu }) => {
           <UserBarBtn variant="burger" toggleUserPanel={toggleUserPanel} />
           {isUserPanelOpen && <UserPanel variant="burger" />}
         </StyledContainerUserBtn>
-        <TransactionsHistoryNav variant="burger" />
+        <TransactionsHistoryNav closeBurgerMenu={closeBurgerMenu} variant="burger" />
       </StyledBurgerMenu>
     </ModalBackdrop>,
     modalRoot
