@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import NewCategoriesForm from '../NewCategoriesForm/NewCategoriesForm';
 import EditCategoriesForm from '../EditCategoriesForm/EditCategoriesForm';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { deleteCategoryThunk, fetchCategoriesThunk } from 'redux/category/operations';
 import { Pencil, Delete, Check1 } from '../../../components/svgs/index';
 

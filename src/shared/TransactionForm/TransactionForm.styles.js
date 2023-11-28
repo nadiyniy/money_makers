@@ -1,4 +1,3 @@
-import { Clock } from 'components/svgs';
 import ReactDatePicker from 'react-datepicker';
 import styled from 'styled-components';
 
