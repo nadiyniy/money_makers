@@ -22,7 +22,7 @@ export const StyledAuthWrapper = styled.div`
 export const Title = styled.h1`
   margin-bottom: 14px;
 
-  color: var(--primary-color);
+  color: var(--white-color);
 
   font-size: 32px;
   letter-spacing: -0.02em;
