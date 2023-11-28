@@ -5,7 +5,9 @@ import UserPanel from '../userPanel/UserPanel';
 import { StyledContainerUserBtn } from '../Header.styled';
 import { ModalBackdrop, StyledBurgerMenu, StyledCloseBurgerBtn } from './BurgerMenu.styled';
 import { CloseBurgerIcon } from 'components/svgs';
-
+import ReactDOM from 'react-dom';
+const modalRoot = document.querySelector('#modal');
+console.log(modalRoot);
 const BurgerMenu = ({ closeBurgerMenu }) => {
   const [isUserPanelOpen, setIsUserPanelOpen] = useState(false);
 
@@ -34,7 +36,7 @@ const BurgerMenu = ({ closeBurgerMenu }) => {
     }
   };
 
-  return (
+  return ReactDOM.createPortal(
     <ModalBackdrop onClick={handleModalClose}>
       <StyledBurgerMenu>
         <StyledCloseBurgerBtn onClick={closeBurgerMenu}>
@@ -46,7 +48,8 @@ const BurgerMenu = ({ closeBurgerMenu }) => {
         </StyledContainerUserBtn>
         <TransactionsHistoryNav variant="burger" />
       </StyledBurgerMenu>
-    </ModalBackdrop>
+    </ModalBackdrop>,
+    modalRoot
   );
 };
 

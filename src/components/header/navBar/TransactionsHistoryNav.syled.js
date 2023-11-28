@@ -16,6 +16,14 @@ export const StyledListTransactions = styled.nav`
     display: none;
     &.burger {
       display: flex;
+      a {
+        color: var(--black-color);
+        border: 1px solid var(--gray-avatar-40);
+      }
+      a.active {
+        color: var(--white-color);
+        background-color: var(--black-color);
+      }
     }
   }
 
@@ -29,7 +37,6 @@ export const StyledListTransactions = styled.nav`
     border-radius: var(--border-radius-30);
     border: 1px solid var(--gray-text-40);
     color: var(--white-color);
-
     letter-spacing: -0.02em;
     &.burger {
       color: var(--black-color);
@@ -39,10 +46,6 @@ export const StyledListTransactions = styled.nav`
       border: none;
       color: var(--black-color);
       background-color: var(--primary-color);
-    }
-    &.active.burger {
-      color: var(--white-color);
-      background-color: var(--black-color);
     }
   }
 `;

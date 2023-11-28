@@ -10,6 +10,9 @@ export const ModalBackdrop = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (min-width: 769px) {
+    display: none;
+  }
 `;
 export const StyledCloseBurgerBtn = styled.button`
   position: absolute;
@@ -35,7 +38,7 @@ export const StyledBurgerMenu = styled.div`
   padding: 18px 20px;
   display: flex;
   flex-direction: column;
-  @media (min-width: 768px) {
+  @media (min-width: 550px) {
     width: 50%;
   }
 `;
