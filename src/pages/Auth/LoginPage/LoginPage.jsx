@@ -2,9 +2,8 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { loginThunk } from 'redux/auth/operations';
 import AuthForm from 'pages/Auth/AuthForm/AuthForm';
-import { validationSchema } from 'shared/validationSchema/validationSchema';
+import { validationSchemaLogin } from 'shared/validationSchema/validationSchema';
 import { Description, StyledAuthWrapper, Title } from '../commonAuthStyles';
-
 
 const fieldsData = [
   { name: 'email', label: 'Email', type: 'email' },
@@ -27,18 +26,18 @@ const LoginPage = () => {
 
   return (
     <StyledAuthWrapper>
-        <Title>Sign In</Title>
-        <Description>Welcome back to effortless expense tracking! Your financial dashboard awaits.</Description>
+      <Title>Sign In</Title>
+      <Description>Welcome back to effortless expense tracking! Your financial dashboard awaits.</Description>
 
-        <AuthForm
-          fieldsData={fieldsData}
-          submitButtonText="Sign In"
-          initialState={{ email: '', password: '' }}
-          validationSchema={validationSchemaLogin}
-          onSubmit={onSubmit}
-          navigationData={navigationData}
-          authType="login"
-        />
+      <AuthForm
+        fieldsData={fieldsData}
+        submitButtonText="Sign In"
+        initialState={{ email: '', password: '' }}
+        validationSchema={validationSchemaLogin}
+        onSubmit={onSubmit}
+        navigationData={navigationData}
+        authType="login"
+      />
     </StyledAuthWrapper>
   );
 };
