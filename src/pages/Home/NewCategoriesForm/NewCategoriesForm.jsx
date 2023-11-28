@@ -33,13 +33,19 @@ const NewCategoriesForm = () => {
     resolver: yupResolver(validationCategoryFormSchema),
   });
   const submit = data => {
-    const categoryIncomesExsist = categories.incomes.find(
-      category => category.categoryName.toLowerCase().trim() === data.categoryName.toLowerCase().trim()
-    );
+    let categoryIncomesExsist = '';
+    let categoryExpensesExists = '';
 
-    const categoryExpensesExists = categories.expenses.find(
-      category => category.categoryName.toLowerCase().trim() === data.categoryName.toLowerCase().trim()
-    );
+    if (categories.incomes) {
+      categoryIncomesExsist = categories.incomes.find(
+        category => category.categoryName.toLowerCase().trim() === data.categoryName.toLowerCase().trim()
+      );
+    }
+    if (categories.expenses) {
+      categoryExpensesExists = categories.expenses.find(
+        category => category.categoryName.toLowerCase().trim() === data.categoryName.toLowerCase().trim()
+      );
+    }
 
     if (categoryIncomesExsist || categoryExpensesExists) {
       toast.info(`${data.categoryName} is already in your list.`);
@@ -58,7 +64,13 @@ const NewCategoriesForm = () => {
       <NewCategoriesWrapper>
         <NewLabel htmlFor="add">
           New Category
-          <NewCategoriesInput id="add" type="text" placeholder="Enter the text" {...register('categoryName')} />
+          <NewCategoriesInput
+            autoComplete="off"
+            id="add"
+            type="text"
+            placeholder="Enter the text"
+            {...register('categoryName')}
+          />
           <NewCategoriesButton type="submit">Add</NewCategoriesButton>
         </NewLabel>
         <ErrorMessage>{errors.categoryName?.message} </ErrorMessage>

@@ -35,6 +35,7 @@ import {
 import { Calendar1, Clock } from '../../components/svgs/index';
 import { selectCurrentUser } from 'redux/user/selectors';
 import { currentInfoUserThunk } from 'redux/user/operations';
+import { toast } from 'react-toastify';
 
 const TransactionForm = ({ transactionsType, setRender }) => {
   const { isOpen, openModal, closeModal } = useModal();
@@ -43,10 +44,6 @@ const TransactionForm = ({ transactionsType, setRender }) => {
   const [checked, setCheked] = useState(false);
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
-
-  // useEffect(() => {
-  //   dispatch(currentInfoUserThunk());
-  // }, [dispatch]);
 
   useEffect(() => {
     dispatch(currentInfoUserThunk());
@@ -61,17 +58,25 @@ const TransactionForm = ({ transactionsType, setRender }) => {
     formState: { errors },
   } = useForm({});
 
-  const submit = ({ comment, date, sum, time, type }) => {
-    const formData = {
-      category: takeCategoryId,
-      comment,
-      date: date.toISOString().slice(0, 10),
-      sum: parseInt(sum),
-      time: time.toISOString().slice(11, 16),
-      type,
-    };
-    dispatch(createUserTransactionThunk(formData));
-    console.log(formData);
+  const submit = async ({ comment, date, sum, time, type }) => {
+    try {
+      const startDate = new Date(date);
+      const nextDay = new Date(startDate);
+      nextDay.setDate(startDate.getDate() + 1);
+
+      const formData = {
+        category: takeCategoryId,
+        comment,
+        date: nextDay.toISOString().slice(0, 10),
+        sum: parseInt(sum),
+        time: time.toISOString().slice(11, 16),
+        type,
+      };
+      console.log(formData);
+      await dispatch(createUserTransactionThunk(formData)).unwrap();
+    } catch (error) {
+      toast.error('Sorry, registration failed, please added all field to transaction form');
+    }
     reset();
   };
 
@@ -125,7 +130,6 @@ const TransactionForm = ({ transactionsType, setRender }) => {
                     placeholderText="mm/dd/yyyy"
                     onChange={date => field.onChange(date)}
                     selected={field.value}
-                    rules={{ required: true }}
                   />
                 )}
               />
@@ -149,7 +153,6 @@ const TransactionForm = ({ transactionsType, setRender }) => {
                     placeholderText="00:00:00"
                     onChange={date => field.onChange(date)}
                     selected={field.value}
-                    rules={{ required: true }}
                   />
                 )}
               />
@@ -163,6 +166,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
             <OneLabel>
               Category:
               <CategoryInput
+                autoComplete="off"
                 type="text"
                 value={chooseCategory}
                 {...register('category')}
@@ -176,7 +180,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
           <ParentInputWrapper>
             <TwoLabel>
               Sum:
-              <SumInput type="text" {...register('sum')} placeholder="Enter the sum" />
+              <SumInput autoComplete="off" type="text" {...register('sum')} placeholder="Enter the sum" />
               {currentUser.transactionsTotal && <Currency>{currentUser.currency.toUpperCase()}</Currency>}
               <ErrorMessage>{errors.sum?.message}</ErrorMessage>
             </TwoLabel>
@@ -184,7 +188,13 @@ const TransactionForm = ({ transactionsType, setRender }) => {
           <ParentInputWrapper>
             <OneLabel>
               Comment:
-              <CommentInput {...register('comment')} rows={4} cols={50} placeholder="Enter the text" />
+              <CommentInput
+                autoComplete="off"
+                {...register('comment')}
+                rows={4}
+                cols={50}
+                placeholder="Enter the text"
+              />
               <ErrorMessage>{errors.comment?.message}</ErrorMessage>
             </OneLabel>
           </ParentInputWrapper>

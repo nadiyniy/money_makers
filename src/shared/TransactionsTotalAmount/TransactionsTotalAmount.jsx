@@ -14,8 +14,6 @@ const TransactionsTotalAmount = () => {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
 
-  console.log(currentUser);
-
   useEffect(() => {
     dispatch(currentInfoUserThunk());
   }, [dispatch]);
