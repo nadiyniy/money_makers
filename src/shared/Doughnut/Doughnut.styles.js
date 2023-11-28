@@ -34,6 +34,11 @@ export const ContentWrapper = styled.div`
 export const Title = styled.h2`
 color: var(--gray-text-50);
 padding-bottom: 40px;
+font-family: Suisse Intl;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 `;
 
 export const ListWrapper = styled.div`
