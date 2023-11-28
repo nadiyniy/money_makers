@@ -25,6 +25,10 @@ const commonButtonStyles = `
     font-size: 16px;
     letter-spacing: -0.32px;
   }
+
+  @media screen and (min-width: 1280px) {
+    margin-bottom: 166px;
+  }
   
 `;
 
