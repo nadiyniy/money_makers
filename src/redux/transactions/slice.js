@@ -5,6 +5,9 @@ import {
   removeUserTransactionThunk,
   updateUserTransactionThunk,
 } from './operations.js';
+const year = new Date().getFullYear();
+const month = new Date().getMonth() + 1;
+const day = new Date().getDate();
 
 const initialState = {
   transactions: [
@@ -96,12 +99,17 @@ const initialState = {
   ],
   isLoading: false,
   error: null,
+  inputDate: { year, month, day },
 };
 
 const transactionsSlice = createSlice({
   name: 'transactions',
   initialState,
-  reducers: {},
+  reducers: {
+    setInputDate: (state, { payload }) => {
+      state.inputDate = payload;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchTransactionsThunk.fulfilled, (state, { payload }) => {
@@ -148,5 +156,8 @@ const transactionsSlice = createSlice({
       );
   },
 });
+
+
+export const { setInputDate } = transactionsSlice.actions;
 
 export const transactionsReducer = transactionsSlice.reducer;

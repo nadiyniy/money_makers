@@ -55,10 +55,6 @@
   border-top-color: var(--primary-color);
 }
 
-.react-datepicker-ignore-onclickoutside {
-  margin-left: 71px;
-}
-
 .react-datepicker-ignore-onclickoutside .dataButton {
   display: none;
 }
