@@ -1,9 +1,10 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import Header from './header/Header';
+import Header from '../header/Header';
 import BgImageWrapper from 'shared/BgImageWrapper/BgImageWrapper';
-import styled from 'styled-components';
-import PageLoader from './PageLoader/PageLoader';
+import PageLoader from '../PageLoader/PageLoader';
+import { StyledCommonWrapper } from 'styles/Common.styled';
+import { BgImageWrapperContainer, Container, ContentContainer } from './Layout.styled';
 
 // import Header from './header';
 // import BgImageWrapper from './BgImageWrapper';
@@ -45,45 +46,22 @@ const Layout = () => {
   return (
     <>
       <Header />
-      <Container>
-        {shouldRender && (
-          <BgImageWrapperContainer>
-            <BgImageWrapper />
-          </BgImageWrapperContainer>
-        )}
-        <ContentContainer>
-          <Suspense fallback={<PageLoader />}>
-            <Outlet />
-          </Suspense>
-        </ContentContainer>
-      </Container>
+      <StyledCommonWrapper>
+        <Container>
+          {shouldRender && (
+            <BgImageWrapperContainer>
+              <BgImageWrapper />
+            </BgImageWrapperContainer>
+          )}
+          <ContentContainer>
+            <Suspense fallback={<PageLoader />}>
+              <Outlet />
+            </Suspense>
+          </ContentContainer>
+        </Container>
+      </StyledCommonWrapper>
     </>
   );
 };
 
 export { Layout };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  @media (min-width: 1280px) {
-    flex-direction: row;
-  }
-`;
-
-const BgImageWrapperContainer = styled.div`
-  order: 2;
-  @media (min-width: 1280px) {
-    order: 1;
-  }
-`;
-
-const ContentContainer = styled.div`
-  order: 1;
-  @media (min-width: 1280px) {
-    order: 2;
-    flex-grow: 1;
-  }
-`;

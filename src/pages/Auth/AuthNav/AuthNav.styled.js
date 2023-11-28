@@ -16,7 +16,7 @@ const commonButtonStyles = `
   border-radius: 40px;
 
   font-size: 14px;
-  letter-spacing: -0.28px;
+  letter-spacing: -0.02em;
 
   white-space: nowrap;
   transition: background-color 0.2s ease-in-out;

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Text = styled.p`
-  margin-top: 40px;
   margin-bottom: 10px;
 
   color: rgba(250, 250, 250, 0.4);
@@ -9,6 +8,10 @@ export const Text = styled.p`
   font-size: 14px;
   letter-spacing: 2.8px;
   text-transform: uppercase;
+
+  @media screen and (min-width: 1280px) {
+    margin-top: 100px;
+  }
 `;
 
 export const Title = styled.h1`
@@ -43,16 +46,8 @@ export const Description = styled.p`
   }
 
   @media screen and (min-width: 1280px) {
+    width: 100%;
     max-width: 533px;
   }
 `;
 
-/*
-
-@media screen and (min-width: 768px) {
-}
-
-@media screen and (min-width: 1280px) {
-}
-
-*/

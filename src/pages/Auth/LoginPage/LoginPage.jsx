@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { loginThunk } from 'redux/auth/operations';
 import AuthForm from 'shared/AuthForm/AuthForm';
 import { validationSchema } from 'shared/validationSchema/validationSchema';
-import { StyledCommonWrapper } from 'styles/Common.styled';
 import { Description, Title, Wrapper } from '../RegisterPage/RegisterPage.styled';
 
 const fieldsData = [
@@ -26,7 +25,6 @@ const LoginPage = () => {
   };
 
   return (
-    <StyledCommonWrapper>
       <Wrapper>
         <Title>Sign In</Title>
         <Description>Welcome back to effortless expense tracking! Your financial dashboard awaits.</Description>
@@ -41,7 +39,6 @@ const LoginPage = () => {
           authType="login"
         />
       </Wrapper>
-    </StyledCommonWrapper>
   );
 };
 

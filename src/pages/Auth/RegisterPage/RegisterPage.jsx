@@ -2,7 +2,6 @@ import { useDispatch } from 'react-redux';
 import { loginThunk, registerThunk } from 'redux/auth/operations';
 import AuthForm from 'shared/AuthForm/AuthForm';
 import { validationSchema } from 'shared/validationSchema/validationSchema';
-import { StyledCommonWrapper } from 'styles/Common.styled';
 import { Description, Title, Wrapper } from './RegisterPage.styled';
 
 const fieldsData = [
@@ -34,7 +33,6 @@ const RegisterPage = () => {
   };
 
   return (
-    <StyledCommonWrapper>
       <Wrapper>
         <Title>Sign Up</Title>
         <Description>
@@ -50,7 +48,6 @@ const RegisterPage = () => {
           authType="register"
         />
       </Wrapper>
-    </StyledCommonWrapper>
   );
 };
 
