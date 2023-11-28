@@ -1,38 +1,45 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 
-export const StyledTitle = styled.h1`
-  font-size: 80px; /* Increased size for a more prominent display */
-  color: #ffffff;
-  text-transform: uppercase; /* Makes all letters uppercase */
-  font-family: 'Press Start 2P', cursive; /* This font has a pixelated style */
-  margin-bottom: 20px; /* Adjust as needed */
-  
-`;
+
+import styled from 'styled-components';
+import backgroundImage from '../../images/4044-page.png';
 
 export const StyledBox = styled.div`
-  width: 100vw;
+  background-image: url(${backgroundImage});
+  background-size: cover;
+  background-position: center;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  text-align: center;
-  background-color: #0C0D0D;
-  /* Removed text shadow for a cleaner look */
+  justify-content: center;
 `;
 
-export const StyledLink = styled(Link) `
-  text-decoration: underline;
-  color: #0EF387; /* Bright green color for the link */
-  font-family: 'Press Start 2P', cursive; /* Consistent font for the link */
-  font-size: 24px; /* Adjust as needed */
-  cursor: pointer; /* Changes the cursor to indicate clickable */
-   display: block;
+export const StyledTitle = styled.h1`
+  color: #8cffa0; // A neon green to match the image
+  font-family: 'Your Futuristic Font', sans-serif;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+`;
+
+export const StyledButton = styled.button`
+  padding: 0.5rem 1rem;
+  background-color: #121212; // Dark to match the theme
+  color: #8cffa0; // Neon green text
+  border: 1px solid #8cffa0; // Neon green border
+  border-radius: 2rem;
+  cursor: pointer;
+  font-family: 'Your Futuristic Font', sans-serif;
+  text-transform: uppercase;
+  box-shadow: 0 0 10px #8cffa0; // Neon glow effect
+  transition: all 0.3s ease;
+  margin-left: auto;
    margin-right: auto;
-   margin-left: auto;
-`;
 
+  &:hover {
+    background-color: #242424; // A slightly lighter shade on hover
+    box-shadow: 0 0 20px #8cffa0; // Increase glow effect on hover
+  }
+`;
 
 
 
