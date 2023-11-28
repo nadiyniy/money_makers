@@ -9,7 +9,13 @@ export const StyledLogo = styled.div`
     transition: var(--transition);
     &:hover .logo-icon-svg,
     &:focus .logo-icon-svg {
-      transform: rotate(50deg);
+      transition: var(--transition);
+      transform: rotate(360deg);
+    }
+    &:hover,
+    &:focus {
+      transition: var(--transition);
+      transform: scale(1.1);
     }
     p {
       color: #fafafa;
