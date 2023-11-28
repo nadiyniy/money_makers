@@ -17,9 +17,16 @@ const slice = createSlice({
     builder
       .addCase(updateCategoryThunk.fulfilled, (state, { payload }) => {
         const { _id, categoryName } = payload;
+        let editCategoryIncomes = '';
+        let editCategoryExpenses = '';
 
-        const editCategoryIncomes = state.categories.incomes.find(category => category._id === _id);
-        const editCategoryExpenses = state.categories.expenses.find(category => category._id === _id);
+        if (state.categories.incomes) {
+          editCategoryIncomes = state.categories.incomes.find(category => category._id === _id);
+        }
+
+        if (state.categories.expenses) {
+          editCategoryExpenses = state.categories.expenses.find(category => category._id === _id);
+        }
 
         if (editCategoryIncomes) {
           editCategoryIncomes.categoryName = categoryName;

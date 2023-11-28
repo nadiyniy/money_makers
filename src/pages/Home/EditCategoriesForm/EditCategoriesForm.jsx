@@ -36,13 +36,19 @@ const EditCategoriesForm = ({ setIsEditing, category }) => {
   });
   const submit = data => {
     if (category) {
-      const categoryIncomesExsist = categories.incomes.find(
-        category => category.categoryName.toLowerCase().trim() === data.categoryName.toLowerCase().trim()
-      );
+      let categoryIncomesExsist = '';
+      let categoryExpensesExists = '';
 
-      const categoryExpensesExists = categories.expenses.find(
-        category => category.categoryName.toLowerCase().trim() === data.categoryName.toLowerCase().trim()
-      );
+      if (categories.incomes) {
+        categoryIncomesExsist = categories.incomes.find(
+          category => category.categoryName.toLowerCase().trim() === data.categoryName.toLowerCase().trim()
+        );
+      }
+      if (categories.expenses) {
+        categoryExpensesExists = categories.expenses.find(
+          category => category.categoryName.toLowerCase().trim() === data.categoryName.toLowerCase().trim()
+        );
+      }
 
       if (categoryIncomesExsist || categoryExpensesExists) {
         toast.info(`${data.categoryName} is already in your list.`);
@@ -68,7 +74,13 @@ const EditCategoriesForm = ({ setIsEditing, category }) => {
       <EditCategoriesWrapper>
         <EditLabel htmlFor="edit">
           Edit Category
-          <EditCategoriesInput id="edit" type="text" placeholder="Enter the text" {...register('categoryName')} />
+          <EditCategoriesInput
+            autoComplete="off"
+            id="edit"
+            type="text"
+            placeholder="Enter the text"
+            {...register('categoryName')}
+          />
           <EditCategoriesButton type="submit">Edit</EditCategoriesButton>
         </EditLabel>
         <ErrorMessage>{errors.categoryName?.message}</ErrorMessage>
