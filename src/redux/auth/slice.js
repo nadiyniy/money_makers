@@ -33,7 +33,6 @@ const slice = createSlice({
         state.error = null;
       })
       .addCase(registerThunk.fulfilled, (state, { payload }) => {
-        console.log(payload, 1);
         state.user.name = payload.name;
         state.user.email = payload.email;
         state.isLoggedIn = true;
