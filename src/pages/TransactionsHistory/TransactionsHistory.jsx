@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router';
-import { fetchTransactionsThunk } from 'redux/transactions/operations';
+import { fetchTransactionsThunk, removeUserTransactionThunk } from 'redux/transactions/operations';
+import { selectDate, selectTransactions } from 'redux/transactions/selectors';
 
 import TransactionsTotalAmount from 'shared/TransactionsTotalAmount/TransactionsTotalAmount';
+import { Calendar, Search, TrPencil, TrTrash } from 'components/svgs';
+
 import {
   ActionButtonWrapper,
   Button,
@@ -30,18 +33,37 @@ import {
   Title,
 } from './TransactionsHistoryStyled';
 import { StyledCommonWrapper } from 'styles/Common.styled';
-import { Calendar, Search, TrPencil, TrTrash } from 'components/svgs';
+import { setInputDate } from 'redux/transactions/slice';
 
 const TransactionsHistoryPage = () => {
   const dispatch = useDispatch();
   const { transactionsType } = useParams();
-  const date = '2022-12-28';
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const transactions = useSelector(selectTransactions);
+  const date = useSelector(selectDate);
+
+  const dateFormat = `${date.year}-${String(date.month).padStart(2, '0')}-${String(date.day).padStart(2, '0')}`;
+  console.log(dateFormat);
+
+  const handleChangeDate = date => {
+    setSelectedDate(date);
+    if (date) {
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      dispatch(setInputDate({ year, month, day }));
+    }
+  };
 
   useEffect(() => {
-    dispatch(fetchTransactionsThunk(transactionsType, date));
-  }, [dispatch, transactionsType]);
+    dispatch(fetchTransactionsThunk({ type: transactionsType, date: dateFormat }));
+  }, [dispatch, transactionsType, date, dateFormat]);
 
-  const [startDate, setStartDate] = useState(new Date());
+  const handleDelete = id => {
+    dispatch(removeUserTransactionThunk(id));
+  };
+
   return (
     <StyledCommonWrapper>
       <SideContainer>
@@ -64,10 +86,11 @@ const TransactionsHistoryPage = () => {
           </StyledForm>
           <StyledFormWrapper>
             <DatePicker
-              wrapperClassName="datePicker"
+              selected={selectedDate}
+              value={date}
+              onChange={handleChangeDate}
               dateFormat="dd/MM/yyyy"
-              selected={startDate}
-              onChange={date => setStartDate(date)}
+              placeholderText="dd/mm/yyyy"
             />
             <IconWrapper>
               <Calendar />
@@ -86,23 +109,25 @@ const TransactionsHistoryPage = () => {
             </tr>
           </StyledTableHead>
           <tbody>
-            <tr>
-              <StyledTableBody>Salary</StyledTableBody>
-              <StyledTableBody>December salary</StyledTableBody>
-              <StyledTableBody>2022-12-28</StyledTableBody>
-              <StyledTableBody>19:45</StyledTableBody>
-              <StyledTableBody>700 /UAH</StyledTableBody>
-              <StyledTableBody>
-                <ActionButtonWrapper>
-                  <EditButton>
-                    <TrPencil style={{ stroke: '#171719' }} width="16" height="16" />
-                  </EditButton>
-                  <DeleteButton>
-                    <TrTrash width="16" height="16" />
-                  </DeleteButton>
-                </ActionButtonWrapper>
-              </StyledTableBody>
-            </tr>
+            {transactions?.map(({ _id, type, date, time, category, sum, comment }) => (
+              <tr key={_id}>
+                <StyledTableBody>{category.categoryName}</StyledTableBody>
+                <StyledTableBody>{comment}</StyledTableBody>
+                <StyledTableBody>{date}</StyledTableBody>
+                <StyledTableBody>{time}</StyledTableBody>
+                <StyledTableBody>{sum}/UAH</StyledTableBody>
+                <StyledTableBody>
+                  <ActionButtonWrapper>
+                    <EditButton onClick={() => handleDelete(_id)}>
+                      <TrPencil style={{ stroke: '#171719' }} width="16" height="16" />
+                    </EditButton>
+                    <DeleteButton>
+                      <TrTrash width="16" height="16" />
+                    </DeleteButton>
+                  </ActionButtonWrapper>
+                </StyledTableBody>
+              </tr>
+            ))}
           </tbody>
         </StyledTable>
       </StyledBackground>
