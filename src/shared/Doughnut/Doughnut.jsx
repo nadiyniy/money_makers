@@ -5,6 +5,14 @@ import {
     ArcElement, 
     Tooltip, 
     Legend } from 'chart.js';
+    import {
+      DonutWrapper,
+      ContentWrapper,
+      Title,
+      ListWrapper,
+      ColoredMarker,
+      ListItem,
+    } from '../Doughnut/Doughnut.styles';
 
 ChartJS.register(
     ArcElement, 
@@ -37,12 +45,12 @@ const DonutChart = () => {
               },
             ],
           }
-
+    
     const options = {
         aspectRatio: 2,
             plugins: {
                 legend: {
-                    display: true,
+                    display: false,
                     labels: {
                         usePointStyle: true,
                         pointStyle: 'circle',
@@ -50,9 +58,30 @@ const DonutChart = () => {
                 }
             }
         }
-        
-    return <Doughnut data={data} options={options} />;
+      
+      const percentageData = data.datasets[0].data;
+      const labelData = data.labels;
+      const backgroundColors = data.datasets[0].backgroundColor;
     
+      return (
+        <DonutWrapper>
+      <ContentWrapper>
+        <Title>Expenses categories</Title>
+        <Doughnut data={data} options={options} />
+      </ContentWrapper>
+      <ListWrapper>
+        <ul style={{ display: 'flex', flexDirection: 'column' }} >
+          {labelData.map((label, index) => (
+            <ListItem key={index} >
+              <ColoredMarker style={{ backgroundColor: backgroundColors[index] }}
+              ></ColoredMarker>
+              {label} {percentageData[index]}%
+            </ListItem>
+          ))}
+        </ul>
+      </ListWrapper>
+    </DonutWrapper>
+      );
  }
 
 export default DonutChart;
