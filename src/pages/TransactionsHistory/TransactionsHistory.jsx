@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 import { fetchTransactionsThunk, removeUserTransactionThunk } from 'redux/transactions/operations';
-import { selectDate, selectTransactions } from 'redux/transactions/selectors';
+import { selectDate, selectFilter, selectTransactions } from 'redux/transactions/selectors';
 
 import TransactionsTotalAmount from 'shared/TransactionsTotalAmount/TransactionsTotalAmount';
 import { Calendar, Search, TrPencil, TrTrash } from 'components/svgs';
@@ -23,6 +22,7 @@ import {
   RightSideContainer,
   SideContainer,
   StyledBackground,
+  StyledDatePicker,
   StyledForm,
   StyledFormWrapper,
   StyledTable,
@@ -33,15 +33,17 @@ import {
   Title,
 } from './TransactionsHistoryStyled';
 import { StyledCommonWrapper } from 'styles/Common.styled';
-import { setInputDate } from 'redux/transactions/slice';
+import { setFilter, setInputDate } from 'redux/transactions/slice';
 
 const TransactionsHistoryPage = () => {
+  const transactions = useSelector(selectTransactions);
+  const date = useSelector(selectDate);
+  const filter = useSelector(selectFilter);
+
   const dispatch = useDispatch();
   const { transactionsType } = useParams();
   const [selectedDate, setSelectedDate] = useState(new Date());
-
-  const transactions = useSelector(selectTransactions);
-  const date = useSelector(selectDate);
+  const [inputFilter, setInputFilter] = useState(filter);
 
   const dateFormat = `${date.year}-${String(date.month).padStart(2, '0')}-${String(date.day).padStart(2, '0')}`;
 
@@ -63,6 +65,19 @@ const TransactionsHistoryPage = () => {
     dispatch(removeUserTransactionThunk(id));
   };
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    dispatch(setFilter(inputFilter));
+  };
+
+  const filterChange = e => {
+    setInputFilter(e.target.value);
+  };
+
+  const filteredTransactions = transactions.filter(transaction =>
+    transaction.comment.toLowerCase().trim().includes(filter.toLowerCase().trim())
+  );
+
   return (
     <StyledCommonWrapper>
       <SideContainer>
@@ -77,14 +92,14 @@ const TransactionsHistoryPage = () => {
 
       <StyledBackground>
         <Container>
-          <StyledForm>
-            <Input type="text" placeholder="Search for anything..." />
+          <StyledForm onSubmit={handleSubmit}>
+            <Input type="text" placeholder="Search for anything..." value={inputFilter} onChange={filterChange} />
             <Button>
               <Search />
             </Button>
           </StyledForm>
           <StyledFormWrapper>
-            <DatePicker
+            <StyledDatePicker
               selected={selectedDate}
               value={date}
               onChange={handleChangeDate}
@@ -108,7 +123,7 @@ const TransactionsHistoryPage = () => {
             </tr>
           </StyledTableHead>
           <tbody>
-            {transactions?.map(({ _id, type, date, time, category, sum, comment }) => (
+            {filteredTransactions?.map(({ _id, type, date, time, category, sum, comment }) => (
               <tr key={_id}>
                 <StyledTableBody>{category.categoryName}</StyledTableBody>
                 <StyledTableBody>{comment}</StyledTableBody>
