@@ -19,7 +19,7 @@ export const DonutWrapper = styled.form`
   }
   @media screen and (min-width: 1280px) {
     max-width: 630px;
-    height: 302px;
+    height: 284px;
     padding: 40px 66px 82px 40px;
     flex-direction: row;
   }
@@ -32,13 +32,13 @@ export const ContentWrapper = styled.div`
 `;
 
 export const Title = styled.h2`
-color: var(--gray-text-50);
-padding-bottom: 40px;
-font-family: Suisse Intl;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+  color: var(--gray-text-50);
+  padding-bottom: 40px;
+  font-family: Suisse Intl;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 `;
 
 export const ListWrapper = styled.div`

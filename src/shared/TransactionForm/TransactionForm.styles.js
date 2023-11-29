@@ -26,7 +26,7 @@ export const TransactionFormStyle = styled.form`
   }
   @media screen and (min-width: 1280px) {
     width: 566px;
-    max-height: 600px;
+    height: 600px;
     margin: 0;
     margin-left: 44px;
     padding: 40px 40px;
