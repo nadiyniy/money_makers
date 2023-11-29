@@ -99,6 +99,7 @@ export const ModalItem = styled.li`
     margin-left: 20px;
   }
 `;
+
 export const ModalCategoryText = styled.p`
   color: var(--white-color);
   font-size: 14px;
