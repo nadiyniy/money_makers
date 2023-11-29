@@ -48,18 +48,16 @@ within a specified 6-day time frame.
 ## Task management
 
 ✅ Vladyslav Vasyliuk - Team Leader ◼ Setting up repository and common styles ◼
-Codereview ◼ Section Header
+Codereview ◼ Section Header ◼ Redux
 
-✅ Serhii Pochtovyk - Scrum Master + Creation of <span> <a href="https://trello.com/b/jzTYAdzp/money-makers">Trello</a> </span> and PageNotFound;
+✅ Serhii Pochtovyk - Scrum Master + created of <span> <a href="https://trello.com/b/jzTYAdzp/money-makers">Trello</a> </span>;
 
-✅ Mariia Hula - ◼ Section ◼
+✅ Mariia Hula - ◼ Created  MainTransactionsPage ◼ Redux
 
-✅ Daria Krykunova - Section ◼
+✅ Daria Krykunova - ◼ Created TransactionsHistoryPage ◼ Redux
 
-✅ Олена Побегайло - Section ◼
+✅ Olena Pobehailo - ◼ Created WelcomePage; ◼ RegisterPage; ◼ LoginPage; ◼ AuthForm; 
 
-✅ Світлана - Section ◼
+✅ Andrii Bilyk - Preparation and optimization of project images ◼ Created of sprite.svg file for icons; ◼ TransactionsChart and Loader;
 
-✅ Andrii Bilyk - Preparation and optimization of project images ◼ creation of sprite.svg file for icons
-
-✅ Eugenii Minko -
+✅ Eugenii Minko - ◼ Created Not Found Page;
