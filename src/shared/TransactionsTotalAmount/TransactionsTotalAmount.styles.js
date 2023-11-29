@@ -6,7 +6,6 @@ export const TotalAmountWrapper = styled.div`
   gap: 12px;
   margin-bottom: 40px;
 
-
   @media screen and (min-width: 768px) {
     max-width: 704px;
     flex-direction: row;
@@ -58,7 +57,7 @@ export const AmountText = styled.p`
     font-size: 24px;
   }
 `;
-export const AmountButton = styled.button`
+export const AmountButton = styled.div`
   display: inline-flex;
   align-items: center;
   justify-content: center;
