@@ -4,7 +4,6 @@ import { instance } from 'redux/fetchInstance';
 export const currentInfoUserThunk = createAsyncThunk('currentInfoUser', async (_, thunkApi) => {
   try {
     const { data } = await instance.get('users/current');
-    thunkApi.dispatch(currentInfoUserThunk());
     return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
