@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { loginThunk, registerThunk } from 'redux/auth/operations';
 import AuthForm from 'pages/Auth/AuthForm/AuthForm';
 import { validationSchemaRegister } from 'shared/validationSchema/validationSchema';
-import { Description, StyledAuthWrapper, Title } from '../commonAuthStyles';
+import { CenterWrapper, FormDescription, StyledAuthWrapper, Title } from '../commonAuthStyles';
 
 const fieldsData = [
   { name: 'name', label: 'Name', type: 'text' },
@@ -33,21 +33,23 @@ const RegisterPage = () => {
   };
 
   return (
-    <StyledAuthWrapper>
-      <Title>Sign Up</Title>
-      <Description>
-        Step into a world of hassle-free expense management! Your journey towards financial mastery begins here.
-      </Description>
-      <AuthForm
-        onSubmit={submit}
-        fieldsData={fieldsData}
-        submitButtonText="Sign Up"
-        initialState={{ email: '', password: '', name: '' }}
-        validationSchema={validationSchemaRegister}
-        navigationData={navigationData}
-        authType="register"
-      />
-    </StyledAuthWrapper>
+    <CenterWrapper>
+      <StyledAuthWrapper>
+        <Title>Sign Up</Title>
+        <FormDescription>
+          Step into a world of hassle-free expense management! Your journey towards financial mastery begins here.
+        </FormDescription>
+        <AuthForm
+          onSubmit={submit}
+          fieldsData={fieldsData}
+          submitButtonText="Sign Up"
+          initialState={{ email: '', password: '', name: '' }}
+          validationSchema={validationSchemaRegister}
+          navigationData={navigationData}
+          authType="register"
+        />
+      </StyledAuthWrapper>
+    </CenterWrapper>
   );
 };
 

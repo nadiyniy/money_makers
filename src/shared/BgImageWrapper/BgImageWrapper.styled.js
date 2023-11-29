@@ -8,7 +8,7 @@ export const StyledBgImageWrapper = styled.div`
   width: 335px;
   height: 381px;
   margin-top: 40px;
-
+  margin-bottom: 20px;
   border-radius: 20px;
 
   background-color: var(--gray-text-60);
@@ -22,6 +22,8 @@ export const StyledBgImageWrapper = styled.div`
     width: 704px;
     height: 482px;
     margin-top: 36px;
+    margin-bottom: 32px;
+
 
     background-image: url(${img1Tab});
     @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {

@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 export const FormWrapper = styled.form`
   height: 100%;
+  min-height: 360px;
   display: flex;
-  flex-grow: 1;
   flex-direction: column;
   justify-content: space-between;
   padding-bottom: 50px;
