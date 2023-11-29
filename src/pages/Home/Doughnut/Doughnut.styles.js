@@ -4,23 +4,13 @@ export const DonutWrapper = styled.form`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 99px 22px 87px 22px;
-  max-width: 335px;
-  height: 533px;
+  padding: 40px 20px;
+
   background-color: var(--gray-dark-color);
   border-radius: var(--border-radius-30);
   color: var(--white-color);
-  margin-bottom: 40px;
 
   @media screen and (min-width: 768px) {
-    height: 302px;
-    max-width: 704px;
-    padding: 99px 372px 82px 40px;
-  }
-  @media screen and (min-width: 1280px) {
-    max-width: 630px;
-    height: 284px;
-    padding: 40px 66px 82px 40px;
     flex-direction: row;
   }
 `;
@@ -43,8 +33,8 @@ export const Title = styled.h2`
 
 export const ListWrapper = styled.div`
   max-width: 180px;
-  margin-top: auto;
-  margin-left: auto;
+  margin: 0 auto;
+  margin-top: 40px;
 `;
 
 export const ColoredMarker = styled.span`
