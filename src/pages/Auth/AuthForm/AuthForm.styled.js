@@ -61,6 +61,22 @@ export const Input = styled.input`
     border: 1px solid var(--error-color);
   }
 
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
+    background-color: transparent;
+    color: var(--white-color);
+  }
+
+  /* &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    transition: border-color 5000s ease-in-out 0s;
+    border: 1px solid var(--primary-color);
+  } */
+
   @media screen and (min-width: 768px) {
     height: 42px;
   }
