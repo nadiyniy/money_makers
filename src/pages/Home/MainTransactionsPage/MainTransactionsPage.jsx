@@ -3,11 +3,12 @@ import { useMediaQuery } from 'react-responsive';
 import { useEffect, useState } from 'react';
 
 import TransactionsTotalAmount from '../../../shared/TransactionsTotalAmount/TransactionsTotalAmount';
-import TransactionsChart from '../TransactionsChart/TransactionsChart';
+
 import TransactionForm from '../../../shared/TransactionForm/TransactionForm';
 
 import { StyledCommonWrapper } from 'styles/Common.styled';
 import { MainPageSection, MainPageText, MainPageTitle, MainPageWrapper } from './MainTransactionsPage.styled';
+import DonutChart from '../Doughnut/Doughnut';
 
 const MainTransactionsPage = () => {
   const { transactionsType } = useParams();
@@ -43,7 +44,7 @@ const MainTransactionsPage = () => {
                 </div>
                 <TransactionsTotalAmount />
 
-                <TransactionsChart transactionsType={transactionsType} />
+                <DonutChart transactionsType={transactionsType} />
               </div>
               <TransactionForm transactionsType={transactionsType} setRender={setRender} />
             </>
@@ -58,7 +59,7 @@ const MainTransactionsPage = () => {
               </div>
               <TransactionsTotalAmount />
               <TransactionForm transactionsType={transactionsType} setRender={setRender} />
-              <TransactionsChart transactionsType={transactionsType} />
+              <DonutChart transactionsType={transactionsType} />
             </>
           )}
         </MainPageWrapper>
