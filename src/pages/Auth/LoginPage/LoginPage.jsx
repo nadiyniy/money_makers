@@ -13,7 +13,6 @@ import {
   Title,
 } from '../commonAuthStyles';
 
-
 const fieldsData = [
   { name: 'email', label: 'Email', type: 'email' },
   { name: 'password', label: 'Password', type: 'password' },
@@ -51,7 +50,6 @@ const LoginPage = () => {
     reset();
   };
 
-
   return (
     <CenterWrapper>
       <StyledAuthWrapper>
@@ -70,7 +68,7 @@ const LoginPage = () => {
 
         {!errorMessage && <Placeholder />}
 
-        {errorMessage && <ErrorMessage style={{ color: 'red' }}>{errorMessage}</ErrorMessage>}
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       </StyledAuthWrapper>
     </CenterWrapper>
   );

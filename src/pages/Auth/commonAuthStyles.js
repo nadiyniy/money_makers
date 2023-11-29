@@ -90,7 +90,7 @@ export const Placeholder = styled.div`
 export const ErrorMessage = styled.div`
   height: 30px;
   margin-bottom: 10px;
-  color: var(--red-color);
+  color: var(--error-color);
   font-size: 14px;
   margin-bottom: 10px;
 `;

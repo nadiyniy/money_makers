@@ -1,8 +1,16 @@
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginThunk, registerThunk } from 'redux/auth/operations';
 import AuthForm from 'pages/Auth/AuthForm/AuthForm';
 import { validationSchemaRegister } from 'shared/validationSchema/validationSchema';
-import { CenterWrapper, FormDescription, StyledAuthWrapper, Title } from '../commonAuthStyles';
+import {
+  CenterWrapper,
+  ErrorMessage,
+  FormDescription,
+  Placeholder,
+  StyledAuthWrapper,
+  Title,
+} from '../commonAuthStyles';
 
 const fieldsData = [
   { name: 'name', label: 'Name', type: 'text' },
@@ -16,20 +24,34 @@ const navigationData = {
 };
 
 const RegisterPage = () => {
+  const [errorMessage, setErrorMessage] = useState(null);
   const dispatch = useDispatch();
 
-  const submit = data => {
-    dispatch(registerThunk(data)).then(response => {
+  const submit = async data => {
+    try {
+      const response = await dispatch(registerThunk(data));
+      console.log('response', response);
+
       if (response?.payload) {
         const sendData = {
           email: data.email,
           password: data.password,
         };
-        dispatch(loginThunk(sendData));
-      } else {
-        console.error('Error');
+        const result = await dispatch(loginThunk(sendData));
+        console.log('result', result);
+
+        if (response.error) {
+          if (response.payload?.includes('409') && result.payload?.includes('403')) {
+            setErrorMessage('Provided email already exists. Please sign in. ');
+            console.log(errorMessage);
+          }
+          console.error('Error during registration');
+        }
       }
-    });
+    } catch (error) {
+      console.error('An error occurred during registration:', error);
+      setErrorMessage('An error occurred. Please try again.');
+    }
   };
 
   return (
@@ -48,6 +70,10 @@ const RegisterPage = () => {
           navigationData={navigationData}
           authType="register"
         />
+
+        {!errorMessage && <Placeholder />}
+
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       </StyledAuthWrapper>
     </CenterWrapper>
   );
