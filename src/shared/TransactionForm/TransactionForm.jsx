@@ -41,7 +41,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
   const { isOpen, openModal, closeModal } = useModal();
   const [chooseCategory, setchooseCategory] = useState('');
   const [takeCategoryId, setTakeCategoryId] = useState('');
-  const [checked, setCheked] = useState(false);
+  const [checked, setChecked] = useState('incomes');
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
 
@@ -56,7 +56,11 @@ const TransactionForm = ({ transactionsType, setRender }) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({});
+  } = useForm({
+    defaultValues: {
+      type: 'incomes',
+    },
+  });
 
   const submit = async ({ comment, date, sum, time, type }) => {
     try {
@@ -86,7 +90,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
   const handleTypeChange = e => {
     const value = e.target.value;
     setRender(value);
-    setCheked(value);
+    setChecked(value);
   };
 
   return (
