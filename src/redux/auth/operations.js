@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { Error } from 'components/svgs';
 import { toast } from 'react-toastify';
 import { clearToken, instance, setToken } from 'redux/fetchInstance';
 import { currentInfoUserThunk } from 'redux/user/operations';
@@ -21,9 +22,13 @@ export const loginThunk = createAsyncThunk('login', async (user, thunkApi) => {
     return data;
   } catch (error) {
     if (error.response.status === 403) {
-      toast.error("Email doesn't exist or password is wrong");
+      
+      toast(<>{"Email doesn't exist or password is wrong"}</>, {
+        className: 'Toastify__toast--error',
+        icon: <Error />,
+      });
     } else {
-      toast.error('Something went wrong. Please try again!');
+      toast('Something went wrong. Please try again!');
     }
     return thunkApi.rejectWithValue(error.message);
   }
