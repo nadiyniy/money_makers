@@ -239,7 +239,7 @@ export const TransactionButton = styled.button`
   border-radius: 40px;
   background: var(--primary-color);
   transition: all 0.3s ease;
-
+  border: none;
   &:hover {
     background: var(--primary-hover-color);
   }
