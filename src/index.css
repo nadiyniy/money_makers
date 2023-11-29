@@ -1,6 +1,6 @@
-@import-normalize; /* bring in normalize.css styles */
+@import-normalize;
 @font-face {
-  font-family: 'SuisseIntl'; /*Can be any text*/
+  font-family: 'SuisseIntl';
   src: local('SuisseIntlRegular'), url('/public/fonts/suisse-regular.ttf') format('truetype');
 }
 @font-face {

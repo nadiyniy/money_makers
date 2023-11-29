@@ -37,9 +37,4 @@ export const StyledUserBtn = styled.button`
   &.panel-open .arrow-icon {
     transform: rotate(0);
   }
-
-  /* &:hover > .arrow-icon,
-  &:focus > .arrow-icon {
-    transform: rotate(45deg);
-  } */
 `;

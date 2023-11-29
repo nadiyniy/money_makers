@@ -5,18 +5,6 @@ import BgImageWrapper from 'shared/BgImageWrapper/BgImageWrapper';
 import PageLoader from '../PageLoader/PageLoader';
 import { BgImageWrapperContainer, Container, ContentContainer } from './Layout.styled';
 
-// import Header from './header';
-// import BgImageWrapper from './BgImageWrapper';
-
-// Імпорт компонентів
-// Імпорти, назви папок/компонентів взяв по дефолту,вам слід адаптувати імпорти відповідно.
-// import WellcomPage from './WellcomePage';
-// import RegisterPage from './RegisterPage';
-// import LoginPage from './LoginPage';
-// import MainTransactionsPage from './MainTransactionsPage';
-// import TransactionsHistoryPage from './TransactionsHistoryPage';
-// import Loader from './Loader';
-
 const Layout = () => {
   const location = useLocation();
   const { pathname } = location;

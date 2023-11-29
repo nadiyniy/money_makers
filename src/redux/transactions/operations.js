@@ -2,41 +2,16 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { instance } from 'redux/fetchInstance';
 
-// export const fetchTransactionsThunk = createAsyncThunk('fetchTransactions', async ({ transactionType, date }, thunkApi) => {
-//   try {
-//     const savedToken = thunkApi.getState().auth.accessToken;
-//     const { data } = await instance.get(`transactions/${transactionType}?date=${date}`, {
-//       headers: {
-//         Authorization: `Bearer ${savedToken}`,
-//       },
-//     });
-//     return data;
-//   } catch (error) {
-//     return thunkApi.rejectWithValue(error.message);
-//   }
-// });
-
-/**
-  |============================
-  | наша стара санка зверху, знизу інша 
-  |============================
-*/
-
-export const fetchTransactionsThunk = createAsyncThunk(
-  'getTransactions',
-  async ({ type, date }, thunkApi) => {
-    try {
-      const { data } = await instance.get(`transactions/${type}`, {
-        params: { date },
-      });
-      return data;
-    } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
-    }
+export const fetchTransactionsThunk = createAsyncThunk('getTransactions', async ({ type, date }, thunkApi) => {
+  try {
+    const { data } = await instance.get(`transactions/${type}`, {
+      params: { date },
+    });
+    return data;
+  } catch (error) {
+    return thunkApi.rejectWithValue(error.message);
   }
-);
-
-
+});
 
 export const createUserTransactionThunk = createAsyncThunk(
   'createUserTransaction',

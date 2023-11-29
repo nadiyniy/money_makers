@@ -74,10 +74,6 @@ export const RadioInput = styled.input`
   height: 0;
   width: 0;
   cursor: pointer;
-  /* @media screen and (min-width: 768px) {
-  }
-  @media screen and (min-width: 1280px) {
-  } */
 `;
 export const RadioCustom = styled.span`
   position: absolute;
@@ -153,9 +149,9 @@ export const CalendarIcon = styled.button`
   border: none;
   position: absolute;
   top: 48px;
-  right: 10px; /* Регулюйте відстань від лейбла */
+  right: 10px;
   transform: translateY(-50%);
-  width: 24px; /* Регулюйте розмір іконки за потребою */
+  width: 24px;
   height: auto;
 `;
 export const DateInput = styled(ReactDatePicker)`

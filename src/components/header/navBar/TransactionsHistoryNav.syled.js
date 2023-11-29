@@ -41,11 +41,11 @@ export const StyledListTransactions = styled.nav`
     transition: var(--transition);
     &.burger {
       color: var(--black-color);
-      border: 1px solid var(--gray-avatar-40);
+      outline: 1px solid var(--gray-avatar-40);
     }
     &:hover,
     &:focus {
-      background-color: var(--gray-hover-color);
+      outline: 1px solid var(--primary-color);
     }
     &.active {
       border: none;
