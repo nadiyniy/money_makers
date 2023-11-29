@@ -22,13 +22,15 @@ export const loginThunk = createAsyncThunk('login', async (user, thunkApi) => {
     return data;
   } catch (error) {
     if (error.response.status === 403) {
-      
       toast(<>{"Email doesn't exist or password is wrong"}</>, {
         className: 'Toastify__toast--error',
         icon: <Error />,
       });
     } else {
-      toast('Something went wrong. Please try again!');
+      toast(<>{'Something went wrong. Please try again!'}</>, {
+        className: 'Toastify__toast--error',
+        icon: <Error />,
+      });
     }
     return thunkApi.rejectWithValue(error.message);
   }
