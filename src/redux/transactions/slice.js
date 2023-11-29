@@ -100,6 +100,7 @@ const initialState = {
   isLoading: false,
   error: null,
   inputDate: { year, month, day },
+  filter: '',
 };
 
 const transactionsSlice = createSlice({
@@ -108,6 +109,9 @@ const transactionsSlice = createSlice({
   reducers: {
     setInputDate: (state, { payload }) => {
       state.inputDate = payload;
+    },
+    setFilter: (state, { payload }) => {
+      state.filter = payload;
     },
   },
   extraReducers: builder => {
@@ -158,6 +162,6 @@ const transactionsSlice = createSlice({
 });
 
 
-export const { setInputDate } = transactionsSlice.actions;
+export const { setInputDate, setFilter } = transactionsSlice.actions;
 
 export const transactionsReducer = transactionsSlice.reducer;

@@ -1,3 +1,4 @@
+import ReactDatePicker from 'react-datepicker';
 import styled from 'styled-components';
 
 /**
@@ -103,15 +104,11 @@ export const StyledFormWrapper = styled.div`
   margin-top: 20px;
   display: flex;
   justify-content: center;
+  position: relative;
 
   margin-left: auto;
   margin-right: auto;
-  padding: 15px 30px;
   align-items: center;
-  gap: 71px;
-  border-radius: 30px;
-  border: 1px solid rgba(250, 250, 250, 0.2);
-  background: transparent;
   width: 295px;
 
     @media screen and (min-width: 768px) {}
@@ -120,9 +117,15 @@ export const StyledFormWrapper = styled.div`
     margin-left: 0;
   }
 `;
+
+
+
 export const IconWrapper = styled.div`
-  border: none;
-  background-color: transparent;
+  position: absolute;
+  top: 15px;
+  right: 52px;
+  stroke: #0ef387;
+  fill: none;
 `;
 export const Button = styled.button`
   border: none;
@@ -262,4 +265,27 @@ display: flex;
 justify-content: center;
 gap: 8px;
 `
+
+export const StyledDatePicker = styled(ReactDatePicker)`
+  padding: 15px 30px;
+  width: auto;
+
+  border-radius: 30px;
+  border: 1px solid rgba(250, 250, 250, 0.2);
+
+  background-color: transparent;
+  color: rgba(250, 250, 250, 0.4);
+
+  outline: none;
+  box-sizing: border-box;
+
+  transition: border-color 250ms ease-in-out;
+
+  &:hover {
+    border-color: #0ef387;
+  }
+  &:focus {
+    border-color: #0ef387;
+  }
+`;
 
