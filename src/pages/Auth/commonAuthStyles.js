@@ -15,7 +15,18 @@ export const StyledAuthWrapper = styled.div`
     margin-right: 100px;
     margin-left: 54px;
     padding: 0;
-    
+  }
+`;
+
+export const CenterWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  @media (min-width: 1280px) {
+    display: block;
+    height: auto;
   }
 `;
 
@@ -39,10 +50,9 @@ export const Title = styled.h1`
   }
 `;
 
-export const Description = styled.p`
+const sharedDescriptionStyles = `
   margin-bottom: 30px;
   color: var(--gray-text-40);
-
   font-size: 14px;
   letter-spacing: -0.28px;
 
@@ -54,3 +64,22 @@ export const Description = styled.p`
     max-width: 533px;
   }
 `;
+
+export const Description = styled.p`
+  ${sharedDescriptionStyles}
+
+  @media screen and (min-width: 768px) {
+    max-width: 533px;
+  }
+`;
+
+export const FormDescription = styled.p`
+  ${sharedDescriptionStyles}
+  max-width: 399px;
+
+  @media screen and (min-width: 1280px) {
+    max-width: 533px;
+  }
+`;
+
+

@@ -1,4 +1,4 @@
-import DecorationTab from 'shared/DecorationTab/DecorationTab';
+import DecorationTab from 'pages/Auth/DecorationTab/DecorationTab';
 import { StyledBgImageWrapper } from './BgImageWrapper.styled';
 
 const BgImageWrapper = () => {

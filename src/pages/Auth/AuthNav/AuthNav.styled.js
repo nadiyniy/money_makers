@@ -7,7 +7,7 @@ export const Wrapper = styled.ul`
 `;
 
 export const StyledItem = styled.li`
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
 `;
 
 const commonButtonStyles = `
