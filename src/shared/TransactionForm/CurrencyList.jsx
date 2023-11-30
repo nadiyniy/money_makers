@@ -13,7 +13,6 @@ const CurrencyList = () => {
   const [currencyForNow, setCurrencyForNow] = useState(
     currenciesList.find(item => item.value === currentUser.currency)
   );
-  console.log(currencyForNow.value);
 
   const handleCurrencyClick = item => {
     setCurrencyForNow(item);

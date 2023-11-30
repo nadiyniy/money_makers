@@ -23,7 +23,6 @@ import {
 import { Close, Pencil, Delete, Check1 } from 'components/svgs';
 
 const CategoriesModalList = ({ closeModal, categoryName, setchooseCategory, setTakeCategoryId }) => {
-  const [activeIndex, setActiveIndex] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const dispatch = useDispatch();
