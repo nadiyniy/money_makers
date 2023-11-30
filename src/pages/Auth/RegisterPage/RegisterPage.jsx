@@ -30,18 +30,20 @@ const RegisterPage = () => {
   const submit = async data => {
     try {
       const response = await dispatch(registerThunk(data));
-      console.log('response', response);
+      // console.log('response', response?.payload);
 
       if (response?.payload) {
-        const sendData = {
-          email: data.email,
-          password: data.password,
-        };
-        const result = await dispatch(loginThunk(sendData));
+        if (response.payload.includes('409')) {
+          setErrorMessage('Provided email already exists. Please sign in.');
+        } else {
+          const sendData = {
+            email: data.email,
+            password: data.password,
+          };
+          const result = await dispatch(loginThunk(sendData));
 
-        if (response.error) {
-          if (response.payload?.includes('409') && result.payload?.includes('403')) {
-            setErrorMessage('Provided email already exists. Please sign in. ');
+          if (result.error) {
+            setErrorMessage('Unknown error occurred. Please try again later.');
           }
         }
       }
