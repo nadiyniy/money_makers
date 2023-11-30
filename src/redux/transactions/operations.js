@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { instance } from 'redux/fetchInstance';
+import { currentInfoUserThunk } from 'redux/user/operations';
 
 export const fetchTransactionsThunk = createAsyncThunk('getTransactions', async ({ type, date }, thunkApi) => {
   try {
@@ -23,6 +24,7 @@ export const createUserTransactionThunk = createAsyncThunk(
           Authorization: `Bearer ${savedToken}`,
         },
       });
+      thunkApi.dispatch(currentInfoUserThunk());
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
