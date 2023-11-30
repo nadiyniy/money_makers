@@ -82,4 +82,15 @@ export const FormDescription = styled.p`
   }
 `;
 
+export const Placeholder = styled.div`
+  height: 30px;
+  margin-bottom: 10px;
+`;
 
+export const ErrorMessage = styled.div`
+  height: 30px;
+  margin-bottom: 10px;
+  color: var(--error-color);
+  font-size: 14px;
+  margin-bottom: 10px;
+`;

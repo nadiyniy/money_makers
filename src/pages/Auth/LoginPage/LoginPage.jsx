@@ -1,27 +1,49 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { loginThunk } from 'redux/auth/operations';
 import AuthForm from 'pages/Auth/AuthForm/AuthForm';
 import { validationSchemaLogin } from 'shared/validationSchema/validationSchema';
-import { CenterWrapper, FormDescription, StyledAuthWrapper, Title } from '../commonAuthStyles';
+import {
+  CenterWrapper,
+  ErrorMessage,
+  FormDescription,
+  Placeholder,
+  StyledAuthWrapper,
+  Title,
+} from '../commonAuthStyles';
 
 const fieldsData = [
   { name: 'email', label: 'Email', type: 'email' },
   { name: 'password', label: 'Password', type: 'password' },
 ];
 
+const navigationData = {
+  text: 'Don’t have an account?',
+  buttonText: 'Sign Up!',
+};
+
 const LoginPage = () => {
+  const [errorMessage, setErrorMessage] = useState(null);
   const dispatch = useDispatch();
   const { reset } = useForm();
 
-  const onSubmit = data => {
-    dispatch(loginThunk(data));
-    reset();
-  };
+  const onSubmit = async data => {
+    try {
+      const result = await dispatch(loginThunk(data));
 
-  const navigationData = {
-    text: 'Don’t have an account?',
-    buttonText: 'Sign Up!',
+      if (result.error) {
+        if (result.payload?.includes('403')) {
+          setErrorMessage('Access denied: Invalid email or password');
+        } else if (result.payload?.includes('400')) {
+          setErrorMessage('Unknown error occurred. Please try again later.');
+        }
+      }
+    } catch (error) {
+      console.error('error');
+    }
+
+    reset();
   };
 
   return (
@@ -39,6 +61,10 @@ const LoginPage = () => {
           navigationData={navigationData}
           authType="login"
         />
+
+        {!errorMessage && <Placeholder />}
+
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       </StyledAuthWrapper>
     </CenterWrapper>
   );
