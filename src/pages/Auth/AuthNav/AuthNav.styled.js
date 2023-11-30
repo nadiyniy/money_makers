@@ -4,6 +4,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.ul`
   display: flex;
   gap: 20px;
+  min-height: 36px;
 `;
 
 export const StyledItem = styled.li`

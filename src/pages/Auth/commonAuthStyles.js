@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledAuthWrapper = styled.div`
-  max-width: 375px;
+  /* max-width: 375px;
   padding: 40px 20px 0;
   margin-left: auto;
   margin-right: auto;
@@ -15,6 +15,30 @@ export const StyledAuthWrapper = styled.div`
     margin-right: 100px;
     margin-left: 54px;
     padding: 0;
+  } */
+`;
+
+export const PageWrapper = styled.div`
+  margin-top: 37px;
+  margin-bottom: 40px;
+
+  @media screen and (min-width: 1280px) {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 54px;
+    align-items: start;
+    height: auto;
+
+    padding-top: 40px;
+    padding-bottom: 100px;
+  }
+`;
+
+export const ContentWrapper = styled.div`
+  outline: 1px solid red;
+
+  @media screen and (min-width: 1280px) {
+    max-width: 575px;
   }
 `;
 
@@ -24,7 +48,7 @@ export const CenterWrapper = styled.div`
   align-items: center;
   height: 100vh;
 
-  @media (min-width: 1280px) {
+  @media screen and (min-width: 1280px) {
     display: block;
     height: auto;
   }
@@ -45,6 +69,7 @@ export const Title = styled.h1`
   }
 
   @media screen and (min-width: 768px) {
+    margin-bottom: 20px;
     font-size: 56px;
     letter-spacing: -1.12px;
   }
@@ -62,6 +87,7 @@ const sharedDescriptionStyles = `
 
   @media screen and (min-width: 1280px) {
     max-width: 533px;
+    margin-bottom:40px;
   }
 `;
 

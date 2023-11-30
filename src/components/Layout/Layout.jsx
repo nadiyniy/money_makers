@@ -34,11 +34,11 @@ const Layout = () => {
     <>
       <Header />
       <Container>
-        {shouldRender && (
+        {/* {shouldRender && (
           <BgImageWrapperContainer>
             <BgImageWrapper />
           </BgImageWrapperContainer>
-        )}
+        )} */}
         <ContentContainer>
           <Suspense fallback={<PageLoader />}>
             <Outlet />

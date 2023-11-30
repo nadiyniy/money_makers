@@ -2,12 +2,12 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: none;
-  @media (min-width: 768px) and (max-width: 1439.8px) {
+  @media screen and (min-width: 768px) and (max-width: 1439.8px) {
     display: none;
   }
 
-  @media (min-width: 1280px) {
-    margin-top: 156px;
+  @media screen and  (min-width: 1280px) {
+    margin-top: 166px;
     display: flex;
     gap: 32px;
   }

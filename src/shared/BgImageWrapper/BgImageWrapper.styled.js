@@ -4,6 +4,9 @@ import { homeImages } from 'images/home/home-images';
 const { img1Desk, img2Desk, img1Mob, img2Mob, img1Tab, img2Tab } = homeImages;
 
 export const StyledBgImageWrapper = styled.div`
+  outline: 1px solid yellow;
+
+
   position: relative;
   width: 335px;
   height: 381px;
@@ -24,7 +27,6 @@ export const StyledBgImageWrapper = styled.div`
     margin-top: 36px;
     margin-bottom: 32px;
 
-
     background-image: url(${img1Tab});
     @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
       background-image: url(${img2Tab});
@@ -34,8 +36,8 @@ export const StyledBgImageWrapper = styled.div`
   @media (min-width: 1280px) {
     width: 611px;
     height: 568px;
-    margin-top: 40px;
-    margin-left: 100px;
+    margin: 0;
+    
 
     background-image: url(${img1Desk});
     @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
