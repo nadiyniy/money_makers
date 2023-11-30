@@ -40,7 +40,7 @@ const transactionsSlice = createSlice({
       })
       .addCase(removeUserTransactionThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.transactions = state.transactions.filter(transaction => transaction._id !== payload);
+        state.error = null;
       })
       .addCase(updateUserTransactionThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;

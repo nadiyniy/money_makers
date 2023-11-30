@@ -70,9 +70,16 @@ const TransactionsHistoryPage = () => {
     dispatch(setFilter(e.target.value));
   };
 
-  const filteredTransactions = transactions.filter(transaction =>
-    transaction.comment.toLowerCase().trim().includes(filter.toLowerCase().trim())
-  );
+  const filteredTransactions = transactions.filter(transaction => {
+    const lowerCaseFilter = filter.toLowerCase().trim();
+    return (
+      transaction.comment.toLowerCase().includes(lowerCaseFilter) ||
+      transaction.category?.categoryName.toLowerCase().includes(lowerCaseFilter) ||
+      transaction.date.toLowerCase().includes(lowerCaseFilter) ||
+      transaction.time.toLowerCase().includes(lowerCaseFilter) ||
+      String(transaction.sum).includes(lowerCaseFilter)
+    );
+  });
 
   const renderTableRows = () => {
     return filteredTransactions.map(({ _id, category, comment, date, time, sum, type }) => (
