@@ -46,7 +46,7 @@ export const removeUserTransactionThunk = createAsyncThunk('removeUserTransactio
 
 export const updateUserTransactionThunk = createAsyncThunk(
   'updateTransaction',
-  async (transactionType, transactionId, thunkApi) => {
+  async ({ transactionType, transactionId }, thunkApi) => {
     try {
       const savedToken = thunkApi.getState().auth.accessToken;
       const { data } = await instance.patch(`transactions/${transactionType}/${transactionId}`, {

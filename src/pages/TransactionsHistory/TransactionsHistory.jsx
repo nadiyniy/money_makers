@@ -1,45 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
+import { Calendar, Search, TrPencil, TrTrash } from 'components/svgs';
+import { StyledCommonWrapper } from 'styles/Common.styled';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
-import { fetchTransactionsThunk, removeUserTransactionThunk } from 'redux/transactions/operations';
-import { selectDate, selectFilter, selectTransactions } from 'redux/transactions/selectors';
-
-import TransactionsTotalAmount from 'shared/TransactionsTotalAmount/TransactionsTotalAmount';
-import { Calendar, Search, TrPencil, TrTrash } from 'components/svgs';
-
 import {
-  ActionButtonWrapper,
-  Button,
-  Container,
-  DeleteButton,
-  EditButton,
-  IconWrapper,
-  Input,
+  SideContainer,
   LeftSideContainer,
   RightSideContainer,
-  SideContainer,
+  Title,
+  Text,
   StyledBackground,
-  StyledDatePicker,
-  StyledForm,
+  Container,
+  Input,
+  Button,
   StyledFormWrapper,
+  StyledDatePicker,
+  IconWrapper,
   StyledTable,
-  StyledTableBody,
   StyledTableHead,
   StyledTableName,
-  Text,
-  Title,
+  StyledTableBody,
+  ActionButtonWrapper,
+  EditButton,
+  DeleteButton,
 } from './TransactionsHistoryStyled';
-import { StyledCommonWrapper } from 'styles/Common.styled';
+import { useParams } from 'react-router-dom';
+import { fetchTransactionsThunk, removeUserTransactionThunk } from 'redux/transactions/operations';
+import { selectDate, selectFilter, selectTransactions } from 'redux/transactions/selectors';
 import { setFilter, setInputDate } from 'redux/transactions/slice';
+import TransactionsTotalAmount from 'shared/TransactionsTotalAmount/TransactionsTotalAmount';
 
 const TransactionsHistoryPage = () => {
   const transactions = useSelector(selectTransactions);
   const date = useSelector(selectDate);
   const filter = useSelector(selectFilter);
-
   const dispatch = useDispatch();
   const { transactionsType } = useParams();
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -57,26 +53,48 @@ const TransactionsHistoryPage = () => {
     }
   };
 
-  useEffect(() => {
-    dispatch(fetchTransactionsThunk({ type: transactionsType, date: dateFormat }));
-  }, [dispatch, transactionsType, date, dateFormat]);
-
   const handleDelete = id => {
     dispatch(removeUserTransactionThunk(id));
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    dispatch(setFilter(inputFilter));
+  useEffect(() => {
+    dispatch(fetchTransactionsThunk({ type: transactionsType, date: dateFormat }));
+  }, [dispatch, transactionsType, date, dateFormat]);
+
+  const handleEdit = id => {
+    // handle edit logic
   };
 
   const filterChange = e => {
     setInputFilter(e.target.value);
+    dispatch(setFilter(e.target.value));
   };
 
   const filteredTransactions = transactions.filter(transaction =>
     transaction.comment.toLowerCase().trim().includes(filter.toLowerCase().trim())
   );
+
+  const renderTableRows = () => {
+    return filteredTransactions.map(({ _id, category, comment, date, time, sum, type }) => (
+      <tr key={_id}>
+        <StyledTableBody>{category?.categoryName}</StyledTableBody>
+        <StyledTableBody>{comment}</StyledTableBody>
+        <StyledTableBody>{date}</StyledTableBody>
+        <StyledTableBody>{time}</StyledTableBody>
+        <StyledTableBody>{sum}/UAH</StyledTableBody>
+        <StyledTableBody>
+          <ActionButtonWrapper>
+            <EditButton onClick={() => handleEdit(type, _id)}>
+              <TrPencil style={{ stroke: '#171719' }} width="16" height="16" />
+            </EditButton>
+            <DeleteButton onClick={() => handleDelete(_id)}>
+              <TrTrash width="16" height="16" />
+            </DeleteButton>
+          </ActionButtonWrapper>
+        </StyledTableBody>
+      </tr>
+    ));
+  };
 
   return (
     <StyledCommonWrapper>
@@ -92,12 +110,10 @@ const TransactionsHistoryPage = () => {
 
       <StyledBackground>
         <Container>
-          <StyledForm onSubmit={handleSubmit}>
-            <Input type="text" placeholder="Search for anything..." value={inputFilter} onChange={filterChange} />
-            <Button>
-              <Search />
-            </Button>
-          </StyledForm>
+          <Input type="text" placeholder="Search for anything..." onChange={filterChange} />
+          <Button onClick={() => dispatch(setFilter(inputFilter))}>
+            <Search />
+          </Button>
           <StyledFormWrapper>
             <StyledDatePicker
               selected={selectedDate}
@@ -122,27 +138,7 @@ const TransactionsHistoryPage = () => {
               <StyledTableName>Actions</StyledTableName>
             </tr>
           </StyledTableHead>
-          <tbody>
-            {filteredTransactions?.map(({ _id, type, date, time, category, sum, comment }) => (
-              <tr key={_id}>
-                <StyledTableBody>{category.categoryName}</StyledTableBody>
-                <StyledTableBody>{comment}</StyledTableBody>
-                <StyledTableBody>{date}</StyledTableBody>
-                <StyledTableBody>{time}</StyledTableBody>
-                <StyledTableBody>{sum}/UAH</StyledTableBody>
-                <StyledTableBody>
-                  <ActionButtonWrapper>
-                    <EditButton onClick={() => handleDelete(_id)}>
-                      <TrPencil style={{ stroke: '#171719' }} width="16" height="16" />
-                    </EditButton>
-                    <DeleteButton>
-                      <TrTrash width="16" height="16" />
-                    </DeleteButton>
-                  </ActionButtonWrapper>
-                </StyledTableBody>
-              </tr>
-            ))}
-          </tbody>
+          <tbody>{renderTableRows()}</tbody>
         </StyledTable>
       </StyledBackground>
     </StyledCommonWrapper>
