@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Eye, EyeOff, Error } from 'components/svgs';
+import { Eye, EyeOff, Error, Check } from 'components/svgs';
 import {
   ErrorMessage,
   FormWrapper,
+  HintMessage,
   IconContainer,
   Input,
   InputContainer,
@@ -32,10 +33,16 @@ const AuthForm = ({
 
   const linkTo = authType === 'register' ? '/login' : '/register';
 
-  const { isDirty } = formState;
+  const { isDirty, errors, touchedFields } = formState;
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(prev => !prev);
+  };
+
+  const fieldHints = {
+    name: 'Name is required',
+    email: 'E-mail is required',
+    password: 'Password must contain  6 - 20 symbols',
   };
 
   return (
@@ -49,17 +56,30 @@ const AuthForm = ({
                 type={isPasswordVisible ? 'text' : field.type}
                 placeholder={field.label}
                 autoComplete={field.type === 'email' ? 'email' : 'current-password'}
-                className={formState.errors[field.name] ? 'error' : ''}
+                className={` ${errors[field.name] ? 'error' : ''} ${
+                  !errors[field.name] && touchedFields[field.name] && 'success'
+                }`}
               />
+
+              {field.type !== 'password' && (
+                <IconContainer>
+                  {errors[field.name] && <Error />}
+                  {touchedFields[field.name] && !errors[field.name] && !isPasswordVisible && <Check />}
+                </IconContainer>
+              )}
 
               {field.type === 'password' && (
                 <IconContainer onClick={togglePasswordVisibility}>
-                  {formState.errors[field.name] ? <Error /> : !isPasswordVisible ? <EyeOff /> : <Eye />}
+                  {errors[field.name] ? <Error /> : !isPasswordVisible ? <EyeOff /> : <Eye />}
                 </IconContainer>
               )}
             </InputContainer>
 
-            {formState.errors[field.name] && <ErrorMessage>{formState.errors[field.name].message}</ErrorMessage>}
+            {!errors[field.name] ? (
+              <HintMessage>{fieldHints[field.name]}</HintMessage>
+            ) : (
+              <ErrorMessage>{errors[field.name].message}</ErrorMessage>
+            )}
           </InputGroup>
         ))}
       </div>

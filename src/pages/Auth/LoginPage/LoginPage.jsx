@@ -34,17 +34,13 @@ const LoginPage = () => {
 
       if (result.error) {
         if (result.payload?.includes('403')) {
-          setErrorMessage('Access Denied: Invalid email or password');
-
-          console.log('Access Denied: Invalid email or password');
+          setErrorMessage('Access denied: Invalid email or password');
         } else if (result.payload?.includes('400')) {
-          setErrorMessage('Something went wrong. Please try again');
-
-          console.log('Something went wrong. Please try again');
+          setErrorMessage('Unknown error occurred. Please try again later.');
         }
       }
     } catch (error) {
-      console.error('Some custom error message');
+      console.error('error');
     }
 
     reset();

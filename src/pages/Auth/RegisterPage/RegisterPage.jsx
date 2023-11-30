@@ -38,19 +38,15 @@ const RegisterPage = () => {
           password: data.password,
         };
         const result = await dispatch(loginThunk(sendData));
-        console.log('result', result);
 
         if (response.error) {
           if (response.payload?.includes('409') && result.payload?.includes('403')) {
             setErrorMessage('Provided email already exists. Please sign in. ');
-            console.log(errorMessage);
           }
-          console.error('Error during registration');
         }
       }
     } catch (error) {
-      console.error('An error occurred during registration:', error);
-      setErrorMessage('An error occurred. Please try again.');
+      setErrorMessage('Unknown error occurred. Please try again later.');
     }
   };
 

@@ -61,6 +61,10 @@ export const Input = styled.input`
     border: 1px solid var(--error-color);
   }
 
+  &.success {
+    border: 1px solid var(--success-color);
+  }
+
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
@@ -69,13 +73,6 @@ export const Input = styled.input`
     background-color: transparent;
     color: var(--white-color);
   }
-
-  /* &:-webkit-autofill:hover,
-  &:-webkit-autofill:focus,
-  &:-webkit-autofill:active {
-    transition: border-color 5000s ease-in-out 0s;
-    border: 1px solid var(--primary-color);
-  } */
 
   @media screen and (min-width: 768px) {
     height: 42px;
@@ -150,7 +147,18 @@ export const StyledLink = styled(Link)`
   }
 `;
 
-export const ErrorMessage = styled.p`
-  color: var(--error-color);
+const sharedMessageStyles = `
+  margin-top: 4px;
+  margin-left: 18px;
   font-size: 10px;
+`;
+
+export const ErrorMessage = styled.p`
+  ${sharedMessageStyles}
+  color: var(--error-color);
+`;
+
+export const HintMessage = styled.p`
+  ${sharedMessageStyles}
+  color: var(--gray-text-60);
 `;
