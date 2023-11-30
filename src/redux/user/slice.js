@@ -33,7 +33,7 @@ const userSlice = createSlice({
       .addMatcher(
         isAnyOf(
           currentInfoUserThunk.pending,
-          updateInfoUserThunk.pending,
+          // updateInfoUserThunk.pending,
           updateAvatarThunk.pending,
           deleteAvatarThunk.pending
         ),
