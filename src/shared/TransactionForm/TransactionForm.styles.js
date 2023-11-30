@@ -20,7 +20,7 @@ export const TransactionFormStyle = styled.form`
   margin-bottom: 40px;
 
   @media screen and (min-width: 768px) {
-    max-height: 600px;
+    max-height: 620px;
     max-width: 704px;
     padding: 40px 109px;
   }
@@ -42,10 +42,6 @@ export const RadioWrapper = styled.div`
   padding-left: 32px;
   padding-right: 44px;
   margin-bottom: 20px;
-  @media screen and (min-width: 768px) {
-  }
-  @media screen and (min-width: 1280px) {
-  }
 `;
 
 export const RadioLabel = styled.label`
@@ -122,8 +118,6 @@ export const DateInputWrapper = styled.div`
   @media screen and (min-width: 768px) {
     gap: 20px;
   }
-  @media screen and (min-width: 1280px) {
-  }
 `;
 export const DateLabel = styled.label`
   display: flex;
@@ -177,10 +171,11 @@ export const DateInput = styled(ReactDatePicker)`
 
   &::placeholder {
     background-color: var(--gray-dark-color);
-    color: var(--gray-text-20);
+    color: var(--gray-text-40);
   }
   @media screen and (min-width: 768px) {
     max-width: 262px;
+    font-size: 16px;
   }
   @media screen and (min-width: 1280px) {
     width: 234px;
@@ -213,7 +208,11 @@ export const OtherInput = styled.input`
 
   &::placeholder {
     background-color: var(--gray-dark-color);
-    color: var(--gray-text-20);
+    color: var(--gray-text-40);
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
   }
 `;
 
@@ -255,9 +254,9 @@ export const OneLabel = styled.label`
   letter-spacing: -0.28px;
   margin-bottom: 20px;
 `;
-export const ErrorMessage = styled.p`
+export const ErrorMessage = styled.span`
   margin-top: 4px;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--error-color);
 `;
 
@@ -272,14 +271,54 @@ export const TwoLabel = styled.label`
   margin-bottom: 20px;
   position: relative;
 `;
-export const Currency = styled.span`
-  content: '';
+export const Currency = styled.div`
   position: absolute;
-  top: 40px;
-  right: 18px;
+  top: 26px;
+  right: 10px;
   color: var(--gray-text-40);
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 1.28;
+
+  .currencies-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    gap: 4px;
+
+    li {
+      z-index: 1;
+      display: block;
+      padding: 4px 12px;
+      color: var(--gray-text-40);
+      border: 1px solid var(--gray-text-40);
+      border-radius: 8px;
+      &:hover,
+      &:focus {
+        color: var(--white-color);
+        border: 1px solid var(--primary-color);
+      }
+    }
+  }
+
+  .currencies-active {
+    width: max-content;
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 18px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  &.arrow-icon {
+    transform: rotate(0);
+    transform: scale(3);
+  }
+  &.dropdown-open .arrow-icon {
+    transform: rotate(180deg);
+  }
 `;

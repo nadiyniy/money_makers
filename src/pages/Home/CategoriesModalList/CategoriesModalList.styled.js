@@ -22,8 +22,6 @@ export const ModalListWrapper = styled.div`
     max-height: 460px;
     min-width: 500px;
   }
-  @media screen and (min-width: 1280px) {
-  }
 `;
 
 export const ModalListCloseButton = styled.button`
@@ -90,9 +88,13 @@ export const ModalItem = styled.li`
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
+  position: relative;
 
-  &.isActive {
+  &:hover {
     background-color: var(--black-color);
+  }
+  &:hover .ModalButtonWrapper {
+    display: flex;
   }
 
   @media screen and (min-width: 768px) {
@@ -116,7 +118,7 @@ export const ModalButtonWrapper = styled.div`
   align-items: center;
   gap: 14px;
 
-  &.isActive {
+  ${ModalItem}:hover & {
     display: flex;
   }
 `;
@@ -124,11 +126,13 @@ export const ModalButtonWrapper = styled.div`
 export const ModalListButton = styled.button`
   background-color: transparent;
   border: none;
+  transition: all 0.3s ease;
 
-  &:focus {
-    outline: none;
-    border-color: var(--primary-hover-color);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    background-color: var(--gray-dark-color);
+  svg {
+    color: var(--primary-color);
+  }
+
+  &:hover svg {
+    color: var(--primary-hover-color);
   }
 `;
