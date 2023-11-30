@@ -1,26 +1,8 @@
 import styled from 'styled-components';
 
-export const StyledAuthWrapper = styled.div`
-  /* max-width: 375px;
-  padding: 40px 20px 0;
-  margin-left: auto;
-  margin-right: auto;
-
-  @media screen and (min-width: 768px) {
-    max-width: 768px;
-    padding: 63px 32px 0;
-  }
-  @media screen and (min-width: 1280px) {
-    max-width: 575px;
-    margin-right: 100px;
-    margin-left: 54px;
-    padding: 0;
-  } */
-`;
-
 export const PageWrapper = styled.div`
-  margin-top: 37px;
-  margin-bottom: 40px;
+  padding-top: 37px;
+  padding-bottom: 40px;
 
   @media screen and (min-width: 1280px) {
     display: flex;
@@ -35,8 +17,6 @@ export const PageWrapper = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  outline: 1px solid red;
-
   @media screen and (min-width: 1280px) {
     max-width: 575px;
   }
@@ -46,7 +26,7 @@ export const CenterWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 90vh;
 
   @media screen and (min-width: 1280px) {
     display: block;
@@ -75,18 +55,23 @@ export const Title = styled.h1`
   }
 `;
 
+export const AuthTitle = styled(Title)`
+  @media screen and (min-width: 1280px) {
+    margin-top: 18px;
+  }
+`;
+
 const sharedDescriptionStyles = `
   margin-bottom: 30px;
   color: var(--gray-text-40);
   font-size: 14px;
-  letter-spacing: -0.28px;
-
+  letter-spacing: -0.02em;
+  
   @media screen and (min-width: 768px) {
     font-size: 16px;
   }
 
   @media screen and (min-width: 1280px) {
-    max-width: 533px;
     margin-bottom:40px;
   }
 `;
@@ -104,7 +89,7 @@ export const FormDescription = styled.p`
   max-width: 399px;
 
   @media screen and (min-width: 1280px) {
-    max-width: 533px;
+    max-width: 500px;
   }
 `;
 

@@ -1,17 +1,19 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginThunk } from 'redux/auth/operations';
+import { useForm } from 'react-hook-form';
 import AuthForm from 'pages/Auth/AuthForm/AuthForm';
+import { loginThunk } from 'redux/auth/operations';
 import { validationSchemaLogin } from 'shared/validationSchema/validationSchema';
 import {
+  AuthTitle,
   CenterWrapper,
   ErrorMessage,
   FormDescription,
+  PageWrapper,
   Placeholder,
-  StyledAuthWrapper,
-  Title,
 } from '../commonAuthStyles';
+import { StyledCommonWrapper } from 'styles/Common.styled';
+import BgImageWrapper from 'shared/BgImageWrapper/BgImageWrapper';
 
 const fieldsData = [
   { name: 'email', label: 'Email', type: 'email' },
@@ -28,6 +30,19 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const { reset } = useForm();
 
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1280);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1280);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const onSubmit = async data => {
     try {
       const result = await dispatch(loginThunk(data));
@@ -47,26 +62,33 @@ const LoginPage = () => {
   };
 
   return (
-    <CenterWrapper>
-      <StyledAuthWrapper>
-        <Title>Sign In</Title>
-        <FormDescription>Welcome back to effortless expense tracking! Your financial dashboard awaits.</FormDescription>
+    <StyledCommonWrapper>
+      <CenterWrapper>
+        <PageWrapper>
+          <div>
+            <AuthTitle>Sign In</AuthTitle>
+            <FormDescription>
+              Welcome back to effortless expense tracking! Your financial dashboard awaits.
+            </FormDescription>
 
-        <AuthForm
-          fieldsData={fieldsData}
-          submitButtonText="Sign In"
-          initialState={{ email: '', password: '' }}
-          validationSchema={validationSchemaLogin}
-          onSubmit={onSubmit}
-          navigationData={navigationData}
-          authType="login"
-        />
+            <AuthForm
+              fieldsData={fieldsData}
+              submitButtonText="Sign In"
+              initialState={{ email: '', password: '' }}
+              validationSchema={validationSchemaLogin}
+              onSubmit={onSubmit}
+              navigationData={navigationData}
+              authType="login"
+            />
 
-        {!errorMessage && <Placeholder />}
+            {!errorMessage && <Placeholder />}
 
-        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-      </StyledAuthWrapper>
-    </CenterWrapper>
+            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+          </div>
+          {isDesktop && <BgImageWrapper />}
+        </PageWrapper>
+      </CenterWrapper>
+    </StyledCommonWrapper>
   );
 };
 

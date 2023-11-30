@@ -7,8 +7,7 @@ import { ContentWrapper, Description, PageWrapper, Title } from '../commonAuthSt
 
 const WelcomePage = () => {
   return (
-    <StyledCommonWrapper style={{outline: '1px solid yellow'
-    }}>
+    <StyledCommonWrapper>
       <PageWrapper>
         <ContentWrapper>
           <div>
