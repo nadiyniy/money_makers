@@ -286,9 +286,11 @@ export const Currency = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 12px 0px;
     font-size: 16px;
-    gap: 4px;
-
+    gap: 8px;
+    background-color: var(--black-color);
+    border-radius: 8px;
     li {
       z-index: 1;
       display: block;
