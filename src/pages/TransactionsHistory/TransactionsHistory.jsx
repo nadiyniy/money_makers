@@ -54,7 +54,11 @@ const TransactionsHistoryPage = () => {
   };
 
   const handleDelete = id => {
-    dispatch(removeUserTransactionThunk(id));
+    dispatch(removeUserTransactionThunk(id))
+      .unwrap()
+      .then(() => {
+        dispatch(fetchTransactionsThunk({ type: transactionsType, date: dateFormat }));
+      });
   };
 
   useEffect(() => {

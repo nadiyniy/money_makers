@@ -40,7 +40,6 @@ export const removeUserTransactionThunk = createAsyncThunk('removeUserTransactio
         Authorization: `Bearer ${savedToken}`,
       },
     });
-    thunkApi.dispatch(fetchTransactionsThunk());
     return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
