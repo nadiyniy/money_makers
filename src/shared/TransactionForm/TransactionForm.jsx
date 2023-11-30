@@ -30,18 +30,18 @@ import {
   TwoLabel,
   DateLabel,
   CalendarIcon,
-  Currency,
 } from './TransactionForm.styles';
 import { Calendar1, Clock } from '../../components/svgs/index';
 import { selectCurrentUser } from 'redux/user/selectors';
 import { currentInfoUserThunk } from 'redux/user/operations';
 import { toast } from 'react-toastify';
+import CurrencyList from './CurrencyList';
 
 const TransactionForm = ({ transactionsType, setRender }) => {
   const { isOpen, openModal, closeModal } = useModal();
   const [chooseCategory, setchooseCategory] = useState('');
   const [takeCategoryId, setTakeCategoryId] = useState('');
-  const [checked, setChecked] = useState('incomes');
+  const [checked, setCheked] = useState('incomes');
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
 
@@ -76,6 +76,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
         time: time.toISOString().slice(11, 16),
         type,
       };
+
       await dispatch(createUserTransactionThunk(formData)).unwrap();
     } catch (error) {
       toast.error('Sorry, registration failed, please added all field to transaction form');
@@ -90,7 +91,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
   const handleTypeChange = e => {
     const value = e.target.value;
     setRender(value);
-    setChecked(value);
+    setCheked(value);
   };
 
   return (
@@ -128,24 +129,27 @@ const TransactionForm = ({ transactionsType, setRender }) => {
               <Controller
                 control={control}
                 name="date"
+                rules={{ required: true }}
                 render={({ field }) => (
                   <DateInput
                     placeholderText="mm/dd/yyyy"
                     onChange={date => field.onChange(date)}
                     selected={field.value}
+                    aria-invalid={!!errors.date}
                   />
                 )}
               />
+              {errors.date && <ErrorMessage role="alert">Fild required</ErrorMessage>}
               <CalendarIcon>
                 <Calendar1 />
               </CalendarIcon>
-              <ErrorMessage>{errors.date?.message}</ErrorMessage>
             </DateLabel>
             <DateLabel>
               Time:
               <Controller
                 control={control}
                 name="time"
+                rules={{ required: true }}
                 render={({ field }) => (
                   <DateInput
                     showTimeSelect
@@ -156,13 +160,14 @@ const TransactionForm = ({ transactionsType, setRender }) => {
                     placeholderText="00:00:00"
                     onChange={date => field.onChange(date)}
                     selected={field.value}
+                    aria-invalid={!!errors.time}
                   />
                 )}
               />
+              {errors.date && <ErrorMessage role="alert">Fild required</ErrorMessage>}
               <CalendarIcon>
                 <Clock />
               </CalendarIcon>
-              <ErrorMessage>{errors.time?.message}</ErrorMessage>
             </DateLabel>
           </DateInputWrapper>
           <ParentInputWrapper>
@@ -172,10 +177,9 @@ const TransactionForm = ({ transactionsType, setRender }) => {
                 autoComplete="off"
                 type="text"
                 value={chooseCategory}
-                {...register('category')}
+                {...register('category', { required: 'Field required' })}
                 placeholder="Different"
                 onClick={renderCategoryByType}
-                onFocus={renderCategoryByType}
               />
               <ErrorMessage>{errors.category?.message}</ErrorMessage>
             </OneLabel>
@@ -183,8 +187,13 @@ const TransactionForm = ({ transactionsType, setRender }) => {
           <ParentInputWrapper>
             <TwoLabel>
               Sum:
-              <SumInput autoComplete="off" type="text" {...register('sum')} placeholder="Enter the sum" />
-              {currentUser.transactionsTotal && <Currency>{currentUser.currency.toUpperCase()}</Currency>}
+              <SumInput
+                autoComplete="off"
+                type="text"
+                {...register('sum', { required: 'Fild required' })}
+                placeholder="Enter the sum"
+              />
+              {currentUser.transactionsTotal && <CurrencyList />}
               <ErrorMessage>{errors.sum?.message}</ErrorMessage>
             </TwoLabel>
           </ParentInputWrapper>
@@ -193,7 +202,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
               Comment:
               <CommentInput
                 autoComplete="off"
-                {...register('comment')}
+                {...register('comment', { required: 'Fild required' })}
                 rows={4}
                 cols={50}
                 placeholder="Enter the text"

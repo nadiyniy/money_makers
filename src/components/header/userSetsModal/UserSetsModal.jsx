@@ -17,7 +17,7 @@ import UserAvatar from '../userAvatar/UserAvatar';
 import { CloseIcon, UserAvatarIcon, ArrowDownCurrency } from 'components/svgs';
 import LoaderSpinner from 'components/LoaderSpinner/LoaderSpinner';
 
-const currenciesList = [
+export const currenciesList = [
   {
     value: 'usd',
     name: 'USD',

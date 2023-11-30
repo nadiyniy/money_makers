@@ -46,10 +46,6 @@ const CategoriesModalList = ({ closeModal, categoryName, setchooseCategory, setT
     setIsEditing(true);
   };
 
-  const handleItemClick = index => {
-    setActiveIndex(index === activeIndex ? null : index);
-  };
-
   return (
     <ModalListWrapper>
       <ModalListCloseButton onClick={closeModal}>
@@ -60,14 +56,10 @@ const CategoriesModalList = ({ closeModal, categoryName, setchooseCategory, setT
       <ModalWrapper>
         <ModalScrollbar>
           {categories
-            ? categories[categoryName]?.map((category, index) => (
-                <ModalItem
-                  key={category._id}
-                  onClick={() => handleItemClick(index)}
-                  className={index === activeIndex ? 'isActive' : null}
-                >
+            ? categories[categoryName]?.map(category => (
+                <ModalItem key={category._id}>
                   <ModalCategoryText>{category.categoryName}</ModalCategoryText>
-                  <ModalButtonWrapper className={index === activeIndex ? 'isActive' : null}>
+                  <ModalButtonWrapper>
                     <ModalListButton type="button" onClick={() => handleChooseCategory(category)}>
                       <Check1 width={16} height={16} />
                     </ModalListButton>
