@@ -4,8 +4,6 @@ import { homeImages } from 'images/home/home-images';
 const { img1Desk, img2Desk, img1Mob, img2Mob, img1Tab, img2Tab } = homeImages;
 
 export const StyledBgImageWrapper = styled.div`
-  outline: 1px solid yellow;
-
 
   position: relative;
   width: 335px;
