@@ -1,16 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginThunk, registerThunk } from 'redux/auth/operations';
 import AuthForm from 'pages/Auth/AuthForm/AuthForm';
+import { loginThunk, registerThunk } from 'redux/auth/operations';
 import { validationSchemaRegister } from 'shared/validationSchema/validationSchema';
-import {
-  CenterWrapper,
-  ErrorMessage,
-  FormDescription,
-  Placeholder,
-  StyledAuthWrapper,
-  Title,
-} from '../commonAuthStyles';
+import { AuthTitle, CenterWrapper, ErrorMessage, FormDescription, PageWrapper, Placeholder } from '../commonAuthStyles';
+import { StyledCommonWrapper } from 'styles/Common.styled';
+import BgImageWrapper from 'shared/BgImageWrapper/BgImageWrapper';
 
 const fieldsData = [
   { name: 'name', label: 'Name', type: 'text' },
@@ -26,6 +21,20 @@ const navigationData = {
 const RegisterPage = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const dispatch = useDispatch();
+
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1280);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1280);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const submit = async data => {
     try {
@@ -53,27 +62,32 @@ const RegisterPage = () => {
   };
 
   return (
-    <CenterWrapper>
-      <StyledAuthWrapper>
-        <Title>Sign Up</Title>
-        <FormDescription>
-          Step into a world of hassle-free expense management! Your journey towards financial mastery begins here.
-        </FormDescription>
-        <AuthForm
-          onSubmit={submit}
-          fieldsData={fieldsData}
-          submitButtonText="Sign Up"
-          initialState={{ email: '', password: '', name: '' }}
-          validationSchema={validationSchemaRegister}
-          navigationData={navigationData}
-          authType="register"
-        />
+    <StyledCommonWrapper>
+      <CenterWrapper>
+        <PageWrapper>
+          <div>
+            <AuthTitle>Sign Up</AuthTitle>
+            <FormDescription>
+              Step into a world of hassle-free expense management! Your journey towards financial mastery begins here.
+            </FormDescription>
+            <AuthForm
+              onSubmit={submit}
+              fieldsData={fieldsData}
+              submitButtonText="Sign Up"
+              initialState={{ email: '', password: '', name: '' }}
+              validationSchema={validationSchemaRegister}
+              navigationData={navigationData}
+              authType="register"
+            />
 
-        {!errorMessage && <Placeholder />}
+            {!errorMessage && <Placeholder />}
 
-        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-      </StyledAuthWrapper>
-    </CenterWrapper>
+            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+          </div>
+          {isDesktop && <BgImageWrapper />}
+        </PageWrapper>
+      </CenterWrapper>
+    </StyledCommonWrapper>
   );
 };
 
