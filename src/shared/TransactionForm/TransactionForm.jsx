@@ -31,21 +31,36 @@ import {
   TwoLabel,
   DateLabel,
   CalendarIcon,
+  ModalCloseButton,
 } from './TransactionForm.styles';
-import { Calendar1, Clock } from '../../components/svgs/index';
+import { Calendar1, Clock, Close } from '../../components/svgs/index';
 import { selectCurrentUser } from 'redux/user/selectors';
 import { currentInfoUserThunk } from 'redux/user/operations';
 import { toast } from 'react-toastify';
 import CurrencyList from './CurrencyList';
+import { useNavigate, useParams } from 'react-router';
 
-const TransactionForm = ({ transactionsType, setRender, editingTransaction }) => {
+const TransactionForm = ({ editingTransaction, close }) => {
   const [isSubmited, setIsSubmited] = useState(false);
   const { isOpen, openModal, closeModal } = useModal();
   const [chooseCategory, setchooseCategory] = useState('');
   const [takeCategoryId, setTakeCategoryId] = useState('');
-  const [checked, setCheked] = useState('incomes');
+  const [checked, setCheked] = useState('');
+  const { transactionsType } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
+
+  useEffect(() => {
+    if (editingTransaction) {
+      navigate(`/transactions/history/${transactionsType}`);
+    }
+  }, [navigate, transactionsType, editingTransaction]);
+
+  const handleTypeChange = e => {
+    setCheked(e.target.value);
+    navigate(`/transactions/${e.target.value}`);
+  };
 
   useEffect(() => {
     dispatch(currentInfoUserThunk());
@@ -58,19 +73,19 @@ const TransactionForm = ({ transactionsType, setRender, editingTransaction }) =>
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      type: 'incomes',
-    },
-  });
+  } = useForm({});
 
   const isEditing = !!editingTransaction;
 
   const submit = data => {
     if (!isEditing) {
       createTransaction(data);
+      setchooseCategory('');
+      setTakeCategoryId('');
+      setCheked('');
     } else {
       updateTransaction(data);
+      close();
     }
   };
 
@@ -92,8 +107,6 @@ const TransactionForm = ({ transactionsType, setRender, editingTransaction }) =>
       };
       await dispatch(createUserTransactionThunk(formData)).unwrap();
       reset();
-      setchooseCategory('');
-      setTakeCategoryId('');
     } catch (error) {
       toast.error('Sorry, registration failed, please added all field to transaction form');
     } finally {
@@ -103,10 +116,14 @@ const TransactionForm = ({ transactionsType, setRender, editingTransaction }) =>
 
   useEffect(() => {
     if (editingTransaction) {
+      if (takeCategoryId) {
+        editingTransaction.category = {
+          _id: takeCategoryId,
+          categoryName: chooseCategory,
+        };
+      }
       const { category, comment, date, time, sum } = editingTransaction;
       setchooseCategory(category ? category.categoryName : '');
-
-      // editingTransaction.category = edcat;
 
       reset({
         _id: editingTransaction._id,
@@ -114,11 +131,11 @@ const TransactionForm = ({ transactionsType, setRender, editingTransaction }) =>
         time: parseISO(`2000-01-01T${time}`),
         sum,
         comment,
-        category: editingTransaction.category.categoryName,
+        category: category.categoryName,
         type: editingTransaction.type,
       });
     }
-  }, [editingTransaction, reset]); //edcat,
+  }, [editingTransaction, reset, chooseCategory, takeCategoryId]);
 
   const updateTransaction = async transaction => {
     setIsSubmited(true);
@@ -143,19 +160,9 @@ const TransactionForm = ({ transactionsType, setRender, editingTransaction }) =>
     openModal();
   };
 
-  const handleTypeChange = e => {
-    const value = e.target.value;
-    setRender(value);
-    setCheked(value);
-  };
-
   const renderSubmitButton = () => {
     if (isEditing) {
-      return (
-        <TransactionButton type="submit" onClick={() => closeModal()}>
-          Edit
-        </TransactionButton>
-      );
+      return <TransactionButton type="submit">Edit</TransactionButton>;
     } else {
       return <TransactionButton type="submit">Add</TransactionButton>;
     }
@@ -166,9 +173,9 @@ const TransactionForm = ({ transactionsType, setRender, editingTransaction }) =>
       <TransactionWrapper>
         <TransactionFormStyle onSubmit={handleSubmit(submit)}>
           {isEditing ? (
-            <button type="button" onClick={() => closeModal()}>
-              Close
-            </button>
+            <ModalCloseButton onClick={close}>
+              <Close width={20} height={20} />
+            </ModalCloseButton>
           ) : null}
           <RadioWrapper>
             <RadioLabel>
@@ -178,6 +185,7 @@ const TransactionForm = ({ transactionsType, setRender, editingTransaction }) =>
                 checked={checked === 'expenses'}
                 value="expenses"
                 onChange={handleTypeChange}
+                disabled={isEditing}
               />
               Expense
               {checked === 'expenses' ? <RadioCustomChecked /> : <RadioCustom />}
@@ -190,6 +198,7 @@ const TransactionForm = ({ transactionsType, setRender, editingTransaction }) =>
                 checked={checked === 'incomes'}
                 value="incomes"
                 onChange={handleTypeChange}
+                disabled={isEditing}
               />
               Income
               {checked === 'incomes' ? <RadioCustomChecked /> : <RadioCustom />}

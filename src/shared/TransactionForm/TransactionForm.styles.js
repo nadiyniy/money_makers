@@ -7,6 +7,7 @@ export const TransactionWrapper = styled.div`
   }
 `;
 export const TransactionFormStyle = styled.form`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -323,4 +324,12 @@ export const Currency = styled.div`
   &.dropdown-open .arrow-icon {
     transform: rotate(180deg);
   }
+`;
+
+export const ModalCloseButton = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: transparent;
+  border: none;
 `;
