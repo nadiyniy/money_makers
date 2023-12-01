@@ -135,4 +135,24 @@ export const ModalListButton = styled.button`
   &:hover svg {
     color: var(--primary-hover-color);
   }
+  @keyframes wiggle {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: rotateZ(10deg);
+    }
+    50% {
+      transform: translateX(0);
+    }
+    75% {
+      transform: rotateZ(-10deg);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  &:hover {
+    animation: wiggle 0.5s ease infinite;
+  }
 `;

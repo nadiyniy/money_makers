@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const ModalBackdrop = styled.div`
+  overflow: hidden;
   position: fixed;
   top: 0;
   left: 0;

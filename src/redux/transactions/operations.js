@@ -46,19 +46,23 @@ export const removeUserTransactionThunk = createAsyncThunk('removeUserTransactio
   }
 });
 
-export const updateUserTransactionThunk = createAsyncThunk(
-  'updateTransaction',
-  async ({ transactionType, transactionId }, thunkApi) => {
-    try {
-      const savedToken = thunkApi.getState().auth.accessToken;
-      const { data } = await instance.patch(`transactions/${transactionType}/${transactionId}`, {
-        headers: {
-          Authorization: `Bearer ${savedToken}`,
-        },
-      });
-      return data;
-    } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
-    }
+export const updateUserTransactionThunk = createAsyncThunk('updateTransaction', async (transaction, thunkApi) => {
+  try {
+    const savedToken = thunkApi.getState().auth.accessToken;
+
+    const transactionId = transaction._id;
+    const transactionType = transaction.type;
+    transaction._id = undefined;
+    transaction.type = undefined;
+
+    console.log(transaction);
+    const { data } = await instance.patch(`transactions/${transactionType}/${transactionId}`, transaction, {
+      headers: {
+        Authorization: `Bearer ${savedToken}`,
+      },
+    });
+    return data;
+  } catch (error) {
+    return thunkApi.rejectWithValue(error.message);
   }
-);
+});
