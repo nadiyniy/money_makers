@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
+import { parseISO } from 'date-fns';
 
 import { useModal } from 'shared/hooks/useModal';
 import Modal from 'shared/Modal/Modal';
 import CategoriesModalList from 'pages/Home/CategoriesModalList/CategoriesModalList';
-import { createUserTransactionThunk } from 'redux/transactions/operations';
+import { createUserTransactionThunk, updateUserTransactionThunk } from 'redux/transactions/operations';
 import { fetchCategoriesThunk } from 'redux/category/operations';
 
 import {
@@ -37,7 +38,8 @@ import { currentInfoUserThunk } from 'redux/user/operations';
 import { toast } from 'react-toastify';
 import CurrencyList from './CurrencyList';
 
-const TransactionForm = ({ transactionsType, setRender }) => {
+const TransactionForm = ({ transactionsType, setRender, editingTransaction }) => {
+  const [isSubmited, setIsSubmited] = useState(false);
   const { isOpen, openModal, closeModal } = useModal();
   const [chooseCategory, setchooseCategory] = useState('');
   const [takeCategoryId, setTakeCategoryId] = useState('');
@@ -62,7 +64,19 @@ const TransactionForm = ({ transactionsType, setRender }) => {
     },
   });
 
-  const submit = async ({ comment, date, sum, time, type }) => {
+  const isEditing = !!editingTransaction;
+
+  const submit = data => {
+    if (!isEditing) {
+      createTransaction(data);
+    } else {
+      updateTransaction(data);
+    }
+  };
+
+  const createTransaction = async data => {
+    const { comment, date, sum, time, type } = data;
+    setIsSubmited(true);
     try {
       const startDate = new Date(date);
       const nextDay = new Date(startDate);
@@ -76,12 +90,53 @@ const TransactionForm = ({ transactionsType, setRender }) => {
         time: time.toISOString().slice(11, 16),
         type,
       };
-
       await dispatch(createUserTransactionThunk(formData)).unwrap();
+      reset();
+      setchooseCategory('');
+      setTakeCategoryId('');
     } catch (error) {
       toast.error('Sorry, registration failed, please added all field to transaction form');
+    } finally {
+      setIsSubmited(false);
     }
-    reset();
+  };
+
+  useEffect(() => {
+    if (editingTransaction) {
+      const { category, comment, date, time, sum } = editingTransaction;
+      setchooseCategory(category ? category.categoryName : '');
+
+      // editingTransaction.category = edcat;
+
+      reset({
+        _id: editingTransaction._id,
+        date: parseISO(date),
+        time: parseISO(`2000-01-01T${time}`),
+        sum,
+        comment,
+        category: editingTransaction.category.categoryName,
+        type: editingTransaction.type,
+      });
+    }
+  }, [editingTransaction, reset]); //edcat,
+
+  const updateTransaction = async transaction => {
+    setIsSubmited(true);
+    try {
+      if (transaction) {
+        const editDate = new Date(transaction.date);
+        const nextDay = new Date(editDate);
+        nextDay.setDate(editDate.getDate() + 1);
+        transaction.date = nextDay.toISOString().slice(0, 10);
+        transaction.time = transaction.time.toISOString().slice(11, 16);
+        transaction.category = editingTransaction.category._id;
+      }
+      await dispatch(updateUserTransactionThunk(transaction)).unwrap();
+    } catch (error) {
+      toast.error('Sorry, registration failed, please added all field to transaction form');
+    } finally {
+      setIsSubmited(false);
+    }
   };
 
   const renderCategoryByType = () => {
@@ -94,10 +149,27 @@ const TransactionForm = ({ transactionsType, setRender }) => {
     setCheked(value);
   };
 
+  const renderSubmitButton = () => {
+    if (isEditing) {
+      return (
+        <TransactionButton type="submit" onClick={() => closeModal()}>
+          Edit
+        </TransactionButton>
+      );
+    } else {
+      return <TransactionButton type="submit">Add</TransactionButton>;
+    }
+  };
+
   return (
     <>
       <TransactionWrapper>
         <TransactionFormStyle onSubmit={handleSubmit(submit)}>
+          {isEditing ? (
+            <button type="button" onClick={() => closeModal()}>
+              Close
+            </button>
+          ) : null}
           <RadioWrapper>
             <RadioLabel>
               <RadioInput
@@ -177,11 +249,11 @@ const TransactionForm = ({ transactionsType, setRender }) => {
                 autoComplete="off"
                 type="text"
                 value={chooseCategory}
-                {...register('category', { required: 'Field required' })}
+                {...register('category', { required: isSubmited ? 'Field required' : undefined })}
                 placeholder="Different"
                 onClick={renderCategoryByType}
               />
-              <ErrorMessage>{errors.category?.message}</ErrorMessage>
+              <ErrorMessage>{isSubmited && errors.category?.message}</ErrorMessage>
             </OneLabel>
           </ParentInputWrapper>
           <ParentInputWrapper>
@@ -193,7 +265,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
                 {...register('sum', { required: 'Fild required' })}
                 placeholder="Enter the sum"
               />
-              {currentUser.transactionsTotal && <CurrencyList />}
+              {currentUser._id && <CurrencyList />}
               <ErrorMessage>{errors.sum?.message}</ErrorMessage>
             </TwoLabel>
           </ParentInputWrapper>
@@ -210,9 +282,7 @@ const TransactionForm = ({ transactionsType, setRender }) => {
               <ErrorMessage>{errors.comment?.message}</ErrorMessage>
             </OneLabel>
           </ParentInputWrapper>
-          <TransactionButtonWrapper>
-            <TransactionButton type="submit">Add</TransactionButton>
-          </TransactionButtonWrapper>
+          <TransactionButtonWrapper>{renderSubmitButton()}</TransactionButtonWrapper>
         </TransactionFormStyle>
       </TransactionWrapper>
 

@@ -31,8 +31,13 @@ import { fetchTransactionsThunk, removeUserTransactionThunk } from 'redux/transa
 import { selectDate, selectFilter, selectTransactions } from 'redux/transactions/selectors';
 import { setFilter, setInputDate } from 'redux/transactions/slice';
 import TransactionsTotalAmount from 'shared/TransactionsTotalAmount/TransactionsTotalAmount';
+import Modal from 'shared/Modal/Modal';
+import TransactionForm from 'shared/TransactionForm/TransactionForm';
+import { useModal } from 'shared/hooks/useModal';
 
 const TransactionsHistoryPage = () => {
+  const { isOpen, openModal, closeModal } = useModal();
+  const [editingTransaction, setEditingTransaction] = useState(null);
   const transactions = useSelector(selectTransactions);
   const date = useSelector(selectDate);
   const filter = useSelector(selectFilter);
@@ -65,8 +70,9 @@ const TransactionsHistoryPage = () => {
     dispatch(fetchTransactionsThunk({ type: transactionsType, date: dateFormat }));
   }, [dispatch, transactionsType, date, dateFormat]);
 
-  const handleEdit = id => {
-    // handle edit logic
+  const handleEdit = ({ _id, category, comment, date, time, sum, type }) => {
+    setEditingTransaction({ _id, category, comment, date, time, sum, type });
+    openModal();
   };
 
   const filterChange = e => {
@@ -95,7 +101,7 @@ const TransactionsHistoryPage = () => {
         <StyledTableBody>{sum}/UAH</StyledTableBody>
         <StyledTableBody>
           <ActionButtonWrapper>
-            <EditButton onClick={() => handleEdit(type, _id)}>
+            <EditButton onClick={() => handleEdit({ _id, category, comment, date, time, sum, type })}>
               <TrPencil style={{ stroke: '#171719' }} width="16" height="16" />
             </EditButton>
             <DeleteButton onClick={() => handleDelete(_id)}>
@@ -108,51 +114,60 @@ const TransactionsHistoryPage = () => {
   };
 
   return (
-    <StyledCommonWrapper>
-      <SideContainer>
-        <LeftSideContainer>
-          <Title> All {transactionsType === 'incomes' ? 'Income' : 'Expense'}</Title>
-          <Text>View and manage every transaction seamlessly! Your entire financial landscape, all in one place.</Text>
-        </LeftSideContainer>
-        <RightSideContainer>
-          <TransactionsTotalAmount />
-        </RightSideContainer>
-      </SideContainer>
+    <>
+      <StyledCommonWrapper>
+        <SideContainer>
+          <LeftSideContainer>
+            <Title> All {transactionsType === 'incomes' ? 'Income' : 'Expense'}</Title>
+            <Text>
+              View and manage every transaction seamlessly! Your entire financial landscape, all in one place.
+            </Text>
+          </LeftSideContainer>
+          <RightSideContainer>
+            <TransactionsTotalAmount />
+          </RightSideContainer>
+        </SideContainer>
 
-      <StyledBackground>
-        <Container>
-          <Input type="text" placeholder="Search for anything..." onChange={filterChange} />
-          <Button onClick={() => dispatch(setFilter(inputFilter))}>
-            <Search />
-          </Button>
-          <StyledFormWrapper>
-            <StyledDatePicker
-              selected={selectedDate}
-              value={date}
-              onChange={handleChangeDate}
-              dateFormat="dd/MM/yyyy"
-              placeholderText="dd/mm/yyyy"
-            />
-            <IconWrapper>
-              <Calendar />
-            </IconWrapper>
-          </StyledFormWrapper>
-        </Container>
-        <StyledTable>
-          <StyledTableHead>
-            <tr>
-              <StyledTableName>Category</StyledTableName>
-              <StyledTableName>Comment</StyledTableName>
-              <StyledTableName>Date</StyledTableName>
-              <StyledTableName>Time</StyledTableName>
-              <StyledTableName>Sum</StyledTableName>
-              <StyledTableName>Actions</StyledTableName>
-            </tr>
-          </StyledTableHead>
-          <tbody>{renderTableRows()}</tbody>
-        </StyledTable>
-      </StyledBackground>
-    </StyledCommonWrapper>
+        <StyledBackground>
+          <Container>
+            <Input type="text" placeholder="Search for anything..." onChange={filterChange} />
+            <Button onClick={() => dispatch(setFilter(inputFilter))}>
+              <Search />
+            </Button>
+            <StyledFormWrapper>
+              <StyledDatePicker
+                selected={selectedDate}
+                value={date}
+                onChange={handleChangeDate}
+                dateFormat="dd/MM/yyyy"
+                placeholderText="dd/mm/yyyy"
+              />
+              <IconWrapper>
+                <Calendar />
+              </IconWrapper>
+            </StyledFormWrapper>
+          </Container>
+          <StyledTable>
+            <StyledTableHead>
+              <tr>
+                <StyledTableName>Category</StyledTableName>
+                <StyledTableName>Comment</StyledTableName>
+                <StyledTableName>Date</StyledTableName>
+                <StyledTableName>Time</StyledTableName>
+                <StyledTableName>Sum</StyledTableName>
+                <StyledTableName>Actions</StyledTableName>
+              </tr>
+            </StyledTableHead>
+            <tbody>{renderTableRows()}</tbody>
+          </StyledTable>
+        </StyledBackground>
+      </StyledCommonWrapper>
+      {isOpen ? (
+        <Modal closeModal={closeModal}>
+          <TransactionForm closeModal={closeModal} editingTransaction={editingTransaction} />
+        </Modal>
+      ) : null}
+    </>
   );
 };
 
