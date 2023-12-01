@@ -176,7 +176,7 @@ const TransactionsHistoryPage = () => {
       </StyledCommonWrapper>
       {isOpen ? (
         <Modal closeModal={closeModal}>
-          <TransactionForm closeModal={closeModal} editingTransaction={editingTransaction} />
+          <TransactionForm close={closeModal} editingTransaction={editingTransaction} />
         </Modal>
       ) : null}
     </>

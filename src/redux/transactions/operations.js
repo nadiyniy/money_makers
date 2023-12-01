@@ -61,6 +61,7 @@ export const updateUserTransactionThunk = createAsyncThunk('updateTransaction', 
         Authorization: `Bearer ${savedToken}`,
       },
     });
+    thunkApi.dispatch(currentInfoUserThunk());
     return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);

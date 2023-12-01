@@ -1,6 +1,5 @@
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import { useEffect, useState } from 'react';
 
 import TransactionsTotalAmount from '../../../shared/TransactionsTotalAmount/TransactionsTotalAmount';
 
@@ -12,22 +11,10 @@ import DonutChart from '../Doughnut/Doughnut';
 
 const MainTransactionsPage = () => {
   const { transactionsType } = useParams();
-  const [render, setRender] = useState(null);
-  const [nextRender, setNextRender] = useState(null);
-  const location = useLocation();
-  const navigate = useNavigate();
-
   const isDesktopOrLaptop = useMediaQuery({
     query: '(min-width: 1224px)',
   });
 
-  useEffect(() => {
-    if (render !== nextRender) {
-      navigate(`/${(location.pathname = `transactions/${render}`)}`);
-      setNextRender(render);
-      return;
-    }
-  }, [render, location, navigate, nextRender]);
   return (
     <MainPageSection>
       <StyledCommonWrapper>
@@ -46,7 +33,7 @@ const MainTransactionsPage = () => {
 
                 <DonutChart transactionsType={transactionsType} />
               </div>
-              <TransactionForm transactionsType={transactionsType} setRender={setRender} />
+              <TransactionForm transactionsType={transactionsType} />
             </>
           ) : (
             <>
@@ -58,8 +45,8 @@ const MainTransactionsPage = () => {
                 </MainPageText>
               </div>
               <TransactionsTotalAmount />
-              <TransactionForm transactionsType={transactionsType} setRender={setRender} />
-              <DonutChart transactionsType={transactionsType} />
+              <TransactionForm />
+              <DonutChart />
             </>
           )}
         </MainPageWrapper>
