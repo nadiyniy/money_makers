@@ -28,12 +28,13 @@ import {
 } from './TransactionsHistoryStyled';
 import { useParams } from 'react-router-dom';
 import { fetchTransactionsThunk, removeUserTransactionThunk } from 'redux/transactions/operations';
-import { selectDate, selectFilter, selectTransactions } from 'redux/transactions/selectors';
+import { selectDate, selectFilter, selectIsLoading, selectTransactions } from 'redux/transactions/selectors';
 import { setFilter, setInputDate } from 'redux/transactions/slice';
 import TransactionsTotalAmount from 'shared/TransactionsTotalAmount/TransactionsTotalAmount';
 import Modal from 'shared/Modal/Modal';
 import TransactionForm from 'shared/TransactionForm/TransactionForm';
 import { useModal } from 'shared/hooks/useModal';
+import LoaderSpinner from 'components/LoaderSpinner/LoaderSpinner';
 
 const TransactionsHistoryPage = () => {
   const { isOpen, openModal, closeModal } = useModal();
@@ -45,6 +46,8 @@ const TransactionsHistoryPage = () => {
   const { transactionsType } = useParams();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [inputFilter, setInputFilter] = useState(filter);
+  const isLoading = useSelector(selectIsLoading);
+  const [processingTransactionId, setProcessingTransactionId] = useState(null);
 
   const dateFormat = `${date.year}-${String(date.month).padStart(2, '0')}-${String(date.day).padStart(2, '0')}`;
 
@@ -59,10 +62,14 @@ const TransactionsHistoryPage = () => {
   };
 
   const handleDelete = id => {
+    setProcessingTransactionId(id);
+
     dispatch(removeUserTransactionThunk(id))
       .unwrap()
       .then(() => {
-        dispatch(fetchTransactionsThunk({ type: transactionsType, date: dateFormat }));
+        dispatch(fetchTransactionsThunk({ type: transactionsType, date: dateFormat }))
+          .unwrap()
+          .then(setProcessingTransactionId(null));
       });
   };
 
@@ -103,10 +110,15 @@ const TransactionsHistoryPage = () => {
           <ActionButtonWrapper>
             <EditButton onClick={() => handleEdit({ _id, category, comment, date, time, sum, type })}>
               <TrPencil style={{ stroke: '#171719' }} width="16" height="16" />
+              <span>Edit</span>
             </EditButton>
-            <DeleteButton onClick={() => handleDelete(_id)}>
-              <TrTrash width="16" height="16" />
-            </DeleteButton>
+            {isLoading && processingTransactionId === _id ? (
+              <LoaderSpinner />
+            ) : (
+              <DeleteButton onClick={() => handleDelete(_id)}>
+                <TrTrash width="16" height="16" /> <span>Delete</span>
+              </DeleteButton>
+            )}
           </ActionButtonWrapper>
         </StyledTableBody>
       </tr>
