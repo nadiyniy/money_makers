@@ -39,11 +39,13 @@ const RegisterPage = () => {
   const submit = async data => {
     try {
       const response = await dispatch(registerThunk(data));
-      // console.log('response', response?.payload);
+      console.log('response', response?.payload);
 
       if (response?.payload) {
         if (response.payload.includes('409')) {
           setErrorMessage('Provided email already exists. Please sign in.');
+        } else if (response.payload.includes('500')) {
+          setErrorMessage('We are very sorry. An error occurred on server side. Please try again later.');
         } else {
           const sendData = {
             email: data.email,
@@ -51,13 +53,15 @@ const RegisterPage = () => {
           };
           const result = await dispatch(loginThunk(sendData));
 
+          console.log(result);
+
           if (result.error) {
-            setErrorMessage('Unknown error occurred. Please try again later.');
+            setErrorMessage('You are registered. Please sign in.');
           }
         }
       }
     } catch (error) {
-      setErrorMessage('Unknown error occurred. Please try again later.');
+      // setErrorMessage('Unknown error occurred. Please try again later.');
     }
   };
 

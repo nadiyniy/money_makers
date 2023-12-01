@@ -5,7 +5,6 @@ import { Eye, EyeOff, Error, Check } from 'components/svgs';
 import {
   ErrorMessage,
   FormWrapper,
-  HintMessage,
   IconContainer,
   Input,
   InputContainer,
@@ -24,25 +23,19 @@ const AuthForm = ({
   navigationData,
   authType,
 }) => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
   const { handleSubmit, register, formState } = useForm({
+    mode: 'onBlur',
     defaultValues: initialState,
     resolver: yupResolver(validationSchema),
   });
-
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const { isDirty, isValid, errors, touchedFields } = formState;
 
   const linkTo = authType === 'register' ? '/login' : '/register';
 
-  const { isDirty, errors, touchedFields } = formState;
-
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(prev => !prev);
-  };
-
-  const fieldHints = {
-    name: 'Name is required',
-    email: 'E-mail is required',
-    password: 'Password must contain  6 - 20 symbols',
   };
 
   return (
@@ -75,16 +68,12 @@ const AuthForm = ({
               )}
             </InputContainer>
 
-            {!errors[field.name] ? (
-              <HintMessage>{fieldHints[field.name]}</HintMessage>
-            ) : (
-              <ErrorMessage>{errors[field.name].message}</ErrorMessage>
-            )}
+            {errors[field.name] && <ErrorMessage>{errors[field.name].message}</ErrorMessage>}
           </InputGroup>
         ))}
       </div>
       <div>
-        <SubmitButton type="submit" disabled={!isDirty}>
+        <SubmitButton type="submit" disabled={!isDirty || !isValid}>
           {submitButtonText}
         </SubmitButton>
 

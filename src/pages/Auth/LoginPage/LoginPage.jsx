@@ -53,6 +53,9 @@ const LoginPage = () => {
         } else if (result.payload?.includes('400')) {
           setErrorMessage('Unknown error occurred. Please try again later.');
         }
+        else if (result.payload.includes('50')) {
+          setErrorMessage('We are very sorry. An error occurred on server side. Please try again later.');
+        }
       }
     } catch (error) {
       console.error('error');
