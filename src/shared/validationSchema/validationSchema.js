@@ -3,7 +3,11 @@ import * as yup from 'yup';
 export const validationSchemaRegister = yup.object({
   name: yup.string().required('Name is required'),
 
-  email: yup.string().email('Please, enter a valid e-mail').required('E-mail is required'),
+  email: yup
+    .string()
+    .email('Please, enter a valid e-mail')
+    .required('E-mail is required')
+    .matches(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, 'Invalid email format'),
 
   password: yup
     .string()
@@ -11,8 +15,13 @@ export const validationSchemaRegister = yup.object({
     .max(20, 'Password must contain no more than 20 symbols')
     .required('Password is required'),
 });
+
 export const validationSchemaLogin = yup.object({
-  email: yup.string().email('Please, enter a valid e-mail').required('E-mail is required'),
+  email: yup
+    .string()
+    .email('Please, enter a valid e-mail')
+    .required('E-mail is required')
+    .matches(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, 'Invalid email format'),
 
   password: yup
     .string()
