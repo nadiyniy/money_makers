@@ -45,7 +45,7 @@ const TransactionForm = ({ editingTransaction, close }) => {
   const { isOpen, openModal, closeModal } = useModal();
   const [chooseCategory, setchooseCategory] = useState('');
   const [takeCategoryId, setTakeCategoryId] = useState('');
-  const [checked, setCheked] = useState('');
+  const [checked, setCheked] = useState('incomes');
   const { transactionsType } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -73,7 +73,11 @@ const TransactionForm = ({ editingTransaction, close }) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({});
+  } = useForm({
+    defaultValues: {
+      type: 'incomes',
+    },
+  });
 
   const isEditing = !!editingTransaction;
 
@@ -147,6 +151,9 @@ const TransactionForm = ({ editingTransaction, close }) => {
         transaction.date = nextDay.toISOString().slice(0, 10);
         transaction.time = transaction.time.toISOString().slice(11, 16);
         transaction.category = editingTransaction.category._id;
+        transaction.type = editingTransaction.type;
+        transaction._id = editingTransaction._id;
+    
       }
       await dispatch(updateUserTransactionThunk(transaction)).unwrap();
     } catch (error) {
@@ -177,7 +184,7 @@ const TransactionForm = ({ editingTransaction, close }) => {
               <Close width={20} height={20} />
             </ModalCloseButton>
           ) : null}
-          <RadioWrapper>
+          <RadioWrapper className={isEditing ? 'isActive' : null}>
             <RadioLabel>
               <RadioInput
                 {...register('type')}

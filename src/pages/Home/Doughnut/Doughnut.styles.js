@@ -24,7 +24,6 @@ export const ContentWrapper = styled.div`
 export const Title = styled.h2`
   color: var(--gray-text-50);
   padding-bottom: 40px;
-  font-family: Suisse Intl;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -45,6 +44,20 @@ export const ColoredMarker = styled.span`
   margin-right: 5px;
 `;
 
+export const DoughnutScrollbar = styled.ul`
+  margin-right: 10px;
+  max-height: 200px;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--scroll-color);
+    border-radius: 6px;
+  }
+`;
 export const ListItem = styled.li`
   display: flex;
   align-items: center;
