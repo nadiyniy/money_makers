@@ -18,7 +18,6 @@ import {
   NotTansactionWrapper,
   NotTansactionTitle,
 } from '../Doughnut/Doughnut.styles';
-import { Ellipse } from '../../../components/svgs/index';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
