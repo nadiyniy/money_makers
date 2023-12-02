@@ -55,7 +55,6 @@ export const updateUserTransactionThunk = createAsyncThunk('updateTransaction', 
     transaction._id = undefined;
     transaction.type = undefined;
 
-    console.log(transaction);
     const { data } = await instance.patch(`transactions/${transactionType}/${transactionId}`, transaction, {
       headers: {
         Authorization: `Bearer ${savedToken}`,

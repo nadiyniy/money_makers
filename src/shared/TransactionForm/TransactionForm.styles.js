@@ -43,6 +43,10 @@ export const RadioWrapper = styled.div`
   padding-left: 32px;
   padding-right: 44px;
   margin-bottom: 20px;
+
+  &.isActive {
+    opacity: 0;
+  }
 `;
 
 export const RadioLabel = styled.label`
