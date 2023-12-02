@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { useParams } from 'react-router-dom';
+
+import { fetchTransactionsThunk } from 'redux/transactions/operations';
+import { selectTransactions } from 'redux/transactions/selectors';
+
 import {
   DonutWrapper,
   ContentWrapper,
@@ -9,11 +15,10 @@ import {
   ColoredMarker,
   ListItem,
   DoughnutScrollbar,
+  NotTansactionWrapper,
+  NotTansactionTitle,
 } from '../Doughnut/Doughnut.styles';
-import { useParams } from 'react-router-dom';
-import { fetchTransactionsThunk } from 'redux/transactions/operations';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectTransactions } from 'redux/transactions/selectors';
+import { Ellipse } from '../../../components/svgs/index';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -26,6 +31,12 @@ const DonutChart = () => {
 
     if (steps === 1) {
       colorShades.push(`rgba(${colorStartGreen.r}, ${colorStartGreen.g}, ${colorStartGreen.b}, ${colorStartGreen.a})`);
+      return colorShades;
+    }
+
+    if (steps === 2) {
+      colorShades.push(`rgba(${colorStartGreen.r}, ${colorStartGreen.g}, ${colorStartGreen.b}, ${colorStartGreen.a})`);
+      colorShades.push(`rgba(${colorMidWhite.r}, ${colorMidWhite.g}, ${colorMidWhite.b}, ${colorMidWhite.a})`);
       return colorShades;
     }
 
@@ -163,22 +174,34 @@ const DonutChart = () => {
   }, [currentDate, currentTransactions]);
 
   return (
-    <DonutWrapper>
-      <ContentWrapper>
-        <Title>{transactionsType[0].toUpperCase() + transactionsType.substring(1)} categories</Title>
-        <Doughnut data={data} options={options} />
-      </ContentWrapper>
-      <ListWrapper>
-        <DoughnutScrollbar style={{ display: 'flex', flexDirection: 'column' }}>
-          {labelData?.map((label, index) => (
-            <ListItem key={index}>
-              <ColoredMarker style={{ backgroundColor: backgroundColors[index] }}></ColoredMarker>
-              {label} {percentageData[index]}%
-            </ListItem>
-          ))}
-        </DoughnutScrollbar>
-      </ListWrapper>
-    </DonutWrapper>
+    <>
+      {currentTransactions.length > 0 ? (
+        <DonutWrapper>
+          <ContentWrapper>
+            <Title> {transactionsType[0].toUpperCase() + transactionsType.substring(1)} categories</Title>
+            <Doughnut data={data} options={options} />
+          </ContentWrapper>
+          <ListWrapper>
+            <DoughnutScrollbar>
+              {labelData?.map((label, index) => (
+                <ListItem key={index}>
+                  <ColoredMarker color={backgroundColors[index]}></ColoredMarker>
+                  {label} {percentageData[index]}%
+                </ListItem>
+              ))}
+            </DoughnutScrollbar>
+          </ListWrapper>
+        </DonutWrapper>
+      ) : (
+        <DonutWrapper>
+          <NotTansactionWrapper>
+            <NotTansactionTitle>
+              Here will be your expenses and income statistics for the current month
+            </NotTansactionTitle>
+          </NotTansactionWrapper>
+        </DonutWrapper>
+      )}
+    </>
   );
 };
 
