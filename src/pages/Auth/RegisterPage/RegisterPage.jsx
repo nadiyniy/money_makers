@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import AuthForm from 'pages/Auth/AuthForm/AuthForm';
+import BgImageWrapper from 'shared/BgImageWrapper/BgImageWrapper';
 import { loginThunk, registerThunk } from 'redux/auth/operations';
 import { validationSchemaRegister } from 'shared/validationSchema/validationSchema';
 import { AuthTitle, CenterWrapper, ErrorMessage, FormDescription, PageWrapper, Placeholder } from '../commonAuthStyles';
 import { StyledCommonWrapper } from 'styles/Common.styled';
-import BgImageWrapper from 'shared/BgImageWrapper/BgImageWrapper';
 
 const fieldsData = [
   { name: 'name', label: 'Name', type: 'text' },
@@ -36,33 +36,24 @@ const RegisterPage = () => {
     };
   }, []);
 
-  const submit = async data => {
-    try {
-      const response = await dispatch(registerThunk(data));
-      console.log('response', response?.payload);
-
-      if (response?.payload) {
-        if (response.payload.includes('409')) {
-          setErrorMessage('Provided email already exists. Please sign in.');
-        } else if (response.payload.includes('500')) {
-          setErrorMessage('We are very sorry. An error occurred on server side. Please try again later.');
-        } else {
+  const submit = data => {
+    dispatch(registerThunk(data))
+      .then(response => {
+        if (response.type === 'register/fulfilled') {
           const sendData = {
             email: data.email,
             password: data.password,
           };
-          const result = await dispatch(loginThunk(sendData));
-
-          console.log(result);
-
-          if (result.error) {
-            setErrorMessage('You are registered. Please sign in.');
+          dispatch(loginThunk(sendData));
+        } else {
+          if (response?.payload?.includes('409')) {
+            setErrorMessage('Provided email already exists. Please sign in.');
           }
         }
-      }
-    } catch (error) {
-      // setErrorMessage('Unknown error occurred. Please try again later.');
-    }
+      })
+      .catch(error => {
+        return error;
+      });
   };
 
   return (

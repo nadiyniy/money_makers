@@ -16,6 +16,7 @@ export const registerThunk = createAsyncThunk('register', async (user, thunkApi)
 export const loginThunk = createAsyncThunk('login', async (user, thunkApi) => {
   try {
     const { data } = await instance.post('auth/login', user);
+
     setToken(data.accessToken);
     thunkApi.dispatch(currentInfoUserThunk());
     return data;
