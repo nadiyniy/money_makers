@@ -28,8 +28,7 @@ const TransactionsTotalAmount = () => {
           <AmountTitle>Total Income</AmountTitle>
           {currentUser.transactionsTotal && (
             <AmountText>
-              {currentUser.currency.toUpperCase()}
-              {currentUser.transactionsTotal.incomes?.toFixed(3)}
+              {currentUser.currency.toUpperCase()} {currentUser.transactionsTotal.incomes?.toFixed(2)}
             </AmountText>
           )}
         </div>
@@ -42,8 +41,7 @@ const TransactionsTotalAmount = () => {
           <AmountTitle>Total Expense</AmountTitle>
           {currentUser.transactionsTotal && (
             <AmountText>
-              {currentUser.currency.toUpperCase()}
-              {currentUser.transactionsTotal.expenses?.toFixed(3)}
+              {currentUser.currency.toUpperCase()} {currentUser.transactionsTotal.expenses?.toFixed(2)}
             </AmountText>
           )}
         </div>

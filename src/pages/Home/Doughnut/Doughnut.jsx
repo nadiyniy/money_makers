@@ -17,7 +17,11 @@ import {
   DoughnutScrollbar,
   NotTansactionWrapper,
   NotTansactionTitle,
+  PersengeSpan,
+  PersengeWrapper,
+  ImageChart,
 } from '../Doughnut/Doughnut.styles';
+import chart from '../../../images/chart.png';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -185,7 +189,9 @@ const DonutChart = () => {
               {labelData?.map((label, index) => (
                 <ListItem key={index}>
                   <ColoredMarker color={backgroundColors[index]}></ColoredMarker>
-                  {label} {percentageData[index]}%
+                  <PersengeWrapper>
+                    <PersengeSpan> {label}</PersengeSpan> <span>{percentageData[index]}%</span>
+                  </PersengeWrapper>
                 </ListItem>
               ))}
             </DoughnutScrollbar>
@@ -194,9 +200,8 @@ const DonutChart = () => {
       ) : (
         <DonutWrapper>
           <NotTansactionWrapper>
-            <NotTansactionTitle>
-              Here will be your expenses and income statistics for the current month
-            </NotTansactionTitle>
+            <NotTansactionTitle>Here will be your statistics for the current month</NotTansactionTitle>
+            <ImageChart src={chart} alt="chart" />
           </NotTansactionWrapper>
         </DonutWrapper>
       )}
