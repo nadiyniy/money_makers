@@ -43,9 +43,7 @@ export const EditCategoriesInput = styled.input`
   @media screen and (min-width: 768px) {
     padding: 12px 18px;
     max-width: 500px;
-  }
-
-  @media screen and (min-width: 1280px) {
+    font-size: 16px;
   }
 `;
 export const EditLabel = styled.label`

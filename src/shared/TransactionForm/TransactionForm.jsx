@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
 import { parseISO } from 'date-fns';
+import { useNavigate, useParams } from 'react-router';
+import { selectCurrentUser } from 'redux/user/selectors';
+import { currentInfoUserThunk } from 'redux/user/operations';
+import { toast } from 'react-toastify';
 
+import CurrencyList from './CurrencyList';
 import { useModal } from 'shared/hooks/useModal';
 import Modal from 'shared/Modal/Modal';
 import CategoriesModalList from 'pages/Home/CategoriesModalList/CategoriesModalList';
@@ -34,14 +39,8 @@ import {
   ModalCloseButton,
 } from './TransactionForm.styles';
 import { Calendar1, Clock, Close } from '../../components/svgs/index';
-import { selectCurrentUser } from 'redux/user/selectors';
-import { currentInfoUserThunk } from 'redux/user/operations';
-import { toast } from 'react-toastify';
-import CurrencyList from './CurrencyList';
-import { useNavigate, useParams } from 'react-router';
 
 const TransactionForm = ({ editingTransaction, close }) => {
-  const [isSubmited, setIsSubmited] = useState(false);
   const { isOpen, openModal, closeModal } = useModal();
   const [chooseCategory, setchooseCategory] = useState('');
   const [takeCategoryId, setTakeCategoryId] = useState('');
@@ -86,7 +85,6 @@ const TransactionForm = ({ editingTransaction, close }) => {
       createTransaction(data);
       setchooseCategory('');
       setTakeCategoryId('');
-      setCheked('');
     } else {
       updateTransaction(data);
       close();
@@ -95,7 +93,7 @@ const TransactionForm = ({ editingTransaction, close }) => {
 
   const createTransaction = async data => {
     const { comment, date, sum, time, type } = data;
-    setIsSubmited(true);
+
     try {
       const startDate = new Date(date);
       const nextDay = new Date(startDate);
@@ -113,8 +111,6 @@ const TransactionForm = ({ editingTransaction, close }) => {
       reset();
     } catch (error) {
       toast.error('Sorry, registration failed, please added all field to transaction form');
-    } finally {
-      setIsSubmited(false);
     }
   };
 
@@ -142,7 +138,6 @@ const TransactionForm = ({ editingTransaction, close }) => {
   }, [editingTransaction, reset, chooseCategory, takeCategoryId]);
 
   const updateTransaction = async transaction => {
-    setIsSubmited(true);
     try {
       if (transaction) {
         const editDate = new Date(transaction.date);
@@ -153,13 +148,10 @@ const TransactionForm = ({ editingTransaction, close }) => {
         transaction.category = editingTransaction.category._id;
         transaction.type = editingTransaction.type;
         transaction._id = editingTransaction._id;
-    
       }
       await dispatch(updateUserTransactionThunk(transaction)).unwrap();
     } catch (error) {
       toast.error('Sorry, registration failed, please added all field to transaction form');
-    } finally {
-      setIsSubmited(false);
     }
   };
 
@@ -265,11 +257,11 @@ const TransactionForm = ({ editingTransaction, close }) => {
                 autoComplete="off"
                 type="text"
                 value={chooseCategory}
-                {...register('category', { required: isSubmited ? 'Field required' : undefined })}
+                {...register('category', { required: 'Field required' })}
                 placeholder="Different"
                 onClick={renderCategoryByType}
               />
-              <ErrorMessage>{isSubmited && errors.category?.message}</ErrorMessage>
+              <ErrorMessage>{errors.category?.message}</ErrorMessage>
             </OneLabel>
           </ParentInputWrapper>
           <ParentInputWrapper>

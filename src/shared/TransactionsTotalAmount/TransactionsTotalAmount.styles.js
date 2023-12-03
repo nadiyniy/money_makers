@@ -13,8 +13,7 @@ export const TotalAmountWrapper = styled.div`
   }
   @media screen and (min-width: 1280px) {
     max-width: 630px;
-    height: 121px;
-    margin-top: 59px;
+    max-height: 120px;
   }
 `;
 export const AmountWrapper = styled.div`

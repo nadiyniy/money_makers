@@ -7,7 +7,10 @@ export const MainPageSection = styled.section`
 
 export const MainPageWrapper = styled.div`
   display: flex;
+  margin: 0 auto;
   flex-direction: column;
+  width: 100%;
+  padding-bottom: 80px;
 
   @media screen and (min-width: 768px) {
   }

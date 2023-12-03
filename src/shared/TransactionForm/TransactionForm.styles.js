@@ -27,10 +27,10 @@ export const TransactionFormStyle = styled.form`
   }
   @media screen and (min-width: 1280px) {
     width: 566px;
-    height: 600px;
+    max-height: 620px;
     margin: 0;
     margin-left: 44px;
-    padding: 40px 40px;
+    padding: 40px;
   }
 `;
 export const ParentInputWrapper = styled.div`
@@ -244,8 +244,13 @@ export const TransactionButton = styled.button`
   background: var(--primary-color);
   transition: all 0.3s ease;
   border: none;
+  font-size: 14px;
+  margin-bottom: 8px;
   &:hover {
     background: var(--primary-hover-color);
+  }
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
   }
 `;
 
