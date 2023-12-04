@@ -14,6 +14,11 @@ export const validationSchemaRegister = yup.object({
     .min(6, 'Password must contain at least 6 symbols')
     .max(20, 'Password must contain no more than 20 symbols')
     .required('Password is required'),
+
+  passwordConfirm: yup
+    .string()
+    .oneOf([yup.ref('password'), null], 'Password must match')
+    .required('Password confirmation is required')
 });
 
 export const validationSchemaLogin = yup.object({

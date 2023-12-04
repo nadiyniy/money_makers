@@ -30,6 +30,7 @@ const AuthForm = ({
     defaultValues: initialState,
     resolver: yupResolver(validationSchema),
   });
+  
   const { isDirty, isValid, errors, touchedFields } = formState;
 
   const linkTo = authType === 'register' ? '/login' : '/register';
