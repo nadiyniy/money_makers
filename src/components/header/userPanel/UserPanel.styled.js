@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledModalLink = styled.div`
+  z-index: 1;
   white-space: nowrap;
   position: absolute;
   top: calc(100% + 8px);
