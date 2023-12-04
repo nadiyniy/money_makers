@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 export const validationSchemaRegister = yup.object({
-  name: yup.string().required('Name is required'),
+  name: yup.string().required('Name is required').min(2, 'Name is too short').max(50, 'Name is too long'),
 
   email: yup
     .string()
@@ -18,7 +18,7 @@ export const validationSchemaRegister = yup.object({
   passwordConfirm: yup
     .string()
     .oneOf([yup.ref('password'), null], 'Password must match')
-    .required('Password confirmation is required')
+    .required('Password confirmation is required'),
 });
 
 export const validationSchemaLogin = yup.object({
