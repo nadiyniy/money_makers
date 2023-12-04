@@ -41,6 +41,7 @@ import {
 import { Calendar1, Clock, Close } from '../../components/svgs/index';
 
 const TransactionForm = ({ editingTransaction, close }) => {
+  const [isSubmited, setIsSubmited] = useState(false);
   const { isOpen, openModal, closeModal } = useModal();
   const [chooseCategory, setchooseCategory] = useState('');
   const [takeCategoryId, setTakeCategoryId] = useState('');
@@ -93,7 +94,7 @@ const TransactionForm = ({ editingTransaction, close }) => {
 
   const createTransaction = async data => {
     const { comment, date, sum, time, type } = data;
-
+    setIsSubmited(true);
     try {
       const startDate = new Date(date);
       const nextDay = new Date(startDate);
@@ -111,6 +112,8 @@ const TransactionForm = ({ editingTransaction, close }) => {
       reset();
     } catch (error) {
       toast.error('Sorry, registration failed, please added all field to transaction form');
+    } finally {
+      setIsSubmited(false);
     }
   };
 
@@ -138,6 +141,7 @@ const TransactionForm = ({ editingTransaction, close }) => {
   }, [editingTransaction, reset, chooseCategory, takeCategoryId]);
 
   const updateTransaction = async transaction => {
+    setIsSubmited(true);
     try {
       if (transaction) {
         const editDate = new Date(transaction.date);
@@ -152,6 +156,8 @@ const TransactionForm = ({ editingTransaction, close }) => {
       await dispatch(updateUserTransactionThunk(transaction)).unwrap();
     } catch (error) {
       toast.error('Sorry, registration failed, please added all field to transaction form');
+    } finally {
+      setIsSubmited(false);
     }
   };
 
@@ -257,11 +263,11 @@ const TransactionForm = ({ editingTransaction, close }) => {
                 autoComplete="off"
                 type="text"
                 value={chooseCategory}
-                {...register('category', { required: 'Field required' })}
+                {...register('category', { required: isSubmited ? 'Field required' : undefined })}
                 placeholder="Different"
                 onClick={renderCategoryByType}
               />
-              <ErrorMessage>{errors.category?.message}</ErrorMessage>
+              <ErrorMessage>{isSubmited && errors.category?.message}</ErrorMessage>
             </OneLabel>
           </ParentInputWrapper>
           <ParentInputWrapper>
