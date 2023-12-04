@@ -6,6 +6,7 @@ const initialState = {
     incomes: [],
     expenses: [],
   },
+
   error: null,
   isLoading: false,
 };

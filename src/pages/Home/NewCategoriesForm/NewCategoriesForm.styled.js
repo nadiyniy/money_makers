@@ -30,7 +30,6 @@ export const NewCategoriesInput = styled.input`
   &:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     background-color: var(--gray-dark-color);
   }
 
