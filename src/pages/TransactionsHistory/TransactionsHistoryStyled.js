@@ -294,11 +294,16 @@ export const DeleteButton = styled.button`
 
   border-radius: 40px;
   background: var(--black-color);
+  svg {
+    max-height: 16px;
+    max-width: 16px;
+  }
   span {
     display: none;
   }
   @media screen and (min-width: 768px) {
     padding: 14px;
+    max-height: 48px;
   }
   @media screen and (min-width: 1280px) {
     span {
