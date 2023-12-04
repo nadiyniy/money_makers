@@ -11,6 +11,7 @@ const fieldsData = [
   { name: 'name', label: 'Name', type: 'text' },
   { name: 'email', label: 'Email', type: 'email' },
   { name: 'password', label: 'Password', type: 'password' },
+  { name: 'passwordConfirm', label: 'Confirm password', type: 'password' },
 ];
 
 const navigationData = {
@@ -37,14 +38,20 @@ const RegisterPage = () => {
   }, []);
 
   const submit = data => {
-    dispatch(registerThunk(data))
+    const sendRegisterData = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    };
+
+    dispatch(registerThunk(sendRegisterData))
       .then(response => {
         if (response.type === 'register/fulfilled') {
-          const sendData = {
+          const sendLoginData = {
             email: data.email,
             password: data.password,
           };
-          dispatch(loginThunk(sendData));
+          dispatch(loginThunk(sendLoginData));
         } else {
           if (response?.payload?.includes('409')) {
             setErrorMessage('Provided email already exists. Please sign in.');
