@@ -284,7 +284,6 @@ export const EditButton = styled.button`
 `;
 
 export const DeleteButton = styled.button`
-  max-height: 22px;
   display: flex;
   padding: 3px;
   justify-content: center;
