@@ -15,7 +15,6 @@ import {
   Container,
   Input,
   Button,
-  StyledFormWrapper,
   StyledDatePicker,
   IconWrapper,
   StyledTable,
@@ -25,6 +24,8 @@ import {
   ActionButtonWrapper,
   EditButton,
   DeleteButton,
+  Label,
+  Tbody,
 } from './TransactionsHistoryStyled';
 import { useParams } from 'react-router-dom';
 import { fetchTransactionsThunk, removeUserTransactionThunk } from 'redux/transactions/operations';
@@ -34,7 +35,7 @@ import TransactionsTotalAmount from 'shared/TransactionsTotalAmount/Transactions
 import Modal from 'shared/Modal/Modal';
 import TransactionForm from 'shared/TransactionForm/TransactionForm';
 import { useModal } from 'shared/hooks/useModal';
-import LoaderSpinner from 'components/LoaderSpinner/LoaderSpinner';
+import { RotatingLines } from 'react-loader-spinner';
 
 const TransactionsHistoryPage = () => {
   const { isOpen, openModal, closeModal } = useModal();
@@ -105,7 +106,7 @@ const TransactionsHistoryPage = () => {
         <StyledTableBody>{comment}</StyledTableBody>
         <StyledTableBody>{date}</StyledTableBody>
         <StyledTableBody>{time}</StyledTableBody>
-        <StyledTableBody>{sum}/UAH</StyledTableBody>
+        <StyledTableBody>{sum} / UAH</StyledTableBody>
         <StyledTableBody>
           <ActionButtonWrapper>
             <EditButton onClick={() => handleEdit({ _id, category, comment, date, time, sum, type })}>
@@ -113,7 +114,9 @@ const TransactionsHistoryPage = () => {
               <span>Edit</span>
             </EditButton>
             {isLoading && processingTransactionId === _id ? (
-              <LoaderSpinner />
+              <DeleteButton disabled>
+                <RotatingLines strokeColor="grey" strokeWidth="3" animationDuration="1.5" width="44" visible={true} />
+              </DeleteButton>
             ) : (
               <DeleteButton onClick={() => handleDelete(_id)}>
                 <TrTrash width="16" height="16" /> <span>Delete</span>
@@ -139,26 +142,27 @@ const TransactionsHistoryPage = () => {
             <TransactionsTotalAmount />
           </RightSideContainer>
         </SideContainer>
-
-        <StyledBackground>
-          <Container>
+        <Container>
+          <Label>
             <Input type="text" placeholder="Search for anything..." onChange={filterChange} />
             <Button onClick={() => dispatch(setFilter(inputFilter))}>
               <Search />
             </Button>
-            <StyledFormWrapper>
-              <StyledDatePicker
-                selected={selectedDate}
-                value={date}
-                onChange={handleChangeDate}
-                dateFormat="dd/MM/yyyy"
-                placeholderText="dd/mm/yyyy"
-              />
-              <IconWrapper>
-                <Calendar />
-              </IconWrapper>
-            </StyledFormWrapper>
-          </Container>
+          </Label>
+          <Label>
+            <StyledDatePicker
+              selected={selectedDate}
+              value={date}
+              onChange={handleChangeDate}
+              dateFormat="dd/MM/yyyy"
+              placeholderText="dd/mm/yyyy"
+            />
+            <IconWrapper>
+              <Calendar />
+            </IconWrapper>
+          </Label>
+        </Container>
+        <StyledBackground>
           <StyledTable>
             <StyledTableHead>
               <tr>
@@ -170,7 +174,7 @@ const TransactionsHistoryPage = () => {
                 <StyledTableName>Actions</StyledTableName>
               </tr>
             </StyledTableHead>
-            <tbody>{renderTableRows()}</tbody>
+            <Tbody>{renderTableRows()}</Tbody>
           </StyledTable>
         </StyledBackground>
       </StyledCommonWrapper>
