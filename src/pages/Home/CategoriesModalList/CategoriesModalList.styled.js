@@ -156,3 +156,10 @@ export const ModalListButton = styled.button`
     animation: wiggle 0.5s ease infinite;
   }
 `;
+export const SpinnerWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
+`;

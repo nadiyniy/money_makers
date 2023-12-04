@@ -7,6 +7,7 @@ export const StyledLoader = styled.div`
     width: 80px;
     height: 80px;
   }
+
   .lds-default div {
     position: absolute;
     width: 6px;
@@ -15,6 +16,7 @@ export const StyledLoader = styled.div`
     border-radius: 50%;
     animation: lds-default 1.2s linear infinite;
   }
+
   .lds-default div:nth-child(1) {
     animation-delay: 0s;
     top: 37px;

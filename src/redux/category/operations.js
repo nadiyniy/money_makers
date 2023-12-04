@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { instance } from '../fetchInstance';
-
 export const addedCategoryThunk = createAsyncThunk('addedCategory', async (body, thunkApi) => {
   try {
     const savedToken = thunkApi.getState().auth.accessToken;
