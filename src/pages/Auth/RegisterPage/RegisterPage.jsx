@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AuthForm from 'pages/Auth/AuthForm/AuthForm';
 import BgImageWrapper from 'shared/BgImageWrapper/BgImageWrapper';
+import AuthLoader from '../AuthLoader/AuthLoader';
 import { loginThunk, registerThunk } from 'redux/auth/operations';
+import { selectIsLoading } from 'redux/auth/selectors';
 import { validationSchemaRegister } from 'shared/validationSchema/validationSchema';
 import { AuthTitle, CenterWrapper, ErrorMessage, FormDescription, PageWrapper, Placeholder } from '../commonAuthStyles';
 import { StyledCommonWrapper } from 'styles/Common.styled';
@@ -22,6 +24,7 @@ const navigationData = {
 const RegisterPage = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
 
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1280);
 
@@ -82,9 +85,11 @@ const RegisterPage = () => {
               authType="register"
             />
 
-            {!errorMessage && <Placeholder />}
+            {!errorMessage && !isLoading && <Placeholder />}
 
-            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+            {errorMessage && !isLoading && <ErrorMessage>{errorMessage}</ErrorMessage>}
+
+            {isLoading && <AuthLoader />}
           </div>
           {isDesktop && <BgImageWrapper />}
         </PageWrapper>
