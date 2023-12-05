@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { StyledListTransactions } from './TransactionsHistoryNav.syled';
 
 const TransactionsHistoryNav = ({ variant, closeBurgerMenu }) => {
@@ -16,3 +17,8 @@ const TransactionsHistoryNav = ({ variant, closeBurgerMenu }) => {
 };
 
 export default TransactionsHistoryNav;
+
+TransactionsHistoryNav.propTypes = {
+  closeBurgerMenu: PropTypes.func,
+  variant: PropTypes.string,
+};

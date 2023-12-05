@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { StyledUserBtn } from './UserBarBtn.styled';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from 'redux/user/selectors';
@@ -20,3 +21,9 @@ const UserBarBtn = ({ variant, toggleUserPanel, isUserPanelOpen }) => {
 };
 
 export default UserBarBtn;
+
+UserBarBtn.propTypes = {
+  toggleUserPanel: PropTypes.func.isRequired,
+  isUserPanelOpen: PropTypes.bool.isRequired,
+  variant: PropTypes.string,
+};

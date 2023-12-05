@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import PropTypes from 'prop-types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Eye, EyeOff, Error, Check } from 'components/svgs';
 import {
@@ -30,7 +31,7 @@ const AuthForm = ({
     defaultValues: initialState,
     resolver: yupResolver(validationSchema),
   });
-  
+
   const { isDirty, isValid, errors, touchedFields } = formState;
 
   const linkTo = authType === 'register' ? '/login' : '/register';
@@ -90,3 +91,24 @@ const AuthForm = ({
 };
 
 export default AuthForm;
+
+AuthForm.propTypes = {
+  fieldsData: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+    })
+  ),
+  submitButtonText: PropTypes.string.isRequired,
+  initialState: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+  }),
+  onSubmit: PropTypes.func.isRequired,
+  navigationData: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    buttonText: PropTypes.string.isRequired,
+  }),
+  authType: PropTypes.string.isRequired,
+};

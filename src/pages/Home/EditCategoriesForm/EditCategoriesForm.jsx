@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PropTypes from 'prop-types';
 
 import { updateCategoryThunk } from 'redux/category/operations';
 import { validationCategoryFormSchema } from 'shared/validationSchema/validationSchema';
@@ -89,3 +90,8 @@ const EditCategoriesForm = ({ setIsEditing, category }) => {
 };
 
 export default EditCategoriesForm;
+
+EditCategoriesForm.propTypes = {
+  category: PropTypes.objectOf(PropTypes.string).isRequired,
+  setIsEditing: PropTypes.func.isRequired,
+};

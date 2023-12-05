@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router';
 import { selectCurrentUser } from 'redux/user/selectors';
 import { currentInfoUserThunk } from 'redux/user/operations';
 import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 
 import CurrencyList from './CurrencyList';
 import { useModal } from 'shared/hooks/useModal';
@@ -306,7 +307,6 @@ const TransactionForm = ({ editingTransaction, close }) => {
             setchooseCategory={setchooseCategory}
             setTakeCategoryId={setTakeCategoryId}
             closeModal={closeModal}
-            categoryName={transactionsType}
           />
         </Modal>
       ) : null}
@@ -315,3 +315,16 @@ const TransactionForm = ({ editingTransaction, close }) => {
 };
 
 export default TransactionForm;
+
+TransactionForm.propTypes = {
+  editingTransaction: PropTypes.shape({
+    category: PropTypes.objectOf(PropTypes.string),
+    comment: PropTypes.string,
+    date: PropTypes.string,
+    sum: PropTypes.number,
+    time: PropTypes.string,
+    type: PropTypes.string,
+    _id: PropTypes.string,
+  }),
+  close: PropTypes.func,
+};
