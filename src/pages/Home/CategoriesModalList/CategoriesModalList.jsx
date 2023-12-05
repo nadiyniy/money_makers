@@ -4,6 +4,7 @@ import { useLocation } from 'react-router';
 import { selectCategories, selectIsLoading } from 'redux/category/selectors';
 import { useParams } from 'react-router-dom';
 import { deleteCategoryThunk, fetchCategoriesThunk } from 'redux/category/operations';
+import PropTypes from 'prop-types';
 
 import NewCategoriesForm from '../NewCategoriesForm/NewCategoriesForm';
 import EditCategoriesForm from '../EditCategoriesForm/EditCategoriesForm';
@@ -25,7 +26,7 @@ import { Close, Pencil, Delete, Check1 } from 'components/svgs';
 
 import LoaderSpinner from 'components/LoaderSpinner/LoaderSpinner';
 
-const CategoriesModalList = ({ closeModal, categoryName, setchooseCategory, setTakeCategoryId }) => {
+const CategoriesModalList = ({ closeModal, setchooseCategory, setTakeCategoryId }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const dispatch = useDispatch();
@@ -68,7 +69,7 @@ const CategoriesModalList = ({ closeModal, categoryName, setchooseCategory, setT
         ) : (
           <ModalScrollbar>
             {categories
-              ? categories[categoryName]?.map(category => (
+              ? categories[transactionsType]?.map(category => (
                   <ModalItem key={category._id}>
                     <ModalCategoryText>{category.categoryName}</ModalCategoryText>
                     <ModalButtonWrapper>
@@ -100,3 +101,9 @@ const CategoriesModalList = ({ closeModal, categoryName, setchooseCategory, setT
 };
 
 export default CategoriesModalList;
+
+CategoriesModalList.propTypes = {
+  closeModal: PropTypes.func.isRequired,
+  setchooseCategory: PropTypes.func.isRequired,
+  setTakeCategoryId: PropTypes.func.isRequired,
+};

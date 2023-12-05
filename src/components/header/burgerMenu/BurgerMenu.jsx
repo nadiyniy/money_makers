@@ -1,6 +1,7 @@
 import TransactionsHistoryNav from 'components/header/navBar/TransactionsHistoryNav';
 import UserBarBtn from 'components/header/userBar/UserBarBtn';
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import UserPanel from '../userPanel/UserPanel';
 import { StyledContainerUserBtn } from '../Header.styled';
 import { ModalBackdrop, StyledBurgerMenu, StyledCloseBurgerBtn } from './BurgerMenu.styled';
@@ -53,3 +54,7 @@ const BurgerMenu = ({ closeBurgerMenu }) => {
 };
 
 export default BurgerMenu;
+
+BurgerMenu.propTypes = {
+  closeBurgerMenu: PropTypes.func.isRequired,
+};

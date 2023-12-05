@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Modal from 'shared/Modal/Modal';
 import { useModal } from 'shared/hooks/useModal';
 import UserSetsModal from '../userSetsModal/UserSetsModal';
@@ -50,3 +51,7 @@ const UserPanel = ({ variant }) => {
 };
 
 export default UserPanel;
+
+UserPanel.propTypes = {
+  variant: PropTypes.string,
+};

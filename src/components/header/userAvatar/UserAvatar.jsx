@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { StyledContainerAvatar } from './UserAvatar.styled';
 
 const UserAvatar = ({ user, isMinified }) => {
@@ -21,3 +22,34 @@ const UserAvatar = ({ user, isMinified }) => {
 };
 
 export default UserAvatar;
+
+UserAvatar.propTypes = {
+  user: PropTypes.shape({
+    avatarUrl: PropTypes.string,
+    categories: PropTypes.shape({
+      expenses: PropTypes.arrayOf(
+        PropTypes.shape({
+          type: PropTypes.string,
+          categoryName: PropTypes.string,
+          _id: PropTypes.string,
+        })
+      ),
+      incomes: PropTypes.arrayOf(
+        PropTypes.shape({
+          type: PropTypes.string,
+          categoryName: PropTypes.string,
+          _id: PropTypes.string,
+        })
+      ),
+    }),
+    currency: PropTypes.string,
+    email: PropTypes.string,
+    name: PropTypes.string,
+    transactionsTotal: PropTypes.shape({
+      incomes: PropTypes.number,
+      expenses: PropTypes.number,
+    }),
+    _id: PropTypes.string,
+  }),
+  isMinified: PropTypes.bool.isRequired,
+};

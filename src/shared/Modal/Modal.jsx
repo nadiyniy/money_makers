@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { ModalBackdrop, ModalContent } from './Modal.styled';
+import PropTypes from 'prop-types';
 
 const rootModal = document.querySelector('#modal');
 
@@ -35,3 +36,8 @@ const Modal = ({ children, closeModal }) => {
 };
 
 export default Modal;
+
+Modal.propTypes = {
+  children: PropTypes.node.isRequired,
+  closeModal: PropTypes.func.isRequired,
+};
