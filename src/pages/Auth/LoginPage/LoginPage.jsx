@@ -1,12 +1,21 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import AuthForm from 'pages/Auth/AuthForm/AuthForm';
-import { loginThunk } from 'redux/auth/operations';
-import { validationSchemaLogin } from 'shared/validationSchema/validationSchema';
-import { AuthTitle, CenterWrapper, ErrorMessage, FormDescription, PageWrapper, Placeholder } from '../commonAuthStyles';
-import { StyledCommonWrapper } from 'styles/Common.styled';
 import BgImageWrapper from 'shared/BgImageWrapper/BgImageWrapper';
+import AuthLoader from '../AuthLoader/AuthLoader';
+import { loginThunk } from 'redux/auth/operations';
+import { selectIsLoading } from 'redux/auth/selectors';
+import { validationSchemaLogin } from 'shared/validationSchema/validationSchema';
+import {
+  AuthTitle,
+  CenterWrapper,
+  ErrorMessage,
+  FormDescription,
+  PageWrapper,
+  Placeholder,
+} from '../commonAuthStyles';
+import { StyledCommonWrapper } from 'styles/Common.styled';
 
 const fieldsData = [
   { name: 'email', label: 'Email', type: 'email' },
@@ -21,6 +30,8 @@ const navigationData = {
 const LoginPage = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
+
   const { reset } = useForm();
 
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1280);
@@ -73,9 +84,11 @@ const LoginPage = () => {
               authType="login"
             />
 
-            {!errorMessage && <Placeholder />}
+            {!errorMessage && !isLoading && <Placeholder />}
 
-            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+            {errorMessage && !isLoading && <ErrorMessage>{errorMessage}</ErrorMessage>}
+
+            {isLoading && <AuthLoader />}
           </div>
           {isDesktop && <BgImageWrapper />}
         </PageWrapper>
